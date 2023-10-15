@@ -2,13 +2,28 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/styles.css">
     <title>Fitlit</title>
   </head>
   <body>
-    <h1>Activity Tracker</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-<!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+    <div class='widget' id='welcomeMat'>
+      <h1>Hello</h1>
+      <h2 class='snarky-remark'>look after your flesh prison today!</h2>
+    </div>
+    <div class='widget week-view' id='waterWeek'>
+      <h2>your week in oz</h2>
+      <h2>S M T W T F S</h2>
+      <p class='water-oz'></p>
+    </div>
+    <div class='widget' id='waterDay'>
+      <h2>today</h2>
+      <p class='snarky-remark'>no UTIs today!</p>
+      <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>
+    </div>
     <script src="bundle.js"></script>
   </body>
 </html>
