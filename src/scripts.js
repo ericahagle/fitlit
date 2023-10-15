@@ -24,8 +24,8 @@ function generateRandomUserID() {
   return Math.floor(Math.random() * 10) + 1;
 }
 // random userID
-const randomUserID = generateRandomUserID();
-console.log(randomUserID);
+// const randomUserID = generateRandomUserID();
+// console.log(randomUserID);
 
 
 //////////////////////create user card////////////////////////////////////
@@ -85,3 +85,9 @@ function findDistanceTraveled(currentUser) {
 }
 
 findDistanceTraveled(currentUser)
+
+
+/*/////////////////// EXPORTS ///////////////////*/
+module.exports = {
+  generateRandomUserID
+}
