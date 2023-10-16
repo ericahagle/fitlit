@@ -1,4 +1,6 @@
 body {
+  border: pink;
+  border-width: 30px;
   font-family: 'Jaldi', sans-serif;
   background-color: #003249;
 }
@@ -28,6 +30,7 @@ section, article {
 
 #welcomeMat, #stepsAll {
   background-color: white;
+  flex-direction: row;
 }
 
 #userData {
