@@ -7,6 +7,10 @@ section, article {
   display: flex;
 }
 
+h1, h2 {
+  font-weight: 700;
+}
+
 .widget {
   padding: 5%;
   display: flex;
