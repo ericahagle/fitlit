@@ -2,27 +2,28 @@
 // Do not delete or rename this file ********
 
 
-// An example of how you tell webpack to use a CSS file
-import './css/styles.css';
+// // An example of how you tell webpack to use a CSS file
+// import './css/styles.css';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png';
+// // An example of how you tell webpack to use an image (also need to link to it in the index.html)
+// import './images/turing-logo.png';
 
-// An example of how you tell webpack to use a JS file
-import userData from './data/users';
-console.log("User Data:", userData);
+// // An example of how you tell webpack to use a JS file
+// import userData from './data/users';
+// console.log("User Data:", userData);
 
-// Example of one way to import functions from the domUpdates file.  You will delete these examples.
-import { exampleFunction1, exampleFunction2 } from './domUpdates';
+// // Example of one way to import functions from the domUpdates file.  You will delete these examples.
+// // import { exampleFunction1, exampleFunction2 } from './domUpdates';
 
-exampleFunction1('Travis');
-exampleFunction2('Travis')
+// exampleFunction1('Travis');
+// exampleFunction2('Travis')
 
 
 //////////////////////Generate random number//////////////////////////////
 function generateRandomUserID() {
   return Math.floor(Math.random() * 10) + 1;
 }
+console.log(generateRandomUserID());
 // random userID
 // const randomUserID = generateRandomUserID();
 // console.log(randomUserID);
@@ -88,6 +89,4 @@ findDistanceTraveled(currentUser)
 
 
 /*/////////////////// EXPORTS ///////////////////*/
-module.exports = {
-  generateRandomUserID
-}
+export default generateRandomUserID;
