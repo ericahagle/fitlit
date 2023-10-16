@@ -10,20 +10,29 @@
     <title>Fitlit</title>
   </head>
   <body>
-    <div class='widget' id='welcomeMat'>
-      <h1>Hello</h1>
-      <h2 class='snarky-remark'>look after your flesh prison today!</h2>
-    </div>
-    <div class='widget week-view' id='waterWeek'>
-      <h2>your week in oz</h2>
-      <h2>S M T W T F S</h2>
-      <p class='water-oz'></p>
-    </div>
-    <div class='widget' id='waterDay'>
-      <h2>today</h2>
-      <p class='snarky-remark'>no UTIs today!</p>
-      <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>
-    </div>
+    <section>
+        <div class='widget week-view' id='waterWeek'>
+        <h2>your week in oz</h2>
+        <h2>S M T W T F S</h2>
+        <p class='water-oz'></p>
+      </div>
+      <div class='widget' id='waterDay'>
+        <h2>today</h2>
+        <p class='snarky-remark'>no UTIs today!</p>
+        <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>
+      </div>
+    </section>
+    <section id='infoCards'>
+      <div class='widget' id='welcomeMat'>
+        <h1>Hello</h1>
+        <h2 class='snarky-remark'>look after your flesh prison today!</h2>
+      </div>
+      <div class='widget' id='userData'>
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+    </section>
     <div class='widget' id='stepsDay'>
       <section id='step-goal'>
         <h2>your step goal</h2>
@@ -51,6 +60,19 @@
         <h2>average friend step goal</h2>
         <p></p>
         <p class='snarky-remark'>but who's really counting?</p>
+      </section>
+      <section>
+        <div class='widget week-view' id='sleepWeek'>
+          <h2>your week in hrs</h2>
+          <h2>S M T W T F S</h2>
+          <p></p>
+          <p class='indicator'></p>
+        </div>
+        <div class='widget' id='sleepDay'>
+          <h2>today</h2>
+          <p class='indicator'></p>
+          <p class='snarky-remark'>you haven't felt this rested since childhood!</p>
+        </div>
       </section>
     </div>
     <script src="bundle.js"></script>
