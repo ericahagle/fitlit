@@ -2,13 +2,79 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/styles.css">
     <title>Fitlit</title>
   </head>
   <body>
-    <h1>Activity Tracker</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-<!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+    <section>
+        <article class='widget week-view' id='waterWeek'>
+        <h2>your week in oz</h2>
+        <h2>S M T W T F S</h2>
+        <p class='water-oz'></p>
+        </article>
+      <article class='widget' id='waterDay'>
+        <h2>today</h2>
+        <p class='snarky-remark'>no UTIs today!</p>
+        <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>
+      </article>
+    </section>
+    <section id='infoCards'>
+      <article class='widget' id='welcomeMat'>
+        <h1>Hello</h1>
+        <h2 class='snarky-remark'>look after your flesh prison today!</h2>
+      </article>
+      <article class='widget' id='userData'>
+        <p></p>
+        <p></p>
+        <p></p>
+      </article>
+    </section>
+    <article class='widget' id='stepsDay'>
+      <section id='step-goal'>
+        <h2>your step goal</h2>
+        <p></p>
+        <p class='snarky-remark'>just try your best</p>
+      </section>
+      <section id='steps-today'>
+        <h2>steps today</h2>
+        <p></p>
+        <p></p>
+        <p class='indicator'></p>
+      </section>
+      <section id='active-minutes'>
+        <h2>active minutes</h2>
+        <p></p>
+        <p class='snarky-remark'>ouchie!</p>
+      </section>
+      <section class='week-view' id='stepsWeek'>
+        <h2>your week in steps</h2>
+        <h2>S M T W T F S</h2>
+        <p></p>
+        <p class='indicator'></p>
+      </section>
+      <section id='friend-goal'>
+        <h2>average friend step goal</h2>
+        <p></p>
+        <p class='snarky-remark'>but who's really counting?</p>
+      </section>
+      </article>
+      <section>
+        <article class='widget week-view' id='sleepWeek'>
+          <h2>your week in hrs</h2>
+          <h2>S M T W T F S</h2>
+          <p></p>
+          <p class='indicator'></p>
+        </article>
+        <article class='widget' id='sleepDay'>
+          <h2>today</h2>
+          <p class='indicator'></p>
+          <p class='snarky-remark'>you haven't felt this rested since childhood!</p>
+        </article>
+      </section>
     <script src="bundle.js"></script>
   </body>
 </html>
