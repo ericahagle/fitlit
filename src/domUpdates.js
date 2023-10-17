@@ -3,6 +3,8 @@ const userName = document.querySelector('#welcomeMat');
 const userInfo = document.querySelector('#userData');
 const waterDay = document.querySelector('#waterDay');
 const waterWeek = document.querySelector('#waterWeek')
+const sleepDay = document.querySelector('#sleepDay');
+const sleepWeek = document.querySelector('#sleepWeek');
 //Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
 
 const updateUserName = (userData) => {
@@ -28,9 +30,27 @@ const  waterWeekUpdate = (hydrationArray) => {
 }
 }
 
+const sleepDayUpdate = (date, sleepData) => {
+  sleepDay.innerHTML = '';
+  sleepDay.innerHTML = `<div> <h1>${date}</h1> <p>${sleepData}</p> </div>`;
+}
+
+const sleepWeekUpdate = (sleepArray) => {
+  sleepWeek.innerHTML = '';
+  for(i = sleepArray.length -8; i < sleepArray.length; i++) {
+    sleepWeek.innerHTML += `<div class = 'week-view'>
+                            <p>${sleepArray[i].date}</p>
+                            <p>${sleepArray[i].hours}</p>
+                            <p>${sleepArray[i].quality}</p>
+                            </div>` 
+  }
+}
+
 export {
   updateUserName,
   displayUserInfo,
   waterDayUpdate,
-  waterWeekUpdate
+  waterWeekUpdate,
+  sleepDayUpdate,
+  sleepWeekUpdate
 }
