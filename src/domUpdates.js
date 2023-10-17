@@ -5,12 +5,17 @@ const waterWeek = document.querySelector('#waterWeek')
 
 const  waterDayUpdate = (date, hydrationData) => {
   waterDay.innerHTML = '';
-  waterDay.innerHTML = `<div> <h1>${date}</h1> <p>${hydrationData}</p>`
+  waterDay.innerHTML = `<div> <h1>${date}</h1> <p>${hydrationData}</p> </div>`
 }
 
-const  waterWeekUpdate = (date, hydrationArray) => {
+const  waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
-  hydrationArray.forEach(element => waterWeek.innerHTML += `<div><p>${element.date}</p><p>${element.mumOunces}</p></div>` )
+  for(i = hydrationArray.lenght - 8 ; i < hydrationArray.length; i++) {
+    waterWeek.innerHTML += `<div class = 'week-view'>
+                            <p>${hydrationArray[i].date}</p>
+                            <p>${hydrationArray[i].numOunces}</p>
+                            </div>` 
+}
 }
 
 export {
