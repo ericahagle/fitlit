@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, calculateTotalHydration, ouncesPerDay } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function() {
@@ -210,6 +210,45 @@ describe('ouncesPerDay', () => {
   });
 });
 
+describe('getHydrationFor7Days', () => {
+
+  it('should return hydration data for 7 days when data is available', function () {
+    const user = {
+      hydrationData: [
+        { date: '2023/03/20', numOunces: 30 },
+        { date: '2023/03/21', numOunces: 40 },
+        { date: '2023/03/22', numOunces: 50 },
+        { date: '2023/03/23', numOunces: 30 },
+        { date: '2023/03/24', numOunces: 40 },
+        { date: '2023/03/25', numOunces: 50 },
+        { date: '2023/03/26', numOunces: 30 },
+      ]
+    };
+    const result = getHydrationFor7Days(user, '2023/03/20');
+    expect(result.length).to.equal(7);
+  });
+
+  it('should return empty array when no matching hydration data is found', function () {
+    const user = {
+      hydrationData: []
+    };
+    const result = getHydrationFor7Days(user, '2023/03/20');
+    expect(result).to.deep.equal([]);
+  });
+
+  it('should return partial data when only some days have hydration data', function () {
+    const user = {
+      hydrationData: [
+        { date: '2023/03/20', numOunces: 30 },
+        { date: '2023/03/22', numOunces: 50 },
+      ]
+    };
+    const result = getHydrationFor7Days(user, '2023/03/20');
+    expect(result.length).to.equal(2);
+  });
+
+});
+
 describe('calculateTotalHydration', () => {
 
   it('should be a function', function () {
@@ -238,4 +277,3 @@ describe('calculateTotalHydration', () => {
       expect(result).to.equal('66.67');
     });
   });
-

@@ -28,8 +28,7 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
   return currentUser;
 }
 
-
-////////////////Ounces per day//////////////////////////////////////
+////////////////* Ounces per day *//////////////////////////////////////
 
 function ouncesPerDay(currentUser, date) {
 
@@ -56,7 +55,22 @@ function findStepGoalAverage(users) {
   return averageStepCount;
 }
 
-//////////////////////*HYDRATION AVERAGE*/////////////////////////////
+/////////////////////* Log the hydration for 7 days *////////////////////////////
+
+function getHydrationFor7Days(currentUser, startDate) {
+  
+  let startDateObj = new Date(startDate);
+  
+  let endDateObj = new Date(startDateObj);
+  endDateObj.setDate(endDateObj.getDate() + 6);
+
+  return currentUser.hydrationData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+  });
+}
+
+//////////////////////* HYDRATION AVERAGE */////////////////////////////
 
 function calculateTotalHydration(currentUser) {
   let totalHydration = 0; 
@@ -83,6 +97,7 @@ module.exports = {
   findStepGoalAverage,
   calculateTotalHydration,
   findDistanceTraveled,
+  getHydrationFor7Days,
   ouncesPerDay
 };
 
