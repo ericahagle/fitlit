@@ -151,7 +151,7 @@ describe('calculateTotalHydration', () => {
   expect(calculateTotalHydration).to.be.a('function')
   })
   
-    it('should return 0 when there are no hydration data', function () {
+    it('should return 0 when there is no hydration data', function () {
       const user = { hydrationData: [] };
       const result = calculateTotalHydration(user);
       expect(result).to.equal('0.00');
