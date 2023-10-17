@@ -2,12 +2,12 @@ import { expect } from 'chai';
 const { generateRandomUserID, selectCurrentUser } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
-  it('should generate a random userId', function() {
+  it('should generate a random userId', function () {
     const randomUserID = generateRandomUserID();
     expect(randomUserID).to.be.a('number');
   });
 
-  it('should return a currentUser object with the specified ID', function() {
+  it('should return a currentUser object with the specified ID', function () {
     const users = [
       {
         "id": 1,
@@ -16,7 +16,7 @@ describe('userObject creation', () => {
         "email": "Taurean_Pollich31@gmail.com",
         "strideLength": 4,
         "dailyStepGoal": 7000,
-        "friends": [ 5, 43, 46, 11 ]
+        "friends": [5, 43, 46, 11]
       },
       {
         "id": 2,
@@ -25,7 +25,7 @@ describe('userObject creation', () => {
         "email": "Nicolette_Halvorson43@yahoo.com",
         "strideLength": 4.5,
         "dailyStepGoal": 9000,
-        "friends": [ 13, 19, 3 ]
+        "friends": [13, 19, 3]
       },
       {
         "id": 3,
@@ -34,7 +34,7 @@ describe('userObject creation', () => {
         "email": "Wilford.Barton@gmail.com",
         "strideLength": 2.7,
         "dailyStepGoal": 3000,
-        "friends": [ 31, 16, 15, 7 ]
+        "friends": [31, 16, 15, 7]
       }
     ];
 
@@ -59,8 +59,6 @@ describe('userObject creation', () => {
     const userId1 = 1;
     const userId2 = 2;
 
-    // console.log(selectCurrentUser(userId, users, hydrationData));
-
     expect(selectCurrentUser(userId1, users, hydrationData)).to.deep.equal(
       {
         id: 1,
@@ -69,8 +67,8 @@ describe('userObject creation', () => {
         email: 'Taurean_Pollich31@gmail.com',
         strideLength: 4,
         dailyStepGoal: 7000,
-        friends: [ 5, 43, 46, 11 ],
-        hydrationData: [ { userID: 1, date: '2023/03/24', numOunces: 28 }],
+        friends: [5, 43, 46, 11],
+        hydrationData: [{ userID: 1, date: '2023/03/24', numOunces: 28 }],
         activity: [],
         sleep: []
       }
@@ -84,15 +82,15 @@ describe('userObject creation', () => {
         email: 'Nicolette_Halvorson43@yahoo.com',
         strideLength: 4.5,
         dailyStepGoal: 9000,
-        friends: [ 13, 19, 3 ],
-        hydrationData: [ { userID: 2, date: '2023/03/24', numOunces: 35 }],
+        friends: [13, 19, 3],
+        hydrationData: [{ userID: 2, date: '2023/03/24', numOunces: 35 }],
         activity: [],
         sleep: []
       }
     );
   });
 
-  it('should return "User not found!" if the user is not in the list', function() {
+  it('should return "User not found!" if the user is not in the list', function () {
     const users = [
       {
         "id": 1,
@@ -101,7 +99,7 @@ describe('userObject creation', () => {
         "email": "Taurean_Pollich31@gmail.com",
         "strideLength": 4,
         "dailyStepGoal": 7000,
-        "friends": [ 5, 43, 46, 11 ]
+        "friends": [5, 43, 46, 11]
       },
       {
         "id": 2,
@@ -110,7 +108,7 @@ describe('userObject creation', () => {
         "email": "Nicolette_Halvorson43@yahoo.com",
         "strideLength": 4.5,
         "dailyStepGoal": 9000,
-        "friends": [ 13, 19, 3 ]
+        "friends": [13, 19, 3]
       },
       {
         "id": 3,
@@ -119,7 +117,7 @@ describe('userObject creation', () => {
         "email": "Wilford.Barton@gmail.com",
         "strideLength": 2.7,
         "dailyStepGoal": 3000,
-        "friends": [ 31, 16, 15, 7 ]
+        "friends": [31, 16, 15, 7]
       }
     ];
 
