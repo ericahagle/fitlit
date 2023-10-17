@@ -35,7 +35,7 @@ function findStepGoalAverage(users) {
   users.forEach((user) => {
     totalStepCount += user.dailyStepGoal;
   });
-  const averageStepCount = totalStepCount / users.length;
+  const averageStepCount = (totalStepCount / users.length).toFixed(2);
   return averageStepCount;
 }
 

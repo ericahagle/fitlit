@@ -146,7 +146,7 @@ describe('userObject creation', () => {
 });
 
 describe('specific data', () => {
-  it('should find the average step count amongst all users', function() {
+  it('should find the average step goal amongst all users', function() {
     const users = [
       {
         "id": 1,
@@ -176,6 +176,6 @@ describe('specific data', () => {
         "friends": [31, 16, 15, 7]
       }
     ];
-    expect(findStepGoalAverage(users)).to.deep.equal(6333.333333333333);
+    expect(findStepGoalAverage(users)).to.deep.equal('6333.33');
   });
 });
