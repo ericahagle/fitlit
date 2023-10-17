@@ -28,15 +28,58 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
   return currentUser;
 }
 
-////////////////////* Find average step count among users *////////////////////
-function findAverageStepCount(users) {
+////////////////* Ounces per day *//////////////////////////////////////
+
+function ouncesPerDay(currentUser, date) {
+
+  if (currentUser.hydrationData && currentUser.hydrationData.length > 0) {
+  
+    const hydrationDay = currentUser.hydrationData.find((hydrationDate) => {
+      return hydrationDate.date === date;
+    });
+    if (hydrationDay) {
+      return hydrationDay.numOunces;
+    }
+  }
+}
+
+////////////////////* Find average step goal amongst all users *////////////////////
+function findStepGoalAverage(users) {
+
   let totalStepCount = 0;
 
   users.forEach((user) => {
     totalStepCount += user.dailyStepGoal;
   });
-  const averageStepCount = totalStepCount / users.length;
+  const averageStepCount = (totalStepCount / users.length).toFixed(2);
   return averageStepCount;
+}
+
+/////////////////////* Log the hydration for 7 days *////////////////////////////
+
+function getHydrationFor7Days(currentUser, startDate) {
+  
+  let startDateObj = new Date(startDate);
+  
+  let endDateObj = new Date(startDateObj);
+  endDateObj.setDate(endDateObj.getDate() + 6);
+
+  return currentUser.hydrationData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+  });
+}
+
+//////////////////////* HYDRATION AVERAGE */////////////////////////////
+
+function calculateTotalHydration(currentUser) {
+  let totalHydration = 0; 
+
+  currentUser.hydrationData.forEach((hydrationEntry) => {
+    totalHydration += hydrationEntry.numOunces /currentUser.hydrationData.length
+  });
+
+  return totalHydration.toFixed(2);  
 }
 
 ////////////////////* How far did you walk today *////////////////////
@@ -51,6 +94,10 @@ function findDistanceTraveled(currentUser) {
 module.exports = {
   generateRandomUserID,
   selectCurrentUser,
-  findAverageStepCount,
-  findDistanceTraveled
+  findStepGoalAverage,
+  calculateTotalHydration,
+  findDistanceTraveled,
+  getHydrationFor7Days,
+  ouncesPerDay
 };
+
