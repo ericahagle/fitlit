@@ -28,8 +28,25 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
   return currentUser;
 }
 
+
+////////////////Ounces per day//////////////////////////////////////
+
+function ouncesPerDay(currentUser, date) {
+
+  if (currentUser.hydrationData && currentUser.hydrationData.length > 0) {
+  
+    const hydrationDay = currentUser.hydrationData.find((hydrationDate) => {
+      return hydrationDate.date === date;
+    });
+    if (hydrationDay) {
+      return hydrationDay.numOunces;
+    }
+  }
+}
+
 ////////////////////* Find average step goal amongst all users *////////////////////
 function findStepGoalAverage(users) {
+
   let totalStepCount = 0;
 
   users.forEach((user) => {
@@ -51,8 +68,6 @@ function calculateTotalHydration(currentUser) {
   return totalHydration.toFixed(2);  
 }
 
-
-
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
   const distance = (currentUser.strideLength * currentUser.dailyStepGoal) / 5280
@@ -67,5 +82,7 @@ module.exports = {
   selectCurrentUser,
   findStepGoalAverage,
   calculateTotalHydration,
-  findDistanceTraveled
+  findDistanceTraveled,
+  ouncesPerDay
 };
+
