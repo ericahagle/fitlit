@@ -28,14 +28,14 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
   return currentUser;
 }
 
-////////////////////* Find average step count among users *////////////////////
-function findAverageStepCount(users) {
+////////////////////* Find average step goal amongst all users *////////////////////
+function findStepGoalAverage(users) {
   let totalStepCount = 0;
 
   users.forEach((user) => {
     totalStepCount += user.dailyStepGoal;
   });
-  const averageStepCount = totalStepCount / users.length;
+  const averageStepCount = (totalStepCount / users.length).toFixed(2);
   return averageStepCount;
 }
 
@@ -51,6 +51,6 @@ function findDistanceTraveled(currentUser) {
 module.exports = {
   generateRandomUserID,
   selectCurrentUser,
-  findAverageStepCount,
+  findStepGoalAverage,
   findDistanceTraveled
 };
