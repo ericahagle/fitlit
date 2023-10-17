@@ -39,6 +39,22 @@ function findAverageStepCount(users) {
   return averageStepCount;
 }
 
+// ///////////////////*Log the hydration for 7 days*////////////////////////////
+
+function getHydrationFor7Days(currentUser, startDate) {
+  
+  let startDateObj = new Date(startDate);
+  
+  let endDateObj = new Date(startDateObj);
+  endDateObj.setDate(endDateObj.getDate() + 6);
+
+  return currentUser.hydrationData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+  });
+}
+
+
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
   const distance = (currentUser.strideLength * currentUser.dailyStepGoal) / 5280
@@ -52,5 +68,6 @@ module.exports = {
   generateRandomUserID,
   selectCurrentUser,
   findAverageStepCount,
-  findDistanceTraveled
+  findDistanceTraveled,
+  getHydrationFor7Days
 };
