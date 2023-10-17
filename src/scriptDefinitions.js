@@ -39,6 +39,20 @@ function findAverageStepCount(users) {
   return averageStepCount;
 }
 
+//////////////////////*HYDRATION AVERAGE*/////////////////////////////
+
+function calculateTotalHydration(currentUser) {
+  let totalHydration = 0; 
+
+  currentUser.hydrationData.forEach((hydrationEntry) => {
+    totalHydration += hydrationEntry.numOunces /currentUser.hydrationData.length
+  });
+
+  return totalHydration.toFixed(2);  
+}
+
+
+
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
   const distance = (currentUser.strideLength * currentUser.dailyStepGoal) / 5280
@@ -52,5 +66,6 @@ module.exports = {
   generateRandomUserID,
   selectCurrentUser,
   findAverageStepCount,
-  findDistanceTraveled
+  findDistanceTraveled,
+  calculateTotalHydration
 };

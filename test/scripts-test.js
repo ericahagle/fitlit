@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, calculateTotalHydration } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function () {
@@ -144,3 +144,33 @@ describe('userObject creation', () => {
     expect(selectCurrentUser(userId4, users, hydrationData)).to.deep.equal('User not found!');
   });
 });
+
+describe('calculateTotalHydration', () => {
+
+  it('should be a function', function () {
+  expect(calculateTotalHydration).to.be.a('function')
+  })
+  
+    it('should return 0 when there are no hydration data', function () {
+      const user = { hydrationData: [] };
+      const result = calculateTotalHydration(user);
+      expect(result).to.equal('0.00');
+    });
+  
+    it('should return the average hydration when there is one hydration data entry', function () {
+      const user = {
+        hydrationData: [{ numOunces: 40 }]
+      };
+      const result = calculateTotalHydration(user);
+      expect(result).to.equal('40.00');
+    });
+  
+    it('should return the average hydration when there are multiple hydration data entries', function () {
+      const user = {
+        hydrationData: [{ numOunces: 40 }, { numOunces: 60 }, { numOunces: 100 }]
+      };
+      const result = calculateTotalHydration(user);
+      expect(result).to.equal('66.67');
+    });
+  
+  });
