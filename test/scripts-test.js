@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, ouncesPerDay } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function () {
@@ -143,4 +143,35 @@ describe('userObject creation', () => {
 
     expect(selectCurrentUser(userId4, users, hydrationData)).to.deep.equal('User not found!');
   });
+});
+
+describe('ouncesPerDay', () => {
+
+  it('should return numOunces when the date is found', function () {
+    const user = {
+      hydrationData: [
+        { date: '2023/03/24', numOunces: 40 },
+        { date: '2023/03/25', numOunces: 50 }
+      ]
+    };
+    const result = ouncesPerDay(user, '2023/03/24');
+    expect(result).to.equal(40);
+  });
+
+  it('should return undefined when the date is not found', function () {
+    const user = {
+      hydrationData: [
+        { date: '2023/03/24', numOunces: 40 }
+      ]
+    };
+    const result = ouncesPerDay(user, '2023/03/25');
+    expect(result).to.be.undefined;
+  });
+
+  it('should return undefined when the hydrationData array is empty', function () {
+    const user = { hydrationData: [] };
+    const result = ouncesPerDay(user, '2023/03/24');
+    expect(result).to.be.undefined;
+  });
+
 });

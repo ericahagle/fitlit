@@ -28,6 +28,23 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
   return currentUser;
 }
 
+////////////////Ounces per day//////////////////////////////////////
+
+function ouncesPerDay(currentUser, date) {
+
+  if (currentUser.hydrationData && currentUser.hydrationData.length > 0) {
+  
+    const hydrationDay = currentUser.hydrationData.find((hydrationDate) => {
+      return hydrationDate.date === date;
+    });
+    if (hydrationDay) {
+      return hydrationDay.numOunces;
+    }
+  }
+  return undefined;
+}
+
+
 ////////////////////* Find average step count among users *////////////////////
 function findAverageStepCount(users) {
   let totalStepCount = 0;
@@ -52,5 +69,6 @@ module.exports = {
   generateRandomUserID,
   selectCurrentUser,
   findAverageStepCount,
-  findDistanceTraveled
+  findDistanceTraveled,
+  ouncesPerDay
 };
