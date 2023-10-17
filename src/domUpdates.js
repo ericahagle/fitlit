@@ -1,3 +1,5 @@
+import { currentDay } from "./scriptDefinitions";
+
 //NOTE: Your DOM manipulation will occur in this file
 const userName = document.querySelector('#welcomeMat');
 const userInfo = document.querySelector('#userData');
@@ -20,7 +22,7 @@ const  waterDayUpdate = (date, hydrationData) => {
 }
 const  waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
-  for(i = hydrationArray.lenght - 8 ; i < hydrationArray.length; i++) {
+  for(i = hydrationArray.length - 8 ; i < hydrationArray.length; i++) {
     waterWeek.innerHTML += `<div class = 'week-view'>
                             <p>${hydrationArray[i].date}</p>
                             <p>${hydrationArray[i].numOunces}</p>
@@ -28,10 +30,6 @@ const  waterWeekUpdate = (hydrationArray) => {
 }
 }
 
-const displayUserInfo = (user) => {
-  userInfo.innerHTML = '';
-  userInfo.innerHTML = `<p>${user.address}</p> <p>${user.email}</p>`;
-}
 export {
   updateUserName,
   displayUserInfo,
