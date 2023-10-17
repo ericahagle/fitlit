@@ -28,6 +28,7 @@ p {
 img {
   height: 100px;
   width: 100px;
+  padding-bottom: 5%;
 }
 
 .left, .middle, .right {
@@ -49,8 +50,7 @@ img {
 }
 
 .bottom {
-  grid-column: 2 / 5;
-  width: 100%;
+  grid-column: 2 / 6;
 }
 
 .widget {
