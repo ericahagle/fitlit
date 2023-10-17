@@ -1,5 +1,3 @@
-import { currentDay } from "./scriptDefinitions";
-
 //NOTE: Your DOM manipulation will occur in this file
 const userName = document.querySelector('#welcomeMat');
 const userInfo = document.querySelector('#userData');
