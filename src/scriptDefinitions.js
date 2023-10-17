@@ -41,7 +41,6 @@ function ouncesPerDay(currentUser, date) {
       return hydrationDay.numOunces;
     }
   }
-  return undefined;
 }
 
 
