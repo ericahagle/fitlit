@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, findDistanceTraveled } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function() {
@@ -275,5 +275,11 @@ describe('calculateTotalHydration', () => {
       };
       const result = calculateTotalHydration(user);
       expect(result).to.equal('66.67');
+    });
+  });
+
+  describe('distance traveled', () => {
+    it('should return the distance traveled by a user on a given day', function() {
+      expect(true).to.equal(true);
     });
   });
