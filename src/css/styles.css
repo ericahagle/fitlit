@@ -1,6 +1,6 @@
 body {
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 1.5fr 1.5fr 0.5fr 0.5fr;
+  grid-template-columns: 0.5fr 0.5fr 1.5fr 1.5fr 0.25fr 0.25fr 0.5fr;
   grid-template-rows: 1fr 1fr 1fr;
   font-family: 'Jaldi', sans-serif;
   background-color: #003249;
@@ -8,9 +8,13 @@ body {
   width: 100%;
 }
 
-section, article {
+section {
   display: flex;
   justify-content: space-around;
+}
+
+article {
+  display: flex;
 }
 
 h1, h2 {
@@ -46,11 +50,13 @@ img {
 }
 
 .right {
-  grid-column: 5 / 7;
+  grid-column: 6 / 8;
 }
 
 .bottom {
-  grid-column: 2 / 6;
+  width: 864px;
+  grid-column: 3 / 5;
+  justify-content: space-evenly;
 }
 
 .widget {
