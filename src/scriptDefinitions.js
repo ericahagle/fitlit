@@ -93,6 +93,15 @@ function calculateAverageHoursSlept(currentUser) {
   return totalHoursSlept.toFixed(2);  
 }
 
+function calculateAverageSleepQuality(currentUser) {
+  let avgSleepQuality = 0; 
+
+  currentUser.sleepData.forEach((sleepEntry) => {
+    avgSleepQuality += sleepEntry.sleepQuality / currentUser.sleepData.length
+  });
+
+  return avgSleepQuality.toFixed(2);  
+}
 
 
 ////////////////////* How far did you walk today *////////////////////
@@ -112,6 +121,7 @@ module.exports = {
   findDistanceTraveled,
   getHydrationFor7Days,
   ouncesPerDay,
-  calculateAverageHoursSlept
+  calculateAverageHoursSlept,
+  calculateAverageSleepQuality
 };
 
