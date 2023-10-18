@@ -80,7 +80,20 @@ function calculateTotalHydration(currentUser) {
   });
 
   return totalHydration.toFixed(2);  
+
 }
+
+function calculateAverageHoursSlept(currentUser) {
+  let totalHoursSlept = 0; 
+
+  currentUser.sleepData.forEach((sleepEntry) => {
+    totalHoursSlept += sleepEntry.hoursSlept /currentUser.sleepData.length
+  });
+
+  return totalHoursSlept.toFixed(2);  
+}
+
+
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -98,6 +111,7 @@ module.exports = {
   calculateTotalHydration,
   findDistanceTraveled,
   getHydrationFor7Days,
-  ouncesPerDay
+  ouncesPerDay,
+  calculateAverageHoursSlept
 };
 

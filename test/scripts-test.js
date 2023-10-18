@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function() {
@@ -277,3 +277,40 @@ describe('calculateTotalHydration', () => {
       expect(result).to.equal('66.67');
     });
   });
+
+        describe('calculateAverageHoursSlept', () => {
+
+        it('should be a function', function () {
+          expect(calculateAverageHoursSlept).to.be.a('function');
+        });
+
+        it('should return 0 when there is no sleep data', function () {
+          const user = { sleepData: [] };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('0.00');
+        });
+
+        it('should return the average hours slept when there is one sleep data entry', function () {
+          const user = {
+            sleepData: [{ hoursSlept: 7 }]
+          };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('7.00');
+        });
+
+        it('should return the average hours slept when there are multiple sleep data entries', function () {
+          const user = {
+            sleepData: [{ hoursSlept: 7 }, { hoursSlept: 8 }, { hoursSlept: 6 }]
+          };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('7.00');
+        });
+
+        it('should correctly calculate the average hours slept with diferent sleep data entries', function () {
+          const user = {
+            sleepData: [{ hoursSlept: 5 }, { hoursSlept: 8 }, { hoursSlept: 7 }]
+          };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('6.67');
+        });
+      });
