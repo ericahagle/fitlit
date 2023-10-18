@@ -55,7 +55,7 @@ function findStepGoalAverage(users) {
   return averageStepCount;
 }
 
-/////////////////////* Log the hydration for 7 days *////////////////////////////
+/////////////////////* LOG HYDRATION FOR 7 DAYS ITERATION 2 *////////////////////////////
 
 function getHydrationFor7Days(currentUser, startDate) {
   
@@ -70,7 +70,7 @@ function getHydrationFor7Days(currentUser, startDate) {
   });
 }
 
-//////////////////////* HYDRATION AVERAGE */////////////////////////////
+//////////////////////* HYDRATION AVERAGE ITERATION 2 */////////////////////////////
 
 function calculateTotalHydration(currentUser) {
   let totalHydration = 0; 
@@ -82,6 +82,8 @@ function calculateTotalHydration(currentUser) {
   return totalHydration.toFixed(2);  
 
 }
+
+////////////////////* SLEEP ITERATION 4*///////////////////////////
 
 function calculateAverageHoursSlept(currentUser) {
   let totalHoursSlept = 0; 
@@ -103,6 +105,20 @@ function calculateAverageSleepQuality(currentUser) {
   return avgSleepQuality.toFixed(2);  
 }
 
+function hoursSleptGivenDate(currentUser, date) {
+
+  if (currentUser.sleepData && 
+      currentUser.sleepData.length > 0) {
+
+    const sleepDate = currentUser.sleepData.find((sleepDate) => {
+      return sleepDate.date === date;
+    });
+    if (sleepDate) {
+      return sleepDate.hoursSlept;
+    }
+  }
+}
+
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -122,6 +138,7 @@ module.exports = {
   getHydrationFor7Days,
   ouncesPerDay,
   calculateAverageHoursSlept,
-  calculateAverageSleepQuality
+  calculateAverageSleepQuality,
+  hoursSleptGivenDate
 };
 

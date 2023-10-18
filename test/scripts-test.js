@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function() {
@@ -349,5 +349,36 @@ describe('calculateTotalHydration', () => {
           };
           const result = calculateAverageSleepQuality(user);
           expect(result).to.equal('6.67');
+        });
+      });
+
+
+      describe('hoursSleptGivenDate', () => {
+
+        it('should return hoursSlept when the date is found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/26', hoursSlept: 7 },
+              { date: '2023/03/27', hoursSlept: 8 }
+            ]
+          };
+          const result = hoursSleptGivenDate(user, '2023/03/26');
+          expect(result).to.equal(7);
+        });
+
+        it('should return undefined when the date is not found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/26', hoursSlept: 7 }
+            ]
+          };
+          const result = hoursSleptGivenDate(user, '2023/03/27');
+          expect(result).to.be.undefined;
+        });
+
+        it('should return undefined when the sleepData array is empty', function () {
+          const user = { sleepData: [] };
+          const result = hoursSleptGivenDate(user, '2023/03/26');
+          expect(result).to.be.undefined;
         });
       });
