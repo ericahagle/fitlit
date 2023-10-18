@@ -33,7 +33,7 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
 function ouncesPerDay(currentUser, date) {
 
   if (currentUser.hydrationData && currentUser.hydrationData.length > 0) {
-  
+
     const hydrationDay = currentUser.hydrationData.find((hydrationDate) => {
       return hydrationDate.date === date;
     });
@@ -58,37 +58,34 @@ function findStepGoalAverage(users) {
 /////////////////////* Log the hydration for 7 days *////////////////////////////
 
 function getHydrationFor7Days(currentUser, startDate) {
-  
+
   let startDateObj = new Date(startDate);
-  
+
   let endDateObj = new Date(startDateObj);
   endDateObj.setDate(endDateObj.getDate() + 6);
 
   return currentUser.hydrationData.filter((entry) => {
-      let entryDateObj = new Date(entry.date);
-      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+    let entryDateObj = new Date(entry.date);
+    return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
   });
 }
 
 //////////////////////* HYDRATION AVERAGE */////////////////////////////
 
 function calculateTotalHydration(currentUser) {
-  let totalHydration = 0; 
+  let totalHydration = 0;
 
   currentUser.hydrationData.forEach((hydrationEntry) => {
-    totalHydration += hydrationEntry.numOunces /currentUser.hydrationData.length
+    totalHydration += hydrationEntry.numOunces / currentUser.hydrationData.length
   });
 
-  return totalHydration.toFixed(2);  
+  return totalHydration.toFixed(2);
 }
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
-  const distance = (currentUser.strideLength * currentUser.dailyStepGoal) / 5280
-  console.log(`Distance traveled by ${currentUser.name}: ${distance.toFixed(2)} miles`);
-  console.log(distance)
-  return distance
-
+  const distance = ((currentUser.strideLength * currentUser.activity[currentUser.activity.length - 1].numSteps) / 5280).toFixed(2);
+  return distance;
 }
 
 module.exports = {
