@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId', function() {
@@ -382,3 +382,39 @@ describe('calculateTotalHydration', () => {
           expect(result).to.be.undefined;
         });
       });
+
+      describe('sleepQualityGivenDate', () => {
+
+        it('should be a function', function () {
+          expect(sleepQualityGivenDate).to.be.a('function');
+        });
+        
+        it('should return sleepQuality when the date is found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/24', hoursSlept: 7, sleepQuality: 2 },
+              { date: '2023/03/25', hoursSlept: 8, sleepQuality: 3 }
+            ]
+          };
+          const result = sleepQualityGivenDate(user, '2023/03/24');
+          expect(result).to.equal(2);
+        });
+      
+        it('should return undefined when the date is not found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/24', hoursSlept: 7, sleepQuality: 2 }
+            ]
+          };
+          const result = sleepQualityGivenDate(user, '2023/03/25');
+          expect(result).to.be.undefined;
+        });
+      
+        it('should return undefined when the sleepData array is empty', function () {
+          const user = { sleepData: [] };
+          const result = sleepQualityGivenDate(user, '2023/03/24');
+          expect(result).to.be.undefined;
+        });
+      
+      });
+      

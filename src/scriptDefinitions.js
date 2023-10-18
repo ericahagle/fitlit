@@ -119,6 +119,20 @@ function hoursSleptGivenDate(currentUser, date) {
   }
 }
 
+function sleepQualityGivenDate(currentUser, date) {
+
+  if (currentUser.sleepData && 
+      currentUser.sleepData.length > 0) {
+
+    const sleepDate = currentUser.sleepData.find((sleepDate) => {
+      return sleepDate.date === date;
+    });
+    if (sleepDate) {
+      return sleepDate.sleepQuality;
+    }
+  }
+}
+
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -139,6 +153,7 @@ module.exports = {
   ouncesPerDay,
   calculateAverageHoursSlept,
   calculateAverageSleepQuality,
-  hoursSleptGivenDate
+  hoursSleptGivenDate,
+  sleepQualityGivenDate
 };
 
