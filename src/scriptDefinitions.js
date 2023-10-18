@@ -133,6 +133,19 @@ function sleepQualityGivenDate(currentUser, date) {
   }
 }
 
+function getSleepFor7Days(currentUser, startDate) {
+
+  let startDateObj = new Date(startDate);
+
+  let endDateObj = new Date(startDateObj);
+  endDateObj.setDate(endDateObj.getDate() + 6);
+
+  return currentUser.sleepData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+  });
+}
+
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -154,6 +167,7 @@ module.exports = {
   calculateAverageHoursSlept,
   calculateAverageSleepQuality,
   hoursSleptGivenDate,
-  sleepQualityGivenDate
+  sleepQualityGivenDate,
+  getSleepFor7Days
 };
 
