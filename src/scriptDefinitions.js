@@ -1,7 +1,6 @@
 ////////////////////* Generate random number *////////////////////
 function generateRandomUserID(usersArray) {
 	let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
-	console.log(randomUserId);
 	return randomUserId;
 }
 
