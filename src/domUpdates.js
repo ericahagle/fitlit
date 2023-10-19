@@ -8,6 +8,7 @@ const sleepWeek = document.querySelector('#sleepWeek');
 const stepGoal = document.querySelector('#stepGoal');
 const stepsDay = document.querySelector('#stepsDay');
 const activeMinutes = document.querySelector('#activeMinutes');
+const stepsWeek = document.querySelector('#stepsWeek');
 //Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
 
 const updateUserName = (userData) => {
@@ -57,6 +58,12 @@ const activeMinutesUpdate = (time) => {
   activeMinutes.innerHTML = `<h2>active minutes</h2><p>${time}</p>`;
 }
 
+const stepsWeekUpdate = (activityArray) => {
+  stepsWeek.innerHTML = '';
+  const activityDisplay = activityArray.map((html) => `<p>${html}</p>`).join('');
+  stepsWeek.innerHTML = `<h2>Step Goals Week</h2>${activityDisplay}`;
+}
+
 export {
   updateUserName,
   displayUserInfo,
@@ -66,5 +73,6 @@ export {
   sleepWeekUpdate,
   stepGoalUpdate,
   stepsDayUpdate,
-  activeMinutesUpdate
+  activeMinutesUpdate,
+  stepsWeekUpdate
 }
