@@ -420,49 +420,47 @@ describe('calculateTotalHydration', () => {
 
       describe('getSleepFor7Days', () => {
 
-        it('should return an array', function () {
-          const user = {
-            sleepData: [{ date: '2023/03/24', hoursSlept: 7, sleepQuality: 2 }]
-          };
+        let user;
+      
+        // This helper function sets up a common user object structure for the tests.
+        function setUserSleepData(data) {
+          user = { sleepData: data };
+        }
+      
+        it('should return an array', () => {
+          setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
           const result = getSleepFor7Days(user, '2023/03/24');
           expect(result).to.be.an('array');
         });
       
-        it('should return sleep data for 7 days including the start date', function () {
-          const user = {
-            sleepData: [
-              { date: '2023/03/20', hoursSlept: 7, sleepQuality: 2 },
-              { date: '2023/03/21', hoursSlept: 8, sleepQuality: 3 },
-              { date: '2023/03/22', hoursSlept: 6, sleepQuality: 4 },
-              { date: '2023/03/23', hoursSlept: 7, sleepQuality: 2 },
-              { date: '2023/03/24', hoursSlept: 8, sleepQuality: 3 },
-              { date: '2023/03/25', hoursSlept: 6, sleepQuality: 4 },
-              { date: '2023/03/26', hoursSlept: 7, sleepQuality: 2 }
-            ]
-          };
-          const result = getSleepFor7Days(user, '2023/03/20');
+        it('should return sleep data for 7 days including the end date', () => {
+          setUserSleepData([
+            { date: '2023/03/18', hoursSlept: 6 },
+            { date: '2023/03/19', hoursSlept: 7 },
+            { date: '2023/03/20', hoursSlept: 8 },
+            { date: '2023/03/21', hoursSlept: 8 },
+            { date: '2023/03/22', hoursSlept: 8 },
+            { date: '2023/03/23', hoursSlept: 8 },
+            { date: '2023/03/24', hoursSlept: 8 }
+          ]);
+          const result = getSleepFor7Days(user, '2023/03/24');
           expect(result).to.have.lengthOf(7);
         });
       
-        it('should return empty array when there is no sleep data in the range', function () {
-          const user = {
-            sleepData: [{ date: '2023/03/19', hoursSlept: 7, sleepQuality: 2 }]
-          };
-          const result = getSleepFor7Days(user, '2023/03/20');
+        it('should return empty array when there is no sleep data in the range', () => {
+          setUserSleepData([{ date: '2023/03/17', hoursSlept: 7 }]);
+          const result = getSleepFor7Days(user, '2023/03/24');
           expect(result).to.be.empty;
         });
       
-        it('should handle dates within the range', function () {
-          const user = {
-            sleepData: [
-              { date: '2023/03/20', hoursSlept: 7, sleepQuality: 2 },
-              { date: '2023/03/26', hoursSlept: 7, sleepQuality: 2 }
-            ]
-          };
-          const result = getSleepFor7Days(user, '2023/03/20');
+        it('should handle dates within the range but not necessarily every day', () => {
+          setUserSleepData([
+            { date: '2023/03/18', hoursSlept: 6 },
+            { date: '2023/03/24', hoursSlept: 7 }
+          ]);
+          const result = getSleepFor7Days(user, '2023/03/24');
           expect(result).to.have.lengthOf(2);
         });
-      
-      });
+      })
       
       
