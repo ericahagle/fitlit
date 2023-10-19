@@ -1,12 +1,19 @@
 import { generateRandomUserID, selectCurrentUser } from './scriptDefinitions'
 
-// Users
+/////////////////// Global Variables for apiCalls.js /////////////////////
 const usersApi = "https://fitlit-api.herokuapp.com/api/v1/users";
-const userId = generateRandomUserID();
+const hydrationApi = "https://fitlit-api.herokuapp.com/api/v1/hydration";
+const sleepApi = "https://fitlit-api.herokuapp.com/api/v1/sleep";
+const activityApi = "https://fitlit-api.herokuapp.com/api/v1/activity";
+let allUsers = null;
 let currentUser = null;
+let hydrationData = null;
+let sleepData = null;
+let activityData = null;
 
+////////// FETCH USERS ////////////
 const fetchUsers = () => {
-	fetch(usersApi)
+	return fetch(usersApi)
 		.then(response => {
 			if (!response.ok) {
 				throw Error(`Something is amiss. Request Code: ${response.status}`);
@@ -14,19 +21,24 @@ const fetchUsers = () => {
 			return response.json();
 		})
 		.then(data => {
-			// console.log(data);
-			currentUser = selectCurrentUser(userId, data.users);
-			console.log(currentUser);
+			allUsers = data.users;
 		})
 		.catch(error => {
 			console.log(error);
 		})
-		return currentUser;
+		return allUsers;
 }
 
-fetchUsers();
+//////////// FETCH ALL THE DATA ////////////
+const fetchAllTheData = () => {
+	return Promise.all([
+		fetchUsers(usersApi),
+		// fetchHydrationData(hydrationApi),
+		// fetchActivityData(activityApi),
+		// fetchSleepData(sleepApi)
+	])
+}
 
-
-// export {
-//   fetchUsers
-// }
+export {
+  fetchAllTheData
+}

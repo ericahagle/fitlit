@@ -1,28 +1,38 @@
-/* This is the JavaScript entry file - your code begins here */
-////////////////////* Do NOT delete or rename this file *////////////////////
+///////////////// Global Variables ///////////////////
+let allUsers = null;
+let currentUser = null;
+// let hydrationData = null;
+// let sleepData = null;
+// let activityData = null;
 
-
-// An example of how you tell webpack to use a CSS file
-   import './css/styles.css';
+/////////// Import CSS File /////////////
+import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
   // import './images/turing-logo.png';
 
-// An example of how you tell webpack to use a JS file
-  // import userData from './data/users';
-  // console.log("User Data:", userData);
+//////////// Import fetch call from apiCalls.js //////////////
+import { fetchAllTheData } from './apiCalls';
 
-  import { fetchUsers } from './apiCalls';
+///////////// Import functions from domUpdates.js ///////////////
+import { updateUserName, displayUserInfo } from './domUpdates';
 
-// Example of one way to import functions from the domUpdates file.  You will delete these examples.
-  import { updateUserName, displayUserInfo } from './domUpdates';
-
-  // exampleFunction1('Travis');
-  // exampleFunction2('Travis')
-
-// Import functions from scriptDefinitions
-
+//////////// Import functions from scriptDefinitions //////////////
 import { generateRandomUserID, selectCurrentUser } from './scriptDefinitions';
 
-
-
+////////// Event Listeners //////////
+window.addEventListener('load', () => {
+  fetchAllTheData()
+	.then(data => {
+		allUsers = allUsers;
+		// console.log(allUsers);
+		currentUser = allUsers[generateRandomUserID(allUsers) - 1];
+		// console.log(currentUser);
+		// hydrationData = hydrationData;
+		// console.log(hydrationData);
+		// activityData = activityData;
+		// console.log(activityData);
+		// sleepData = sleepData;
+		// console.log(sleepData);
+	});
+});
