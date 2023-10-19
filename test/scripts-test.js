@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, findDistanceTraveled } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId that falls within the array of users', function() {
@@ -482,6 +482,45 @@ describe('distance traveled', () => {
       
       });
 
+    describe('getSleepQualityFor7Days', () => {
+
+  it('should return sleep quality data for 7 days when data is available', function () {
+    const user = {
+      sleepData: [
+        { date: '2023/03/20', hoursSlept: 7, sleepQuality: 4 },
+        { date: '2023/03/21', hoursSlept: 6, sleepQuality: 3 },
+        { date: '2023/03/22', hoursSlept: 7, sleepQuality: 2 },
+        { date: '2023/03/23', hoursSlept: 8, sleepQuality: 1 },
+        { date: '2023/03/24', hoursSlept: 5, sleepQuality: 3 },
+        { date: '2023/03/25', hoursSlept: 7, sleepQuality: 4 },
+        { date: '2023/03/26', hoursSlept: 6, sleepQuality: 2 },
+      ]
+    };
+    const result = getSleepQualityFor7Days(user, '2023/03/26');
+    expect(result.length).to.equal(7);
+  });
+
+  it('should return an empty array when no matching sleep data is found', function () {
+    const user = {
+      sleepData: []
+    };
+    const result = getSleepQualityFor7Days(user, '2023/03/26');
+    expect(result).to.deep.equal([]);
+  });
+
+  it('should return partial data when only some days have sleep data', function () {
+    const user = {
+      sleepData: [
+        { date: '2023/03/20', hoursSlept: 7, sleepQuality: 4 },
+        { date: '2023/03/22', hoursSlept: 7, sleepQuality: 2 },
+      ]
+    };
+    const result = getSleepQualityFor7Days(user, '2023/03/26');
+    expect(result.length).to.equal(2);
+  });
+
+});
+
       describe('getSleepFor7Days', () => {
 
         let user;
@@ -526,4 +565,3 @@ describe('distance traveled', () => {
           expect(result).to.have.lengthOf(2);
         });
       });
-
