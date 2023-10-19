@@ -1,6 +1,7 @@
 ////////////////////* Generate random number *////////////////////
-function generateRandomUserID() {
-  return Math.floor(Math.random() * 10) + 1;
+function generateRandomUserID(usersArray) {
+	let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
+	return randomUserId;
 }
 
 ////////////////////* Create userObject card *////////////////////
