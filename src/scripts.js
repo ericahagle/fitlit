@@ -3,7 +3,7 @@ let allUsers = null;
 let currentUser = null;
 let hydrationData = null;
 let activityData = null;
-// let sleepData = null;
+let sleepData = null;
 
 /////////// Import CSS File /////////////
 import './css/styles.css';
@@ -18,7 +18,7 @@ import { fetchAllTheData } from './apiCalls';
 import { updateUserName, displayUserInfo } from './domUpdates';
 
 //////////// Import functions from scriptDefinitions //////////////
-import { generateRandomUserID, selectCurrentUser } from './scriptDefinitions';
+import { generateRandomUserID } from './scriptDefinitions';
 
 ////////// Event Listeners //////////
 window.addEventListener('load', () => {
@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
 		// console.log(hydrationData);
 		activityData = activityData;
 		// console.log(activityData);
-		// sleepData = sleepData;
+		sleepData = sleepData;
 		// console.log(sleepData);
 	});
 });
