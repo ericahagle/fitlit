@@ -1,13 +1,14 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay } = require('../src/scriptDefinitions');
+
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
-  it('should generate a random userId', function() {
+  it('should generate a random userId', function () {
     const randomUserID = generateRandomUserID();
     expect(randomUserID).to.be.a('number');
   });
 
-  it('should return a currentUser object with the specified ID', function() {
+  it('should return a currentUser object with the specified ID', function () {
     const users = [
       {
         "id": 1,
@@ -90,7 +91,7 @@ describe('userObject creation', () => {
     );
   });
 
-  it('should return "User not found!" if the user is not in the list', function() {
+  it('should return "User not found!" if the user is not in the list', function () {
     const users = [
       {
         "id": 1,
@@ -146,7 +147,7 @@ describe('userObject creation', () => {
 });
 
 describe('specific data', () => {
-  it('should find the average step goal amongst all users', function() {
+  it('should find the average step goal amongst all users', function () {
     const users = [
       {
         "id": 1,
@@ -252,28 +253,201 @@ describe('getHydrationFor7Days', () => {
 describe('calculateTotalHydration', () => {
 
   it('should be a function', function () {
-  expect(calculateTotalHydration).to.be.a('function')
+    expect(calculateTotalHydration).to.be.a('function')
   })
-  
-    it('should return 0 when there is no hydration data', function () {
-      const user = { hydrationData: [] };
-      const result = calculateTotalHydration(user);
-      expect(result).to.equal('0.00');
-    });
-  
-    it('should return the average hydration when there is one hydration data entry', function () {
-      const user = {
-        hydrationData: [{ numOunces: 40 }]
-      };
-      const result = calculateTotalHydration(user);
-      expect(result).to.equal('40.00');
-    });
-  
-    it('should return the average hydration when there are multiple hydration data entries', function () {
-      const user = {
-        hydrationData: [{ numOunces: 40 }, { numOunces: 60 }, { numOunces: 100 }]
-      };
-      const result = calculateTotalHydration(user);
-      expect(result).to.equal('66.67');
-    });
+
+  it('should return 0 when there is no hydration data', function () {
+    const user = { hydrationData: [] };
+    const result = calculateTotalHydration(user);
+    expect(result).to.equal('0.00');
   });
+
+  it('should return the average hydration when there is one hydration data entry', function () {
+    const user = {
+      hydrationData: [{ numOunces: 40 }]
+    };
+    const result = calculateTotalHydration(user);
+    expect(result).to.equal('40.00');
+  });
+
+  it('should return the average hydration when there are multiple hydration data entries', function () {
+    const user = {
+      hydrationData: [{ numOunces: 40 }, { numOunces: 60 }, { numOunces: 100 }]
+    };
+    const result = calculateTotalHydration(user);
+    expect(result).to.equal('66.67');
+  });
+});
+
+describe('distance traveled', () => {
+  it('should return the distance traveled by a user on a given day', function () {
+    const currentUser = {
+      "id": 3,
+      "name": "Colt Rohan",
+      "address": "48010 Balistreri Harbor, Cleobury IN 43317",
+      "email": "Wilford.Barton@gmail.com",
+      "strideLength": 2.7,
+      "dailyStepGoal": 3000,
+      "friends": [31, 16, 15, 7],
+      "hydrationData": [{
+        "userID": 3,
+        "date": "2023/03/24",
+        "numOunces": 95
+      }],
+      "activity": [{
+        "userID": 3,
+        "date": "2023/03/24",
+        "numSteps": 12970,
+        "minutesActive": 282,
+        "flightsOfStairs": 38
+      }],
+      "sleep": [{
+        "userID": 3,
+        "date": "2023/03/24",
+        "hoursSlept": 9.7,
+        "sleepQuality": 4.7
+      }]
+    }
+    expect(findDistanceTraveled(currentUser)).to.equal('6.63');
+  });
+});
+
+        describe('calculateAverageHoursSlept', () => {
+
+        it('should be a function', function () {
+          expect(calculateAverageHoursSlept).to.be.a('function');
+        });
+
+        it('should return 0 when there is no sleep data', function () {
+          const user = { sleepData: [] };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('0.00');
+        });
+
+        it('should return the average hours slept when there is one sleep data entry', function () {
+          const user = {
+            sleepData: [{ hoursSlept: 7 }]
+          };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('7.00');
+        });
+
+        it('should return the average hours slept when there are multiple sleep data entries', function () {
+          const user = {
+            sleepData: [{ hoursSlept: 7 }, { hoursSlept: 8 }, { hoursSlept: 6 }]
+          };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('7.00');
+        });
+
+        it('should correctly calculate the average hours slept with diferent sleep data entries', function () {
+          const user = {
+            sleepData: [{ hoursSlept: 5 }, { hoursSlept: 8 }, { hoursSlept: 7 }]
+          };
+          const result = calculateAverageHoursSlept(user);
+          expect(result).to.equal('6.67');
+        });
+      });
+
+         describe('calculateAverageSleepQuality', () => {
+
+        it('should be a function', function () {
+          expect(calculateAverageSleepQuality).to.be.a('function');
+        });
+
+        it('should return 0 when there is no sleep data', function () {
+          const user = { sleepData: [] };
+          const result = calculateAverageSleepQuality(user);
+          expect(result).to.equal('0.00');
+        });
+
+        it('should return the average sleep quality when there is one sleep data entry', function () {
+          const user = {
+            sleepData: [{ sleepQuality: 7 }]
+          };
+          const result = calculateAverageSleepQuality(user);
+          expect(result).to.equal('7.00');
+        });
+
+        it('should return the average sleep quality when there are multiple sleep data entries', function () {
+          const user = {
+            sleepData: [{ sleepQuality: 7 }, { sleepQuality: 8 }, { sleepQuality: 6 }]
+          };
+          const result = calculateAverageSleepQuality(user);
+          expect(result).to.equal('7.00');
+        });
+
+        it('should correctly calculate the average sleep quality with varied sleep data entries', function () {
+          const user = {
+            sleepData: [{ sleepQuality: 5 }, { sleepQuality: 8 }, { sleepQuality: 7 }]
+          };
+          const result = calculateAverageSleepQuality(user);
+          expect(result).to.equal('6.67');
+        });
+      });
+
+
+      describe('hoursSleptGivenDate', () => {
+
+        it('should return hoursSlept when the date is found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/26', hoursSlept: 7 },
+              { date: '2023/03/27', hoursSlept: 8 }
+            ]
+          };
+          const result = hoursSleptGivenDate(user, '2023/03/26');
+          expect(result).to.equal(7);
+        });
+
+        it('should return undefined when the date is not found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/26', hoursSlept: 7 }
+            ]
+          };
+          const result = hoursSleptGivenDate(user, '2023/03/27');
+          expect(result).to.be.undefined;
+        });
+
+        it('should return undefined when the sleepData array is empty', function () {
+          const user = { sleepData: [] };
+          const result = hoursSleptGivenDate(user, '2023/03/26');
+          expect(result).to.be.undefined;
+        });
+      });
+
+      describe('sleepQualityGivenDate', () => {
+
+        it('should be a function', function () {
+          expect(sleepQualityGivenDate).to.be.a('function');
+        });
+        
+        it('should return sleepQuality when the date is found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/24', hoursSlept: 7, sleepQuality: 2 },
+              { date: '2023/03/25', hoursSlept: 8, sleepQuality: 3 }
+            ]
+          };
+          const result = sleepQualityGivenDate(user, '2023/03/24');
+          expect(result).to.equal(2);
+        });
+      
+        it('should return undefined when the date is not found', function () {
+          const user = {
+            sleepData: [
+              { date: '2023/03/24', hoursSlept: 7, sleepQuality: 2 }
+            ]
+          };
+          const result = sleepQualityGivenDate(user, '2023/03/25');
+          expect(result).to.be.undefined;
+        });
+      
+        it('should return undefined when the sleepData array is empty', function () {
+          const user = { sleepData: [] };
+          const result = sleepQualityGivenDate(user, '2023/03/24');
+          expect(result).to.be.undefined;
+        });
+      
+      });
