@@ -28,6 +28,10 @@ function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
   return currentUser;
 }
 
+////////////////* Current Day Value *///////////////////////////
+
+const currentDay = (user) => user.hydrationData[user.hydrationData.length-1];
+
 ////////////////* Ounces per day *//////////////////////////////////////
 
 function ouncesPerDay(currentUser, date) {
@@ -166,6 +170,7 @@ function findDistanceTraveled(currentUser) {
 module.exports = {
   generateRandomUserID,
   selectCurrentUser,
+  currentDay,
   findStepGoalAverage,
   calculateTotalHydration,
   findDistanceTraveled,
