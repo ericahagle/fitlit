@@ -1,6 +1,7 @@
 ////////////////////* Generate random number *////////////////////
-function generateRandomUserID() {
-  return Math.floor(Math.random() * 10) + 1;
+function generateRandomUserID(usersArray) {
+	let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
+	return randomUserId;
 }
 
 ////////////////////* Create userObject card *////////////////////
@@ -141,7 +142,6 @@ function getSleepQualityFor7Days(currentUser, endDate) {
 
   let startDateObj = new Date(endDateObj);
   startDateObj.setDate(endDateObj.getDate() -6  );
-
   return currentUser.sleepData
     .filter((entry) => {
       let entryDateObj = new Date(entry.date);
@@ -155,6 +155,22 @@ function getSleepQualityFor7Days(currentUser, endDate) {
     });
 }
 
+function getSleepFor7Days(currentUser, endDate) {
+  let endDateObj = new Date(endDate);
+
+  let startDateObj = new Date(endDateObj);
+  startDateObj.setDate(endDateObj.getDate() -6  );
+  return currentUser.sleepData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+     })
+        .map((entry) => {
+          return {
+            date: entry.date,
+            hoursSlept: entry.hoursSlept
+          };
+        });
+    }
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -175,6 +191,7 @@ module.exports = {
   calculateAverageSleepQuality,
   hoursSleptGivenDate,
   sleepQualityGivenDate,
-  getSleepQualityFor7Days
+  getSleepQualityFor7Days,
+  getSleepFor7Days
 };
 

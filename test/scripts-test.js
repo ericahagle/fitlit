@@ -1,11 +1,40 @@
 import { expect } from 'chai';
-
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepQualityFor7Days } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
-  it('should generate a random userId', function () {
-    const randomUserID = generateRandomUserID();
-    expect(randomUserID).to.be.a('number');
+  it('should generate a random userId that falls within the array of users', function() {
+    const users = [
+      {
+        "id": 1,
+        "name": "Trystan Gorczany",
+        "address": "9484 Lucas Flat, West Kittymouth WA 67504",
+        "email": "Taurean_Pollich31@gmail.com",
+        "strideLength": 4,
+        "dailyStepGoal": 7000,
+        "friends": [5, 43, 46, 11]
+      },
+      {
+        "id": 2,
+        "name": "Tyreek VonRueden",
+        "address": "623 Koelpin Skyway, Lake Luigichester MN 77576-1678",
+        "email": "Nicolette_Halvorson43@yahoo.com",
+        "strideLength": 4.5,
+        "dailyStepGoal": 9000,
+        "friends": [13, 19, 3]
+      },
+      {
+        "id": 3,
+        "name": "Colt Rohan",
+        "address": "48010 Balistreri Harbor, Cleobury IN 43317",
+        "email": "Wilford.Barton@gmail.com",
+        "strideLength": 2.7,
+        "dailyStepGoal": 3000,
+        "friends": [31, 16, 15, 7]
+      }
+    ];
+    const randomUserID = generateRandomUserID(users);
+    expect(randomUserID).to.be.above(0);
+    expect(randomUserID).to.be.below(4);
   });
 
   it('should return a currentUser object with the specified ID', function () {
@@ -312,6 +341,7 @@ describe('distance traveled', () => {
   });
 });
 
+
         describe('calculateAverageHoursSlept', () => {
 
         it('should be a function', function () {
@@ -451,7 +481,6 @@ describe('distance traveled', () => {
         });
       
       });
-      
 
     describe('getSleepQualityFor7Days', () => {
 
@@ -491,3 +520,48 @@ describe('distance traveled', () => {
   });
 
 });
+
+      describe('getSleepFor7Days', () => {
+
+        let user;
+      
+        // This helper function sets up a common user object structure for the tests.
+        function setUserSleepData(data) {
+          user = { sleepData: data };
+        }
+      
+        it('should return an array', () => {
+          setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
+          const result = getSleepFor7Days(user, '2023/03/24');
+          expect(result).to.be.an('array');
+        });
+      
+        it('should return sleep data for 7 days including the end date', () => {
+          setUserSleepData([
+            { date: '2023/03/18', hoursSlept: 6 },
+            { date: '2023/03/19', hoursSlept: 7 },
+            { date: '2023/03/20', hoursSlept: 8 },
+            { date: '2023/03/21', hoursSlept: 8 },
+            { date: '2023/03/22', hoursSlept: 8 },
+            { date: '2023/03/23', hoursSlept: 8 },
+            { date: '2023/03/24', hoursSlept: 8 }
+          ]);
+          const result = getSleepFor7Days(user, '2023/03/24');
+          expect(result).to.have.lengthOf(7);
+        });
+      
+        it('should return empty array when there is no sleep data in the range', () => {
+          setUserSleepData([{ date: '2023/03/17', hoursSlept: 7 }]);
+          const result = getSleepFor7Days(user, '2023/03/24');
+          expect(result).to.be.empty;
+        });
+      
+        it('should handle dates within the range but not necessarily every day', () => {
+          setUserSleepData([
+            { date: '2023/03/18', hoursSlept: 6 },
+            { date: '2023/03/24', hoursSlept: 7 }
+          ]);
+          const result = getSleepFor7Days(user, '2023/03/24');
+          expect(result).to.have.lengthOf(2);
+        });
+      });
