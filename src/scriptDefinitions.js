@@ -61,18 +61,24 @@ function findStepGoalAverage(users) {
 
 /////////////////////* LOG HYDRATION FOR 7 DAYS ITERATION 2 *////////////////////////////
 
-function getHydrationFor7Days(currentUser, startDate) {
+function getHydrationFor7Days(currentUser, endDate) {
+  
+  let endDateObj = new Date(endDate);
 
-  let startDateObj = new Date(startDate);
-
-  let endDateObj = new Date(startDateObj);
-  endDateObj.setDate(endDateObj.getDate() + 6);
+  let startDateObj = new Date(endDateObj);
+  startDateObj.setDate(endDateObj.getDate() -6  );
 
   return currentUser.hydrationData.filter((entry) => {
-    let entryDateObj = new Date(entry.date);
-    return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
-  });
-}
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+     })
+        .map((entry) => {
+          return {
+            date: entry.date,
+            numOunces: entry.numOunces
+          };
+        });
+    }
 
 //////////////////////* HYDRATION AVERAGE ITERATION 2 */////////////////////////////
 

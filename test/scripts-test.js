@@ -216,39 +216,40 @@ describe('getHydrationFor7Days', () => {
   it('should return hydration data for 7 days when data is available', function () {
     const user = {
       hydrationData: [
-        { date: '2023/03/20', numOunces: 30 },
-        { date: '2023/03/21', numOunces: 40 },
-        { date: '2023/03/22', numOunces: 50 },
-        { date: '2023/03/23', numOunces: 30 },
-        { date: '2023/03/24', numOunces: 40 },
-        { date: '2023/03/25', numOunces: 50 },
-        { date: '2023/03/26', numOunces: 30 },
+        { date: '2023/06/25', numOunces: 30 },
+        { date: '2023/06/26', numOunces: 40 },
+        { date: '2023/06/27', numOunces: 50 },
+        { date: '2023/06/28', numOunces: 30 },
+        { date: '2023/06/29', numOunces: 40 },
+        { date: '2023/06/30', numOunces: 50 },
+        { date: '2023/07/01', numOunces: 30 },
       ]
     };
-    const result = getHydrationFor7Days(user, '2023/03/20');
+    const result = getHydrationFor7Days(user, '2023/07/01');
     expect(result.length).to.equal(7);
   });
 
-  it('should return empty array when no matching hydration data is found', function () {
+  it('should return an empty array when no matching hydration data is found', function () {
     const user = {
       hydrationData: []
     };
-    const result = getHydrationFor7Days(user, '2023/03/20');
+    const result = getHydrationFor7Days(user, '2023/07/01');
     expect(result).to.deep.equal([]);
   });
 
   it('should return partial data when only some days have hydration data', function () {
     const user = {
       hydrationData: [
-        { date: '2023/03/20', numOunces: 30 },
-        { date: '2023/03/22', numOunces: 50 },
+        { date: '2023/06/25', numOunces: 30 },
+        { date: '2023/06/27', numOunces: 50 },
       ]
     };
-    const result = getHydrationFor7Days(user, '2023/03/20');
+    const result = getHydrationFor7Days(user, '2023/07/01');
     expect(result.length).to.equal(2);
   });
 
 });
+
 
 describe('calculateTotalHydration', () => {
 
