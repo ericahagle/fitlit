@@ -37,7 +37,7 @@ const currentDay = (user) => user.hydrationData[user.hydrationData.length-1];
 function ouncesPerDay(currentUser, date) {
 
   if (currentUser.hydrationData && currentUser.hydrationData.length > 0) {
-  
+
     const hydrationDay = currentUser.hydrationData.find((hydrationDate) => {
       return hydrationDate.date === date;
     });
@@ -59,40 +59,107 @@ function findStepGoalAverage(users) {
   return averageStepCount;
 }
 
-/////////////////////* Log the hydration for 7 days *////////////////////////////
+/////////////////////* LOG HYDRATION FOR 7 DAYS ITERATION 2 *////////////////////////////
 
 function getHydrationFor7Days(currentUser, startDate) {
-  
+
   let startDateObj = new Date(startDate);
-  
+
   let endDateObj = new Date(startDateObj);
   endDateObj.setDate(endDateObj.getDate() + 6);
 
   return currentUser.hydrationData.filter((entry) => {
-      let entryDateObj = new Date(entry.date);
-      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+    let entryDateObj = new Date(entry.date);
+    return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
   });
 }
 
-//////////////////////* HYDRATION AVERAGE */////////////////////////////
+//////////////////////* HYDRATION AVERAGE ITERATION 2 */////////////////////////////
 
 function calculateTotalHydration(currentUser) {
-  let totalHydration = 0; 
+  let totalHydration = 0;
 
   currentUser.hydrationData.forEach((hydrationEntry) => {
-    totalHydration += hydrationEntry.numOunces /currentUser.hydrationData.length
+    totalHydration += hydrationEntry.numOunces / currentUser.hydrationData.length
   });
 
-  return totalHydration.toFixed(2);  
+  return totalHydration.toFixed(2);
 }
+
+////////////////////* SLEEP ITERATION 4*///////////////////////////
+
+function calculateAverageHoursSlept(currentUser) {
+  let totalHoursSlept = 0; 
+
+  currentUser.sleepData.forEach((sleepEntry) => {
+    totalHoursSlept += sleepEntry.hoursSlept /currentUser.sleepData.length
+  });
+
+  return totalHoursSlept.toFixed(2);  
+}
+
+function calculateAverageSleepQuality(currentUser) {
+  let avgSleepQuality = 0; 
+
+  currentUser.sleepData.forEach((sleepEntry) => {
+    avgSleepQuality += sleepEntry.sleepQuality / currentUser.sleepData.length
+  });
+
+  return avgSleepQuality.toFixed(2);  
+}
+
+function hoursSleptGivenDate(currentUser, date) {
+
+  if (currentUser.sleepData && 
+      currentUser.sleepData.length > 0) {
+
+    const sleepDate = currentUser.sleepData.find((sleepDate) => {
+      return sleepDate.date === date;
+    });
+    if (sleepDate) {
+      return sleepDate.hoursSlept;
+    }
+  }
+}
+
+function sleepQualityGivenDate(currentUser, date) {
+
+  if (currentUser.sleepData && 
+      currentUser.sleepData.length > 0) {
+
+    const sleepDate = currentUser.sleepData.find((sleepDate) => {
+      return sleepDate.date === date;
+    });
+    if (sleepDate) {
+      return sleepDate.sleepQuality;
+    }
+  }
+}
+
+function getSleepFor7Days(currentUser, endDate) {
+
+  let endDateObj = new Date(endDate);
+
+  let startDateObj = new Date(endDateObj);
+  startDateObj.setDate(endDateObj.getDate() -6  );
+
+  return currentUser.sleepData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+     })
+        .map((entry) => {
+          return {
+            date: entry.date,
+            hoursSlept: entry.hoursSlept
+          };
+        });
+    }
+
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
-  const distance = (currentUser.strideLength * currentUser.dailyStepGoal) / 5280
-  console.log(`Distance traveled by ${currentUser.name}: ${distance.toFixed(2)} miles`);
-  console.log(distance)
-  return distance
-
+  const distance = ((currentUser.strideLength * currentUser.activity[currentUser.activity.length - 1].numSteps) / 5280).toFixed(2);
+  return distance;
 }
 
 module.exports = {
@@ -103,6 +170,11 @@ module.exports = {
   calculateTotalHydration,
   findDistanceTraveled,
   getHydrationFor7Days,
-  ouncesPerDay
+  ouncesPerDay,
+  calculateAverageHoursSlept,
+  calculateAverageSleepQuality,
+  hoursSleptGivenDate,
+  sleepQualityGivenDate,
+  getSleepFor7Days
 };
 
