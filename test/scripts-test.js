@@ -1,13 +1,14 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate } = require('../src/scriptDefinitions');
+
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
-  it('should generate a random userId', function() {
+  it('should generate a random userId', function () {
     const randomUserID = generateRandomUserID();
     expect(randomUserID).to.be.a('number');
   });
 
-  it('should return a currentUser object with the specified ID', function() {
+  it('should return a currentUser object with the specified ID', function () {
     const users = [
       {
         "id": 1,
@@ -90,7 +91,7 @@ describe('userObject creation', () => {
     );
   });
 
-  it('should return "User not found!" if the user is not in the list', function() {
+  it('should return "User not found!" if the user is not in the list', function () {
     const users = [
       {
         "id": 1,
@@ -146,7 +147,7 @@ describe('userObject creation', () => {
 });
 
 describe('specific data', () => {
-  it('should find the average step goal amongst all users', function() {
+  it('should find the average step goal amongst all users', function () {
     const users = [
       {
         "id": 1,
@@ -252,31 +253,64 @@ describe('getHydrationFor7Days', () => {
 describe('calculateTotalHydration', () => {
 
   it('should be a function', function () {
-  expect(calculateTotalHydration).to.be.a('function')
+    expect(calculateTotalHydration).to.be.a('function')
   })
-  
-    it('should return 0 when there is no hydration data', function () {
-      const user = { hydrationData: [] };
-      const result = calculateTotalHydration(user);
-      expect(result).to.equal('0.00');
-    });
-  
-    it('should return the average hydration when there is one hydration data entry', function () {
-      const user = {
-        hydrationData: [{ numOunces: 40 }]
-      };
-      const result = calculateTotalHydration(user);
-      expect(result).to.equal('40.00');
-    });
-  
-    it('should return the average hydration when there are multiple hydration data entries', function () {
-      const user = {
-        hydrationData: [{ numOunces: 40 }, { numOunces: 60 }, { numOunces: 100 }]
-      };
-      const result = calculateTotalHydration(user);
-      expect(result).to.equal('66.67');
-    });
+
+  it('should return 0 when there is no hydration data', function () {
+    const user = { hydrationData: [] };
+    const result = calculateTotalHydration(user);
+    expect(result).to.equal('0.00');
   });
+
+  it('should return the average hydration when there is one hydration data entry', function () {
+    const user = {
+      hydrationData: [{ numOunces: 40 }]
+    };
+    const result = calculateTotalHydration(user);
+    expect(result).to.equal('40.00');
+  });
+
+  it('should return the average hydration when there are multiple hydration data entries', function () {
+    const user = {
+      hydrationData: [{ numOunces: 40 }, { numOunces: 60 }, { numOunces: 100 }]
+    };
+    const result = calculateTotalHydration(user);
+    expect(result).to.equal('66.67');
+  });
+});
+
+describe('distance traveled', () => {
+  it('should return the distance traveled by a user on a given day', function () {
+    const currentUser = {
+      "id": 3,
+      "name": "Colt Rohan",
+      "address": "48010 Balistreri Harbor, Cleobury IN 43317",
+      "email": "Wilford.Barton@gmail.com",
+      "strideLength": 2.7,
+      "dailyStepGoal": 3000,
+      "friends": [31, 16, 15, 7],
+      "hydrationData": [{
+        "userID": 3,
+        "date": "2023/03/24",
+        "numOunces": 95
+      }],
+      "activity": [{
+        "userID": 3,
+        "date": "2023/03/24",
+        "numSteps": 12970,
+        "minutesActive": 282,
+        "flightsOfStairs": 38
+      }],
+      "sleep": [{
+        "userID": 3,
+        "date": "2023/03/24",
+        "hoursSlept": 9.7,
+        "sleepQuality": 4.7
+      }]
+    }
+    expect(findDistanceTraveled(currentUser)).to.equal('6.63');
+  });
+});
 
         describe('calculateAverageHoursSlept', () => {
 
@@ -417,4 +451,3 @@ describe('calculateTotalHydration', () => {
         });
       
       });
-      
