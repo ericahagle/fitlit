@@ -29,11 +29,29 @@ const fetchUsers = () => {
 		return allUsers;
 }
 
+///////// FETCH HYDRATION DATA ////////////
+const fetchHydrationData = () => {
+	return fetch(hydrationApi)
+		.then(response => {
+		if (!response.ok) {
+			throw Error(`Something is amiss. Request Code: ${response.status}`);
+		}
+		return response.json();
+	})
+	.then(data => {
+		hydrationData = data.hydrationData;
+	})
+	.catch(error => {
+		console.log(error);
+	})
+	return hydrationData;
+}
+
 //////////// FETCH ALL THE DATA ////////////
 const fetchAllTheData = () => {
 	return Promise.all([
 		fetchUsers(usersApi),
-		// fetchHydrationData(hydrationApi),
+		fetchHydrationData(hydrationApi),
 		// fetchActivityData(activityApi),
 		// fetchSleepData(sleepApi)
 	])

@@ -1,7 +1,7 @@
 ///////////////// Global Variables ///////////////////
 let allUsers = null;
 let currentUser = null;
-// let hydrationData = null;
+let hydrationData = null;
 // let sleepData = null;
 // let activityData = null;
 
@@ -28,7 +28,7 @@ window.addEventListener('load', () => {
 		// console.log(allUsers);
 		currentUser = allUsers[generateRandomUserID(allUsers) - 1];
 		// console.log(currentUser);
-		// hydrationData = hydrationData;
+		hydrationData = hydrationData;
 		// console.log(hydrationData);
 		// activityData = activityData;
 		// console.log(activityData);
