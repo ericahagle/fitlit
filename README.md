@@ -1,78 +1,39 @@
-# FitLit Starter Kit
+# FitLit
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+### Abstract:
+This application helps users see their fitness data, goals, and milestones in a user-friendly activity dashboard. The user data is sourced remotely and accessed through an API.
 
-## Setup
+### Installation Instructions:
+1. To get this app running, clone it down from GitHub under the "<> Code" dropdown. 
+2. Open it from your terminal or preferred CLI with `git clone <HTTPS or SSH key>`. 
+3. Move (`cd`) into the directory. 
+4. Open the file in your code editor of choice, and you'll have everything you need! 
+5. The app can be viewed and interacted with in your browser of choice by using `open index.html` in your terminal.
 
-1. Within your group, decide on **one** person to have the project repository (repo) on their GitHub account. Then, that person should *fork* this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
-1. Make sure both members of your team are collaborators on the forked repo.  
-1. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version.  If you start to run into Webpack errors, first check that all group members are using the correct version.  
+### Preview of App:
+![screenshot]()
 
-## Testing
+### Context:
+This project was assigned during Week 1 of Module 2 in Turing's Front-End Engineering track. It is Part 1 of 2 and had a timeline of 11 days from assignment to due date. 
 
-Mocha and chai are already set up, with a boilerplate test for you..
+### Contributors:
+This application was built by [Brendan Turner](https://github.com/BrendanTurner1), [Erica Hagle](https://github.com/ericahagle/), [Chris Butler](https://github.com/butlertree/), and [Arden Ranta](https://github.com/tenthwalker/).
 
+### Learning Goals:
+The goals of this project were to:
+- utilize object and array prototype methods to manipulate data
+- create a clear and user-friendly interface
+- implement a robust testing suite via TDD
+- make network requests to retrieve data
+- prioritize DRY, reusable code
+- practice professional and productive team collaboration
 
-## Data Model
+These were enacted on a MacBook Pro using GitHub, VS Code, Webpack, Google Chrome, the Mac Terminal, and Slack.
 
-**Users**
-
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
-
-**Activity**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
-
-**Hydration**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
-
-**Sleep**
-
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+### Wins + Challenges:
+### Wins:
+- 
+-
+### Challenges:
+-
+-
