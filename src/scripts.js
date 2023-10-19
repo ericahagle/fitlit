@@ -2,8 +2,8 @@
 let allUsers = null;
 let currentUser = null;
 let hydrationData = null;
+let activityData = null;
 // let sleepData = null;
-// let activityData = null;
 
 /////////// Import CSS File /////////////
 import './css/styles.css';
@@ -30,7 +30,7 @@ window.addEventListener('load', () => {
 		// console.log(currentUser);
 		hydrationData = hydrationData;
 		// console.log(hydrationData);
-		// activityData = activityData;
+		activityData = activityData;
 		// console.log(activityData);
 		// sleepData = sleepData;
 		// console.log(sleepData);
