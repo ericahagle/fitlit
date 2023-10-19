@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/css/styles.css">
     <title>Fitlit</title>
   </head>
   <body>
-    <section>
+    <section class='left'>
       <article class='widget square week-view' id='waterWeek'>
         <h2>your week in oz</h2>
         <h2>S M T W T F S</h2>
@@ -22,7 +22,7 @@
         <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>
       </article>
     </section>
-    <section id='infoCards'>
+    <section class='middle' id='infoCards'>
       <article class='widget' id='welcomeMat'>
         <h1>Hello</h1>
         <h2 class='snarky-remark'>look after your flesh prison today!</h2>
@@ -32,49 +32,53 @@
         <p></p>
         <p></p>
       </article>
-    </section>
-    <article class='widget' id='stepsAll'>
-      <section id='stepGoal'>
-        <h2>your step goal</h2>
-        <p></p>
-        <p class='snarky-remark'>just try your best</p>
-      </section>
-      <section id='stepsDay'>
-        <h2>steps today</h2>
-        <p></p>
-        <p></p>
-        <p class='indicator'></p>
-      </section>
-      <section id='activeMinutes'>
-        <h2>active minutes</h2>
-        <p></p>
-        <p class='snarky-remark'>ouchie!</p>
-      </section>
-      <section class='week-view' id='stepsWeek'>
-        <h2>your week in steps</h2>
+    </section> 
+    <section class='right'>
+      <article class='widget square week-view' id='sleepWeek'>
+        <h2>your week in hrs</h2>
         <h2>S M T W T F S</h2>
         <p></p>
         <p class='indicator'></p>
+      </article>
+      <article class='widget square' id='sleepDay'>
+        <h2>today</h2>
+        <p class='indicator'></p>
+        <p class='snarky-remark'>you haven't felt this rested since childhood!</p>
+      </article>
+    </section>
+    <section class='bottom'>
+      <section id='steps1'>
+        <article class='widget' id='stepGoal'>
+          <h2>your step goal</h2>
+          <p></p>
+          <p class='snarky-remark'>just try your best</p>
+        </article>
+        <article class='widget' id='stepsDay'>
+          <h2>steps today</h2>
+          <p></p>
+          <p></p>
+          <p class='indicator'></p>
+        </article>
+        <article class='widget' id='activeMinutes'>
+          <h2>active minutes</h2>
+          <p></p>
+          <p class='snarky-remark'>ouchie!</p>
+        </article>
       </section>
-      <section id='friendGoal'>
-        <h2>average friend step goal</h2>
-        <p></p>
-        <p class='snarky-remark'>but who's really counting?</p>
-      </section>
-    </article>
-      <section>
-        <article class='widget square week-view' id='sleepWeek'>
-          <h2>your week in hrs</h2>
+      <section id='steps2'> 
+        <article class='widget week-view' id='stepsWeek'>
+          <h2>your week in steps</h2>
           <h2>S M T W T F S</h2>
           <p></p>
           <p class='indicator'></p>
         </article>
-        <article class='widget square' id='sleepDay'>
-          <h2>today</h2>
-          <p class='indicator'></p>
-          <p class='snarky-remark'>you haven't felt this rested since childhood!</p>
+        <article class='widget' id='friendGoal'>
+          <h2>average friend step goal</h2>
+          <p></p>
+          <p class='snarky-remark'>but who's really counting?</p>
         </article>
       </section>
+    </section>
     <script src="bundle.js"></script>
   </body>
 </html>
