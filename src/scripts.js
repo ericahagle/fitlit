@@ -15,7 +15,16 @@ import './css/styles.css';
 import { fetchAllTheData } from './apiCalls';
 
 ///////////// Import functions from domUpdates.js ///////////////
-import { updateUserName, displayUserInfo } from './domUpdates';
+import { updateUserName,
+  displayUserInfo,
+  waterDayUpdate,
+  waterWeekUpdate,
+  sleepDayUpdate,
+  sleepWeekUpdate,
+  stepGoalUpdate,
+  stepsDayUpdate,
+  activeMinutesUpdate,
+  stepsGoalCompare } from './domUpdates';
 
 //////////// Import functions from scriptDefinitions //////////////
 import { generateRandomUserID } from './scriptDefinitions';
