@@ -178,11 +178,29 @@ function getSleepFor7Days(currentUser, endDate) {
         });
     }
 
-////////////////////* How far did you walk today *////////////////////
+////////////////////* How far did you walk today miles ITERATION 5 *////////////////////
 function findDistanceTraveled(currentUser) {
   const distance = ((currentUser.strideLength * currentUser.activity[currentUser.activity.length - 1].numSteps) / 5280).toFixed(2);
   return distance;
 }
+
+ ///////////////*Minutes user was active on given day ITERATION 5*/////////////////////
+
+ function minutesActiveGivenDate(currentUser, date) {
+
+  if (currentUser.activityData && 
+      currentUser.activityData.length > 0) {
+
+    const activityDate = currentUser.activityData.find((specificDate) => {
+      return specificDate.date === date;
+    });
+    if (activityDate) {
+      return activityDate.minutesActive;
+    }
+  }
+}
+
+
 
 module.exports = {
   generateRandomUserID,
@@ -198,6 +216,7 @@ module.exports = {
   hoursSleptGivenDate,
   sleepQualityGivenDate,
   getSleepQualityFor7Days,
-  getSleepFor7Days
+  getSleepFor7Days,
+  minutesActiveGivenDate
 };
 

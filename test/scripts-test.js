@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, minutesActiveGivenDate } = require('../src/scriptDefinitions');
 
 
 describe('userObject creation', () => {
@@ -488,13 +488,6 @@ describe('distance traveled', () => {
 
       describe('getSleepFor7Days', () => {
 
-        let user;
-      
-        // This helper function sets up a common user object structure for the tests.
-        function setUserSleepData(data) {
-          user = { sleepData: data };
-        }
-      
         it('should return an array', () => {
           setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
           const result = getSleepFor7Days(user, '2023/03/24');
@@ -531,6 +524,43 @@ describe('distance traveled', () => {
         });
       
       });
+
+
+describe('minutesActiveGivenDate', () => {
+
+  it('should be a function', function () {
+    expect(minutesActiveGivenDate).to.be.a('function');
+  });
+  
+  it('should return minutes active when the date is found', function () {
+    const user = {
+      activityData: [
+        { date: '2023/03/24', minutesActive: 40 },
+        { date: '2023/03/25', minutesActive: 50 }
+      ]
+    };
+    const result = minutesActiveGivenDate(user, '2023/03/24');
+    expect(result).to.equal(40);
+  });
+
+  it('should return undefined when the date is not found', function () {
+    const user = {
+      activityData: [
+        { date: '2023/03/24', minutesActive: 40 }
+      ]
+    };
+    const result = minutesActiveGivenDate(user, '2023/03/25');
+    expect(result).to.be.undefined;
+  });
+
+  it('should return undefined when the activityData array is empty', function () {
+    const user = { activityData: [] };
+    const result = minutesActiveGivenDate(user, '2023/03/24');
+    expect(result).to.be.undefined;
+  });
+
+});
+
       
       
 
