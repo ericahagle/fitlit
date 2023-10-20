@@ -34,5 +34,7 @@ window.addEventListener('load', () => {
 		// console.log(activityData);
 		sleepData = sleepData;
 		// console.log(sleepData);
+    const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
+		// console.log("Complete user:", completeCurrentUser);
 	});
 });
