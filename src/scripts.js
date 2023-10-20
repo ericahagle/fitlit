@@ -1,5 +1,9 @@
-/* This is the JavaScript entry file - your code begins here */
-////////////////////* Do NOT delete or rename this file *////////////////////
+///////////////// Global Variables ///////////////////
+let allUsers = null;
+let currentUser = null;
+let hydrationData = null;
+let activityData = null;
+let sleepData = null;
 
 
 // An example of how you tell webpack to use a CSS file

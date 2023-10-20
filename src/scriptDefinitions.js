@@ -1,6 +1,7 @@
 ////////////////////* Generate random number *////////////////////
-function generateRandomUserID() {
-  return Math.floor(Math.random() * 10) + 1;
+function generateRandomUserID(usersArray) {
+	let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
+	return randomUserId;
 }
 
 ////////////////////* Create userObject card *////////////////////
@@ -61,18 +62,24 @@ function findStepGoalAverage(users) {
 
 /////////////////////* LOG HYDRATION FOR 7 DAYS ITERATION 2 *////////////////////////////
 
-function getHydrationFor7Days(currentUser, startDate) {
+function getHydrationFor7Days(currentUser, endDate) {
+  
+  let endDateObj = new Date(endDate);
 
-  let startDateObj = new Date(startDate);
-
-  let endDateObj = new Date(startDateObj);
-  endDateObj.setDate(endDateObj.getDate() + 6);
+  let startDateObj = new Date(endDateObj);
+  startDateObj.setDate(endDateObj.getDate() -6  );
 
   return currentUser.hydrationData.filter((entry) => {
-    let entryDateObj = new Date(entry.date);
-    return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
-  });
-}
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+     })
+        .map((entry) => {
+          return {
+            date: entry.date,
+            numOunces: entry.numOunces
+          };
+        });
+    }
 
 //////////////////////* HYDRATION AVERAGE ITERATION 2 */////////////////////////////
 
@@ -136,6 +143,40 @@ function sleepQualityGivenDate(currentUser, date) {
   }
 }
 
+function getSleepQualityFor7Days(currentUser, endDate) {
+  let endDateObj = new Date(endDate);
+
+  let startDateObj = new Date(endDateObj);
+  startDateObj.setDate(endDateObj.getDate() -6  );
+  return currentUser.sleepData
+    .filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+    })
+    .map((entry) => {
+      return {
+        date: entry.date,
+        sleepQuality: entry.sleepQuality
+      };
+    });
+}
+
+function getSleepFor7Days(currentUser, endDate) {
+  let endDateObj = new Date(endDate);
+
+  let startDateObj = new Date(endDateObj);
+  startDateObj.setDate(endDateObj.getDate() -6  );
+  return currentUser.sleepData.filter((entry) => {
+      let entryDateObj = new Date(entry.date);
+      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+     })
+        .map((entry) => {
+          return {
+            date: entry.date,
+            hoursSlept: entry.hoursSlept
+          };
+        });
+    }
 
 ////////////////////* How far did you walk today *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -155,6 +196,8 @@ module.exports = {
   calculateAverageHoursSlept,
   calculateAverageSleepQuality,
   hoursSleptGivenDate,
-  sleepQualityGivenDate
+  sleepQualityGivenDate,
+  getSleepQualityFor7Days,
+  getSleepFor7Days
 };
 
