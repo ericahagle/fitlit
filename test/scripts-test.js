@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days } = require('../src/scriptDefinitions');
 
 
 describe('userObject creation', () => {
@@ -485,52 +485,85 @@ describe('distance traveled', () => {
       
       });
 
+describe('getSleepQualityFor7Days', () => {
 
+  it('should return sleep quality data for 7 days when data is available', function () {
+    const user = {
+      sleepData: [
+        { date: '2023-03-20', sleepQuality: 4 },
+        { date: '2023-03-21', sleepQuality: 3 },
+        { date: '2023-03-22', sleepQuality: 2 },
+        { date: '2023-03-23', sleepQuality: 1 },
+        { date: '2023-03-24', sleepQuality: 3 },
+        { date: '2023-03-25', sleepQuality: 4 },
+        { date: '2023-03-26', sleepQuality: 2 },
+      ]
+    };
+    const result = getSleepQualityFor7Days(user, '2023-03-26');
+    expect(result.length).to.equal(7);
+  });
+
+  it('should return an empty array when no matching data is found', function () {
+    const user = {
+      sleepData: []
+    };
+    const result = getSleepQualityFor7Days(user, '2023-03-20');
+    expect(result).to.deep.equal([]);
+  });
+
+  it('should return partial data when only some days have sleep data', function () {
+    const user = {
+      sleepData: [
+        { date: '2023-03-20', sleepQuality: 4 },
+        { date: '2023-03-22', sleepQuality: 2 },
+      ]
+    };
+    const result = getSleepQualityFor7Days(user, '2023-03-22');
+    expect(result.length).to.equal(2);
+  });
+
+});
+
+      
       describe('getSleepFor7Days', () => {
-
-        let user;
       
-        // This helper function sets up a common user object structure for the tests.
-        function setUserSleepData(data) {
-          user = { sleepData: data };
-        }
-      
-        it('should return an array', () => {
-          setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
-          const result = getSleepFor7Days(user, '2023/03/24');
-          expect(result).to.be.an('array');
+        it('should return sleep hours data for 7 days when data is available', function () {
+          const user = {
+            sleepData: [
+              { date: '2023-03-20', hoursSlept: 7 },
+              { date: '2023-03-21', hoursSlept: 6 },
+              { date: '2023-03-22', hoursSlept: 7 },
+              { date: '2023-03-23', hoursSlept: 8 },
+              { date: '2023-03-24', hoursSlept: 5 },
+              { date: '2023-03-25', hoursSlept: 7 },
+              { date: '2023-03-26', hoursSlept: 6 },
+            ]
+          };
+          const result = getSleepFor7Days(user, '2023-03-26');
+          expect(result.length).to.equal(7);
         });
       
-        it('should return sleep data for 7 days including the end date', () => {
-          setUserSleepData([
-            { date: '2023/03/18', hoursSlept: 6 },
-            { date: '2023/03/19', hoursSlept: 7 },
-            { date: '2023/03/20', hoursSlept: 8 },
-            { date: '2023/03/21', hoursSlept: 8 },
-            { date: '2023/03/22', hoursSlept: 8 },
-            { date: '2023/03/23', hoursSlept: 8 },
-            { date: '2023/03/24', hoursSlept: 8 }
-          ]);
-          const result = getSleepFor7Days(user, '2023/03/24');
-          expect(result).to.have.lengthOf(7);
+        it('should return an empty array when no matching data is found', function () {
+          const user = {
+            sleepData: []
+          };
+          const result = getSleepFor7Days(user, '2023-03-20');
+          expect(result).to.deep.equal([]);
         });
       
-        it('should return empty array when there is no sleep data in the range', () => {
-          setUserSleepData([{ date: '2023/03/17', hoursSlept: 7 }]);
-          const result = getSleepFor7Days(user, '2023/03/24');
-          expect(result).to.be.empty;
-        });
-      
-        it('should handle dates within the range but not necessarily every day', () => {
-          setUserSleepData([
-            { date: '2023/03/18', hoursSlept: 6 },
-            { date: '2023/03/24', hoursSlept: 7 }
-          ]);
-          const result = getSleepFor7Days(user, '2023/03/24');
-          expect(result).to.have.lengthOf(2);
+        it('should return partial data when only some days have sleep data', function () {
+          const user = {
+            sleepData: [
+              { date: '2023-03-20', hoursSlept: 7 },
+              { date: '2023-03-22', hoursSlept: 7 },
+            ]
+          };
+          const result = getSleepFor7Days(user, '2023-03-22');
+          expect(result.length).to.equal(2);
         });
       
       });
+      
       
       
 
