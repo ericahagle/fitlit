@@ -26,8 +26,8 @@ const  waterDayUpdate = (date, hydrationData) => {
 }
 const  waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
-  const hydrationHTML = hydrationArray.map((html) => `<p>${html}</p>`).join('');
-  waterWeek.innerHTML = `<h2>your week in oz</h2>${hydrationHTML}`;
+  const hydrationHTML = hydrationArray.map((oz) => `${oz} oz`).join(' ');
+  waterWeek.innerHTML = `<h2>your week in oz</h2><p>M T W Th F S Su</p><p>${hydrationHTML}</p>`;
 }
 
 const sleepDayUpdate = (date, sleepData) => {
@@ -37,9 +37,9 @@ const sleepDayUpdate = (date, sleepData) => {
  
 const sleepWeekUpdate = (sleepQuality, sleepTime) => {
   sleepWeek.innerHTML = '';
-  const sleepQualityHTML = sleepQuality.map((html) => `<p>${html}</p>`).join('');
-  const sleepTimeHTML = sleepTime.map((html) => `<p>${html}</p>`).join('');
-  sleepWeek.innerHTML = `<h2>your week in hrs</h2>${sleepQualityHTML}${sleepTimeHTML}`
+  const sleepQualityHTML = sleepQuality.join(' ');
+  const sleepTimeHTML = sleepTime.map((html) => `${html}h`).join(' ');
+  sleepWeek.innerHTML = `<h2>your week in hrs</h2><p>${sleepQualityHTML}</p><p>${sleepTimeHTML}</p>`
 }
 
 const stepGoalUpdate = (goal) => {
