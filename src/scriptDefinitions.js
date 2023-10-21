@@ -184,6 +184,32 @@ function findDistanceTraveled(currentUser) {
   return distance;
 }
 
+///////////////*Step goal ITERATION 5*//////////////////////
+
+function checkStepGoal(currentUser) {
+  // Checking if empty
+  if (currentUser.activityData.length === 0) {
+    return 'No!';
+  }
+
+  // Sort
+  currentUser.activityData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Retrieving the most recent activity data.
+  const latestActivity = currentUser.activityData[0];
+
+  // Comparing steps to goal
+  if (latestActivity.numSteps >= currentUser.dailyStepGoal) {
+    return 'Success!';
+  } else {
+    return 'No!';
+  }
+};
+
+
+
+
+
 module.exports = {
   generateRandomUserID,
   addDataToCurrentUser,
@@ -198,6 +224,7 @@ module.exports = {
   hoursSleptGivenDate,
   sleepQualityGivenDate,
   getSleepQualityFor7Days,
-  getSleepFor7Days
+  getSleepFor7Days,
+  checkStepGoal
 };
 

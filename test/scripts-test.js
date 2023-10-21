@@ -1,7 +1,5 @@
 import { expect } from 'chai';
-
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days } = require('../src/scriptDefinitions');
-
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId that falls within the array of users', function() {
@@ -564,6 +562,45 @@ describe('getSleepQualityFor7Days', () => {
       
       });
       
+      describe('checkStepGoal', () => {
+
+        it('should be a function', function () {
+          expect(checkStepGoal).to.be.a('function');
+        });
+      
+        it('should return "Success!" when the latest numSteps is greater than or equal to dailyStepGoal', function () {
+          const user = {
+            dailyStepGoal: 10000,
+            activityData: [
+              { date: '2023/10/12', numSteps: 10500 },
+              { date: '2023/10/11', numSteps: 9500 }
+            ]
+          };
+          const result = checkStepGoal(user);
+          expect(result).to.equal('Success!');
+        });
+      
+        it('should return "No!" when the latest numSteps is less than dailyStepGoal', function () {
+          const user = {
+            dailyStepGoal: 10000,
+            activityData: [
+              { date: '2023/10/12', numSteps: 8500 },
+              { date: '2023/10/11', numSteps: 9500 }
+            ]
+          };
+          const result = checkStepGoal(user);
+          expect(result).to.equal('No!');
+        });
+      
+        it('should handle cases where activityData is empty, returning "No!"', function () {
+          const user = {
+            dailyStepGoal: 10000,
+            activityData: []
+          };
+          const result = checkStepGoal(user);
+          expect(result).to.equal('No!');
+        });
+      });      
       
       
 
