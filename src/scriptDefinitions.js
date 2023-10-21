@@ -186,7 +186,7 @@ function findDistanceTraveled(currentUser) {
 
 module.exports = {
   generateRandomUserID,
-  selectCurrentUser,
+  addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
   calculateTotalHydration,
