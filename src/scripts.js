@@ -37,7 +37,8 @@ import {  updateUserName,
     stepGoalUpdate,
     stepsDayUpdate,
     activeMinutesUpdate,
-    stepsWeekUpdate} from './domUpdates';
+    stepsWeekUpdate,
+    stepsGoalCompare  } from './domUpdates';
 
     ////////// Event Listeners //////////
 window.addEventListener('load', () => {
@@ -57,4 +58,3 @@ window.addEventListener('load', () => {
 		// console.log("Complete user:", completeCurrentUser);
 	});
 });
-
