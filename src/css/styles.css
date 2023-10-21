@@ -44,7 +44,7 @@ img {
 }
 
 .left, .right {
-  height: 500px;
+  height: 600px;
 }
 
 .left {
@@ -57,11 +57,15 @@ img {
 
 .right {
   grid-column: 6 / 8;
+  grid-row: 1 / 5;
 }
 
 .bottom {
-  width: 864px;
-  grid-column: 3 / 5;
+  width: 1000px;
+  height: 200px;
+  display: flex;
+  background-color: white;
+  grid-column: 2 / 6;
   justify-content: space-between;
 }
 
@@ -92,11 +96,6 @@ img {
   justify-content: space-evenly;
 }
 
-#steps1, #steps2 {
-  height: 200px;
-  width: 400px;
-}
-
 #userData {
   height: 125px;
   background-color: #D9D9D9;
@@ -108,4 +107,9 @@ img {
 
 #sleepDay {
   background-color: #DBD56E;
+}
+
+#sleepAvg {
+  background-color: #8C2155;
+  color: white;
 }
