@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId that falls within the array of users', function() {
@@ -276,9 +276,7 @@ describe('getHydrationFor7Days', () => {
     const result = getHydrationFor7Days(user, '2023/07/01');
     expect(result.length).to.equal(2);
   });
-
 });
-
 
 describe('calculateTotalHydration', () => {
 
@@ -341,7 +339,6 @@ describe('distance traveled', () => {
     expect(findDistanceTraveled(currentUser)).to.equal('6.63');
   });
 });
-
 
         describe('calculateAverageHoursSlept', () => {
 
@@ -519,11 +516,15 @@ describe('getSleepQualityFor7Days', () => {
     const result = getSleepQualityFor7Days(user, '2023-03-22');
     expect(result.length).to.equal(2);
   });
-
 });
-
       
       describe('getSleepFor7Days', () => {
+        
+        it('should return an array', () => {
+          setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
+          const result = getSleepFor7Days(user, '2023/03/24');
+          expect(result).to.be.an('array');
+       });
       
         it('should return sleep hours data for 7 days when data is available', function () {
           const user = {
@@ -591,7 +592,6 @@ describe('getSleepQualityFor7Days', () => {
           const result = checkStepGoal(user);
           expect(result).to.equal('No!');
         });
-      
         it('should handle cases where activityData is empty, returning "No!"', function () {
           const user = {
             dailyStepGoal: 10000,
@@ -600,7 +600,38 @@ describe('getSleepQualityFor7Days', () => {
           const result = checkStepGoal(user);
           expect(result).to.equal('No!');
         });
-      });      
-      
-      
+      });    
 
+describe('minutesActiveGivenDate', () => {
+
+  it('should be a function', function () {
+    expect(minutesActiveGivenDate).to.be.a('function');
+  });
+  
+  it('should return minutes active when the date is found', function () {
+    const user = {
+      activityData: [
+        { date: '2023/03/24', minutesActive: 40 },
+        { date: '2023/03/25', minutesActive: 50 }
+      ]
+    };
+    const result = minutesActiveGivenDate(user, '2023/03/24');
+    expect(result).to.equal(40);
+  });
+
+  it('should return undefined when the date is not found', function () {
+    const user = {
+      activityData: [
+        { date: '2023/03/24', minutesActive: 40 }
+      ]
+    };
+    const result = minutesActiveGivenDate(user, '2023/03/25');
+    expect(result).to.be.undefined;
+  });
+
+  it('should return undefined when the activityData array is empty', function () {
+    const user = { activityData: [] };
+    const result = minutesActiveGivenDate(user, '2023/03/24');
+    expect(result).to.be.undefined;
+  });
+});
