@@ -8,6 +8,7 @@ const sleepWeek = document.querySelector('#sleepWeek');
 const stepGoal = document.querySelector('#stepGoal');
 const stepsDay = document.querySelector('#stepsDay');
 const activeMinutes = document.querySelector('#activeMinutes');
+const stepsWeek = document.querySelector('#stepsWeek');
 //Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
 
 const updateUserName = (userData) => {
@@ -25,8 +26,8 @@ const  waterDayUpdate = (date, hydrationData) => {
 }
 const  waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
-  const hydrationHTML = hydrationArray.map((html) => `<p>${html}</p>`).join('');
-  waterWeek.innerHTML = `<h2>your week in oz</h2>${hydrationHTML}`;
+  const hydrationHTML = hydrationArray.map((oz) => `${oz} oz`).join(' ');
+  waterWeek.innerHTML = `<h2>your week in oz</h2><p>M T W Th F S Su</p><p>${hydrationHTML}</p>`;
 }
 
 const sleepDayUpdate = (date, sleepData) => {
@@ -36,9 +37,9 @@ const sleepDayUpdate = (date, sleepData) => {
  
 const sleepWeekUpdate = (sleepQuality, sleepTime) => {
   sleepWeek.innerHTML = '';
-  const sleepQualityHTML = sleepQuality.map((html) => `<p>${html}</p>`).join('');
-  const sleepTimeHTML = sleepTime.map((html) => `<p>${html}</p>`).join('');
-  sleepWeek.innerHTML = `<h2>your week in hrs</h2>${sleepQualityHTML}${sleepTimeHTML}`
+  const sleepQualityHTML = sleepQuality.join(' ');
+  const sleepTimeHTML = sleepTime.map((html) => `${html}h`).join(' ');
+  sleepWeek.innerHTML = `<h2>your week in hrs</h2><p>${sleepQualityHTML}</p><p>${sleepTimeHTML}</p>`
 }
 
 const stepGoalUpdate = (goal) => {
@@ -57,6 +58,12 @@ const activeMinutesUpdate = (time) => {
   activeMinutes.innerHTML = `<h2>active minutes</h2><p>${time}</p>`;
 }
 
+const stepsWeekUpdate = (activityArray) => {
+  stepsWeek.innerHTML = '';
+  const activityDisplay = activityArray.map((html) => `<p>${html}</p>`).join('');
+  stepsWeek.innerHTML = `<h2>Step Goals Week</h2>${activityDisplay}`;
+}
+
 export {
   updateUserName,
   displayUserInfo,
@@ -66,5 +73,6 @@ export {
   sleepWeekUpdate,
   stepGoalUpdate,
   stepsDayUpdate,
-  activeMinutesUpdate
+  activeMinutesUpdate,
+  stepsWeekUpdate
 }
