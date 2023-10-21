@@ -8,28 +8,39 @@ let sleepData = null;
 /////////// Import CSS File /////////////
 import './css/styles.css';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-  // import './images/turing-logo.png';
-
 //////////// Import fetch call from apiCalls.js //////////////
 import { fetchAllTheData } from './apiCalls';
 
-///////////// Import functions from domUpdates.js ///////////////
-import { updateUserName,
-  displayUserInfo,
-  waterDayUpdate,
-  waterWeekUpdate,
-  sleepDayUpdate,
-  sleepWeekUpdate,
-  stepGoalUpdate,
-  stepsDayUpdate,
-  activeMinutesUpdate,
-  stepsGoalCompare } from './domUpdates';
-
 //////////// Import functions from scriptDefinitions //////////////
-import { generateRandomUserID } from './scriptDefinitions';
+import { generateRandomUserID,
+  addDataToCurrentUser,
+  currentDay,
+  findStepGoalAverage,
+  calculateTotalHydration,
+  findDistanceTraveled,
+  getHydrationFor7Days,
+  ouncesPerDay,
+  calculateAverageHoursSlept,
+  calculateAverageSleepQuality,
+  hoursSleptGivenDate,
+  sleepQualityGivenDate,
+  getSleepQualityFor7Days,
+  getSleepFor7Days } from './scriptDefinitions';
 
-////////// Event Listeners //////////
+///////////// Import functions from domUpdates.js ///////////////
+import {  updateUserName,
+    displayUserInfo,
+    waterDayUpdate,
+    waterWeekUpdate,
+    sleepDayUpdate,
+    sleepWeekUpdate,
+    stepGoalUpdate,
+    stepsDayUpdate,
+    activeMinutesUpdate,
+    stepsWeekUpdate,
+    stepsGoalCompare  } from './domUpdates';
+
+    ////////// Event Listeners //////////
 window.addEventListener('load', () => {
   fetchAllTheData()
 	.then(data => {
@@ -43,5 +54,7 @@ window.addEventListener('load', () => {
 		// console.log(activityData);
 		sleepData = sleepData;
 		// console.log(sleepData);
+    const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
+		// console.log("Complete user:", completeCurrentUser);
 	});
 });
