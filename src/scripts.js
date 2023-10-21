@@ -18,7 +18,20 @@ import { fetchAllTheData } from './apiCalls';
 import { updateUserName, displayUserInfo } from './domUpdates';
 
 //////////// Import functions from scriptDefinitions //////////////
-import { generateRandomUserID } from './scriptDefinitions';
+import { generateRandomUserID,
+  addDataToCurrentUser,
+  currentDay,
+  findStepGoalAverage,
+  calculateTotalHydration,
+  findDistanceTraveled,
+  getHydrationFor7Days,
+  ouncesPerDay,
+  calculateAverageHoursSlept,
+  calculateAverageSleepQuality,
+  hoursSleptGivenDate,
+  sleepQualityGivenDate,
+  getSleepQualityFor7Days,
+  getSleepFor7Days } from './scriptDefinitions';
 
 ////////// Event Listeners //////////
 window.addEventListener('load', () => {
@@ -34,5 +47,7 @@ window.addEventListener('load', () => {
 		// console.log(activityData);
 		sleepData = sleepData;
 		// console.log(sleepData);
+    const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
+		// console.log("Complete user:", completeCurrentUser);
 	});
 });

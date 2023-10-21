@@ -19,11 +19,11 @@ const fetchUsers = () => {
 		})
 		.then(data => {
 			allUsers = data.users;
+      return allUsers;
 		})
 		.catch(error => {
 			console.log(error);
-		})
-		return allUsers;
+		});
 }
 
 ///////// FETCH HYDRATION DATA ////////////
@@ -37,11 +37,11 @@ const fetchHydrationData = () => {
 	})
 	.then(data => {
 		hydrationData = data.hydrationData;
+    return hydrationData;
 	})
 	.catch(error => {
 		console.log(error);
-	})
-	return hydrationData;
+	});
 }
 
 ////////// FETCH ACTIVITY DATA ////////////
@@ -55,11 +55,11 @@ const fetchActivityData = () => {
 	})
 	.then(data => {
 		activityData = data.activityData;
+    return activityData;
 	})
 	.catch(error => {
 		console.log(error);
-	})
-	return activityData;
+	});
 }
 
 //////////// FETCH SLEEP DATA //////////////
@@ -73,11 +73,11 @@ const fetchSleepData = () => {
 	})
 	.then(data => {
 		sleepData = data.sleepData;
+    return sleepData;
 	})
 	.catch(error => {
 		console.log(error);
-	})
-	return sleepData;
+	});
 }
 
 //////////// FETCH ALL THE DATA ////////////
