@@ -4,29 +4,29 @@ function generateRandomUserID(usersArray) {
 	return randomUserId;
 }
 
-////////////////////* Create userObject card *////////////////////
-function selectCurrentUser(userId, users, hydrationData, sleep, activity) {
-  const user = users.find((u) => {
-    return u.id === userId;
-  });
+////////////////////* Create complete userObject card *////////////////////
+function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData) {
 
-  if (!user) {
-    return 'User not found!';
-  }
+	const userHydrationData = hydrationData.filter((hData) => {
+		return hData.userID === currentUser.id;
+	});
+	
+	const userActivityData = activityData.filter((aData) => {
+		return aData.userID === currentUser.id;
+	});
 
-  const userHydrationData = hydrationData.filter((hData) => {
-    return hData.userID === userId;
-  });
+	const userSleepData = sleepData.filter((sData) => {
+		return sData.userID === currentUser.id;
+	});
 
-  // added activity and sleep keys data will be added later
-  const currentUser = {
-    ...user,
-    hydrationData: userHydrationData || [],
-    activity: activity || [],
-    sleep: sleep || []
-  };
+	const completeCurrentUser = {
+		...currentUser,
+		hydrationData: userHydrationData || [],
+		activity: userActivityData || [],
+		sleep: userSleepData || []
+	};
 
-  return currentUser;
+	return completeCurrentUser;
 }
 
 ////////////////* Current Day Value *///////////////////////////
@@ -199,12 +199,31 @@ function findDistanceTraveled(currentUser) {
     }
   }
 }
+///////////////*Step goal ITERATION 5*//////////////////////
 
+function checkStepGoal(currentUser) {
+  // Checking if empty
+  if (currentUser.activityData.length === 0) {
+    return 'No!';
+  }
 
+  // Sort
+  currentUser.activityData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Retrieving the most recent activity data.
+  const latestActivity = currentUser.activityData[0];
+
+  // Comparing steps to goal
+  if (latestActivity.numSteps >= currentUser.dailyStepGoal) {
+    return 'Success!';
+  } else {
+    return 'No!';
+  }
+};
 
 module.exports = {
   generateRandomUserID,
-  selectCurrentUser,
+  addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
   calculateTotalHydration,
@@ -217,6 +236,7 @@ module.exports = {
   sleepQualityGivenDate,
   getSleepQualityFor7Days,
   getSleepFor7Days,
-  minutesActiveGivenDate
+  minutesActiveGivenDate,
+  checkStepGoal
 };
 
