@@ -34,7 +34,7 @@ const waterWeekUpdate = (hydrationArray) => {
 
 const sleepDayUpdate = (date, sleepData) => {
   sleepDay.innerHTML = '';
-  sleepDay.innerHTML = `<h1>${date}</h1><p>${sleepData}</p>`;
+  sleepDay.innerHTML = `<h1>${date}</h1><p>${sleepData}</p><p>you haven't felt this rested since childhood!</p>`;
 }
  
 const sleepWeekUpdate = (sleepQuality, sleepTime) => {
@@ -68,7 +68,7 @@ const stepsWeekUpdate = (activityArray) => {
   stepsWeek.innerHTML = '';
   const activityDisplay = activityArray.join(' ');
   const goalReached = activityArray.map((achieve) => placeholder(achieve)).join(' ')
-  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p><p>did they meet goal placeholder</p>`;
+  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p><p>${goalReached}</p>`;
 }
 
 const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
