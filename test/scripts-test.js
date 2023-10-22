@@ -1,95 +1,19 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, addDataToCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate } = require('../src/scriptDefinitions');
+const { users, hydrationData, activityData, sleepData } = require('../src/data/testData');
 
-describe('userObject creation', () => {
+describe('userObject creation', function() {
   it('should generate a random userId that falls within the array of users', function() {
-    const users = [
-      {
-        "id": 1,
-        "name": "Trystan Gorczany",
-        "address": "9484 Lucas Flat, West Kittymouth WA 67504",
-        "email": "Taurean_Pollich31@gmail.com",
-        "strideLength": 4,
-        "dailyStepGoal": 7000,
-        "friends": [5, 43, 46, 11]
-      },
-      {
-        "id": 2,
-        "name": "Tyreek VonRueden",
-        "address": "623 Koelpin Skyway, Lake Luigichester MN 77576-1678",
-        "email": "Nicolette_Halvorson43@yahoo.com",
-        "strideLength": 4.5,
-        "dailyStepGoal": 9000,
-        "friends": [13, 19, 3]
-      },
-      {
-        "id": 3,
-        "name": "Colt Rohan",
-        "address": "48010 Balistreri Harbor, Cleobury IN 43317",
-        "email": "Wilford.Barton@gmail.com",
-        "strideLength": 2.7,
-        "dailyStepGoal": 3000,
-        "friends": [31, 16, 15, 7]
-      }
-    ];
     const randomUserID = generateRandomUserID(users);
-    expect(randomUserID).to.be.above(0);
+
+    expect(randomUserID).to.be.at.least(1);
     expect(randomUserID).to.be.below(4);
   });
 
-  it('should return a currentUser object with the specified ID', function () {
-    const users = [
-      {
-        "id": 1,
-        "name": "Trystan Gorczany",
-        "address": "9484 Lucas Flat, West Kittymouth WA 67504",
-        "email": "Taurean_Pollich31@gmail.com",
-        "strideLength": 4,
-        "dailyStepGoal": 7000,
-        "friends": [5, 43, 46, 11]
-      },
-      {
-        "id": 2,
-        "name": "Tyreek VonRueden",
-        "address": "623 Koelpin Skyway, Lake Luigichester MN 77576-1678",
-        "email": "Nicolette_Halvorson43@yahoo.com",
-        "strideLength": 4.5,
-        "dailyStepGoal": 9000,
-        "friends": [13, 19, 3]
-      },
-      {
-        "id": 3,
-        "name": "Colt Rohan",
-        "address": "48010 Balistreri Harbor, Cleobury IN 43317",
-        "email": "Wilford.Barton@gmail.com",
-        "strideLength": 2.7,
-        "dailyStepGoal": 3000,
-        "friends": [31, 16, 15, 7]
-      }
-    ];
+  it('should add hydration, activity, and sleep data to the currentUser', function () {
+    const currentUser = users[0];
 
-    const hydrationData = [
-      {
-        "userID": 1,
-        "date": "2023/03/24",
-        "numOunces": 28
-      },
-      {
-        "userID": 2,
-        "date": "2023/03/24",
-        "numOunces": 35
-      },
-      {
-        "userID": 3,
-        "date": "2023/03/24",
-        "numOunces": 95
-      }
-    ]
-
-    const userId1 = 1;
-    const userId2 = 2;
-
-    expect(selectCurrentUser(userId1, users, hydrationData)).to.deep.equal(
+    expect(addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData)).to.deep.equal(
       {
         id: 1,
         name: 'Trystan Gorczany',
@@ -98,80 +22,24 @@ describe('userObject creation', () => {
         strideLength: 4,
         dailyStepGoal: 7000,
         friends: [5, 43, 46, 11],
-        hydrationData: [{ userID: 1, date: '2023/03/24', numOunces: 28 }],
-        activity: [],
-        sleep: []
+        hydrationData: [{
+          userID: 1, date: '2023/03/24', numOunces: 28
+        }],
+        activity: [{
+          userID: 1,
+          date: "2023/03/24",
+          numSteps: 7362,
+          minutesActive: 261,
+          flightsOfStairs: 26
+        }],
+        sleep: [{
+          userID: 1,
+          date: "2023/03/24",
+          hoursSlept: 9.6,
+          sleepQuality: 4.3
+        }]
       }
     );
-
-    expect(selectCurrentUser(userId2, users, hydrationData)).to.deep.equal(
-      {
-        id: 2,
-        name: 'Tyreek VonRueden',
-        address: '623 Koelpin Skyway, Lake Luigichester MN 77576-1678',
-        email: 'Nicolette_Halvorson43@yahoo.com',
-        strideLength: 4.5,
-        dailyStepGoal: 9000,
-        friends: [13, 19, 3],
-        hydrationData: [{ userID: 2, date: '2023/03/24', numOunces: 35 }],
-        activity: [],
-        sleep: []
-      }
-    );
-  });
-
-  it('should return "User not found!" if the user is not in the list', function () {
-    const users = [
-      {
-        "id": 1,
-        "name": "Trystan Gorczany",
-        "address": "9484 Lucas Flat, West Kittymouth WA 67504",
-        "email": "Taurean_Pollich31@gmail.com",
-        "strideLength": 4,
-        "dailyStepGoal": 7000,
-        "friends": [5, 43, 46, 11]
-      },
-      {
-        "id": 2,
-        "name": "Tyreek VonRueden",
-        "address": "623 Koelpin Skyway, Lake Luigichester MN 77576-1678",
-        "email": "Nicolette_Halvorson43@yahoo.com",
-        "strideLength": 4.5,
-        "dailyStepGoal": 9000,
-        "friends": [13, 19, 3]
-      },
-      {
-        "id": 3,
-        "name": "Colt Rohan",
-        "address": "48010 Balistreri Harbor, Cleobury IN 43317",
-        "email": "Wilford.Barton@gmail.com",
-        "strideLength": 2.7,
-        "dailyStepGoal": 3000,
-        "friends": [31, 16, 15, 7]
-      }
-    ];
-
-    const hydrationData = [
-      {
-        "userID": 1,
-        "date": "2023/03/24",
-        "numOunces": 28
-      },
-      {
-        "userID": 2,
-        "date": "2023/03/24",
-        "numOunces": 35
-      },
-      {
-        "userID": 3,
-        "date": "2023/03/24",
-        "numOunces": 95
-      }
-    ]
-
-    const userId4 = 4;
-
-    expect(selectCurrentUser(userId4, users, hydrationData)).to.deep.equal('User not found!');
   });
 });
 
@@ -450,7 +318,7 @@ describe('distance traveled', () => {
         it('should be a function', function () {
           expect(sleepQualityGivenDate).to.be.a('function');
         });
-        
+
         it('should return sleepQuality when the date is found', function () {
           const user = {
             sleepData: [
@@ -461,7 +329,7 @@ describe('distance traveled', () => {
           const result = sleepQualityGivenDate(user, '2023/03/24');
           expect(result).to.equal(2);
         });
-      
+
         it('should return undefined when the date is not found', function () {
           const user = {
             sleepData: [
@@ -471,13 +339,13 @@ describe('distance traveled', () => {
           const result = sleepQualityGivenDate(user, '2023/03/25');
           expect(result).to.be.undefined;
         });
-      
+
         it('should return undefined when the sleepData array is empty', function () {
           const user = { sleepData: [] };
           const result = sleepQualityGivenDate(user, '2023/03/24');
           expect(result).to.be.undefined;
         });
-      
+
       });
 
 describe('getSleepQualityFor7Days', () => {
@@ -517,15 +385,15 @@ describe('getSleepQualityFor7Days', () => {
     expect(result.length).to.equal(2);
   });
 });
-      
+
       describe('getSleepFor7Days', () => {
-        
+
         it('should return an array', () => {
           setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
           const result = getSleepFor7Days(user, '2023/03/24');
           expect(result).to.be.an('array');
        });
-      
+
         it('should return sleep hours data for 7 days when data is available', function () {
           const user = {
             sleepData: [
@@ -541,7 +409,7 @@ describe('getSleepQualityFor7Days', () => {
           const result = getSleepFor7Days(user, '2023-03-26');
           expect(result.length).to.equal(7);
         });
-      
+
         it('should return an empty array when no matching data is found', function () {
           const user = {
             sleepData: []
@@ -549,7 +417,7 @@ describe('getSleepQualityFor7Days', () => {
           const result = getSleepFor7Days(user, '2023-03-20');
           expect(result).to.deep.equal([]);
         });
-      
+
         it('should return partial data when only some days have sleep data', function () {
           const user = {
             sleepData: [
@@ -560,15 +428,15 @@ describe('getSleepQualityFor7Days', () => {
           const result = getSleepFor7Days(user, '2023-03-22');
           expect(result.length).to.equal(2);
         });
-      
+
       });
-      
+
       describe('checkStepGoal', () => {
 
         it('should be a function', function () {
           expect(checkStepGoal).to.be.a('function');
         });
-      
+
         it('should return "Success!" when the latest numSteps is greater than or equal to dailyStepGoal', function () {
           const user = {
             dailyStepGoal: 10000,
@@ -580,7 +448,7 @@ describe('getSleepQualityFor7Days', () => {
           const result = checkStepGoal(user);
           expect(result).to.equal('Success!');
         });
-      
+
         it('should return "No!" when the latest numSteps is less than dailyStepGoal', function () {
           const user = {
             dailyStepGoal: 10000,
@@ -600,14 +468,14 @@ describe('getSleepQualityFor7Days', () => {
           const result = checkStepGoal(user);
           expect(result).to.equal('No!');
         });
-      });    
+      });
 
 describe('minutesActiveGivenDate', () => {
 
   it('should be a function', function () {
     expect(minutesActiveGivenDate).to.be.a('function');
   });
-  
+
   it('should return minutes active when the date is found', function () {
     const user = {
       activityData: [

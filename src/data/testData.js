@@ -95,3 +95,10 @@ const activityData = [
   "flightsOfStairs": 38
   }
 ];
+
+module.exports = {
+  users,
+  hydrationData,
+  activityData,
+  sleepData
+}
