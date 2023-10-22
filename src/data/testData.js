@@ -77,47 +77,112 @@ const hydrationData = [
 //////////////////// SLEEP ////////////////////
 const sleepData = [
   {
-  "userID": 1,
-  "date": "2023/03/24",
-  "hoursSlept": 9.6,
-  "sleepQuality": 4.3
+    "userID": 1,
+    "date": "2023/03/24",
+    "hoursSlept": 9.6,
+    "sleepQuality": 4.3
   },
   {
-  "userID": 2,
-  "date": "2023/03/24",
-  "hoursSlept": 8.4,
-  "sleepQuality": 3.5
+    "userID": 2,
+    "date": "2023/03/24",
+    "hoursSlept": 8.4,
+    "sleepQuality": 3.5
   },
   {
-  "userID": 3,
-  "date": "2023/03/24",
-  "hoursSlept": 9.7,
-  "sleepQuality": 4.7
+    "userID": 2,
+    "date": "2023/03/25",
+    "hoursSlept": 8.1,
+    "sleepQuality": 4.7
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/26",
+    "hoursSlept": 9.8,
+    "sleepQuality": 4.8
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/27",
+    "hoursSlept": 10.7,
+    "sleepQuality": 2.8
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/28",
+    "hoursSlept": 5.1,
+    "sleepQuality": 2.1
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/29",
+    "hoursSlept": 4.3,
+    "sleepQuality": 2.2
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/30",
+    "hoursSlept": 10.1,
+    "sleepQuality": 3.2
   }
 ];
 
 //////////////////// ACTIVITY ////////////////////
 const activityData = [
   {
-  "userID": 1,
-  "date": "2023/03/24",
-  "numSteps": 7362,
-  "minutesActive": 261,
-  "flightsOfStairs": 26
+    "userID": 1,
+    "date": "2023/03/24",
+    "numSteps": 7362,
+    "minutesActive": 261,
+    "flightsOfStairs": 26
   },
   {
-  "userID": 2,
-  "date": "2023/03/24",
-  "numSteps": 3049,
-  "minutesActive": 125,
-  "flightsOfStairs": 43
+    "userID": 2,
+    "date": "2023/03/24",
+    "numSteps": 3049,
+    "minutesActive": 125,
+    "flightsOfStairs": 43
   },
   {
-  "userID": 3,
-  "date": "2023/03/24",
-  "numSteps": 12970,
-  "minutesActive": 282,
-  "flightsOfStairs": 38
+    "userID": 2,
+    "date": "2023/03/25",
+    "numSteps": 14719,
+    "minutesActive": 201,
+    "flightsOfStairs": 39
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/26",
+    "numSteps": 9543,
+    "minutesActive": 203,
+    "flightsOfStairs": 34
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/27",
+    "numSteps": 12127,
+    "minutesActive": 120,
+    "flightsOfStairs": 3
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/28",
+    "numSteps": 5494,
+    "minutesActive": 89,
+    "flightsOfStairs": 46
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/29",
+    "numSteps": 6959,
+    "minutesActive": 269,
+    "flightsOfStairs": 16
+  },
+  {
+    "userID": 2,
+    "date": "2023/03/30",
+    "numSteps": 4676,
+    "minutesActive": 288,
+    "flightsOfStairs": 5
   }
 ];
 
