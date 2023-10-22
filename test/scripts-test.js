@@ -126,36 +126,11 @@ describe('calculateTotalHydration', function() {
   });
 });
 
-describe('distance traveled', () => {
-  it('should return the distance traveled by a user on a given day', function () {
-    const currentUser = {
-      "id": 3,
-      "name": "Colt Rohan",
-      "address": "48010 Balistreri Harbor, Cleobury IN 43317",
-      "email": "Wilford.Barton@gmail.com",
-      "strideLength": 2.7,
-      "dailyStepGoal": 3000,
-      "friends": [31, 16, 15, 7],
-      "hydrationData": [{
-        "userID": 3,
-        "date": "2023/03/24",
-        "numOunces": 95
-      }],
-      "activity": [{
-        "userID": 3,
-        "date": "2023/03/24",
-        "numSteps": 12970,
-        "minutesActive": 282,
-        "flightsOfStairs": 38
-      }],
-      "sleep": [{
-        "userID": 3,
-        "date": "2023/03/24",
-        "hoursSlept": 9.7,
-        "sleepQuality": 4.7
-      }]
-    }
-    expect(findDistanceTraveled(currentUser)).to.equal('6.63');
+describe('distance traveled', function() {
+  it('should return the distance traveled by a user on the most recent day', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+
+    expect(findDistanceTraveled(currentUser)).to.deep.equal('5.58');
   });
 });
 
