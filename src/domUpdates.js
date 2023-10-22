@@ -10,6 +10,7 @@ const stepsDay = document.querySelector('#stepsDay');
 const activeMinutes = document.querySelector('#activeMinutes');
 const stepsAverage = document.querySelector('#avgStepGoal');
 const stepsWeek = document.querySelector('#stepsWeek');
+const sleepLife = document.querySelector('#sleepLife');
 
 const updateUserName = (userData) => {
   userName.innerHTML += `<h1>Hello</h1><h1>${userData.name}!</h1><p>look after your flesh prison today!</p>`;
@@ -69,6 +70,11 @@ const stepsWeekUpdate = (activityArray) => {
   stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p>`;
 }
 
+const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
+  sleepLife.innerHTML = '';
+  sleepLife.innerHTML = `<h2>Placeholder</h2><p>${sleepLifeQuality}</p><p>${sleepLifeTime}</p>`;
+}
+
 export {
   updateUserName,
   displayUserInfo,
@@ -81,4 +87,5 @@ export {
   activeMinutesUpdate,
   stepsGoalCompare,
   stepsWeekUpdate,
+  sleepLifeUpdate
 }

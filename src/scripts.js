@@ -38,7 +38,8 @@ import {  updateUserName,
     stepsDayUpdate,
     activeMinutesUpdate,
     stepsWeekUpdate,
-    stepsGoalCompare  } from './domUpdates';
+    stepsGoalCompare,
+    sleepLifeUpdate  } from './domUpdates';
 
     ////////// Event Listeners //////////
 window.addEventListener('load', () => {
