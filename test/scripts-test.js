@@ -69,41 +69,37 @@ describe('ouncesPerDay', function() {
   });
 });
 
-describe('getHydrationFor7Days', () => {
+describe('getHydrationFor7Days', function() {
+  it('should return hydration data for 7 days when data for all 7 days is available', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/29');
 
-  it('should return hydration data for 7 days when data is available', function () {
-    const user = {
-      hydrationData: [
-        { date: '2023/06/25', numOunces: 30 },
-        { date: '2023/06/26', numOunces: 40 },
-        { date: '2023/06/27', numOunces: 50 },
-        { date: '2023/06/28', numOunces: 30 },
-        { date: '2023/06/29', numOunces: 40 },
-        { date: '2023/06/30', numOunces: 50 },
-        { date: '2023/07/01', numOunces: 30 },
-      ]
-    };
-    const result = getHydrationFor7Days(user, '2023/07/01');
-    expect(result.length).to.equal(7);
+    expect(sevenDayHydration.length).to.deep.equal(7);
+    expect(sevenDayHydration).to.deep.equal([
+      { date: '2023/03/24', numOunces: 35 },
+      { date: '2023/03/25', numOunces: 92 },
+      { date: '2023/03/26', numOunces: 88 },
+      { date: '2023/03/26', numOunces: 88 },
+      { date: '2023/03/27', numOunces: 68 },
+      { date: '2023/03/28', numOunces: 50 },
+      { date: '2023/03/29', numOunces: 57 }
+    ]);
   });
 
-  it('should return an empty array when no matching hydration data is found', function () {
-    const user = {
-      hydrationData: []
-    };
-    const result = getHydrationFor7Days(user, '2023/07/01');
-    expect(result).to.deep.equal([]);
+  it('should return an empty array when no matching hydration data is found', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/29');
+
+    expect(sevenDayHydration.length).to.equal(0);
+    expect(sevenDayHydration).to.deep.equal([]);
   });
 
-  it('should return partial data when only some days have hydration data', function () {
-    const user = {
-      hydrationData: [
-        { date: '2023/06/25', numOunces: 30 },
-        { date: '2023/06/27', numOunces: 50 },
-      ]
-    };
-    const result = getHydrationFor7Days(user, '2023/07/01');
-    expect(result.length).to.equal(2);
+  it('should return partial data when only some of the 7 days have hydration data', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/29');
+
+    expect(sevenDayHydration.length).to.equal(1);
+    expect(sevenDayHydration).to.deep.equal([{ date: '2023/03/24', numOunces: 28 }]);
   });
 });
 
