@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate, checkStepGoal7Days } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId that falls within the array of users', function() {
@@ -634,4 +634,69 @@ describe('minutesActiveGivenDate', () => {
     const result = minutesActiveGivenDate(user, '2023/03/24');
     expect(result).to.be.undefined;
   });
+});
+
+describe('checkStepGoal7Days', () => {
+
+  it('should be a function', function () {
+    expect(checkStepGoal).to.be.a('function');
+  });
+  
+  it('should return an array of "Success!" and/or "No!" for the last seven days', function () {
+    const user = {
+      dailyStepGoal: 10000,
+      activityData: [
+        { date: '2023/10/12', numSteps: 10500 },
+        { date: '2023/10/11', numSteps: 9500 },
+        // ...add more data as needed
+      ]
+    };
+    const result = checkStepGoal7Days(user);
+    expect(result).to.be.an('array').that.includes('Success!', 'No!');
+  });
+
+  it('should return "No!" for days with no activityData', function () {
+    const user = {
+      dailyStepGoal: 10000,
+      activityData: []
+    };
+    const result = checkStepGoal7Days(user);
+    expect(result).to.include('No!');
+  });
+
+  it('should return "No!" for days with numSteps less than dailyStepGoal', function () {
+    const user = {
+      dailyStepGoal: 10000,
+      activityData: [
+        { date: '2023/10/12', numSteps: 8500},
+        { date: '2023/10/13', numSteps: 8},
+        { date: '2023/10/14', numSteps: 24500},
+        { date: '2023/10/15', numSteps: 1},
+        { date: '2023/10/16', numSteps: 34509},
+        { date: '2023/10/17', numSteps: 234567},
+        { date: '2023/10/18', numSteps: 3},
+      ]
+    };
+    const result = checkStepGoal7Days(user);
+    expect(result).to.include('No!')
+});
+  
+  it('should return "Success!" for days with numSteps equal or greater than dailyStepGoal', function () {
+    const user = {
+      dailyStepGoal: 10000,
+      activityData: [
+        { date: '2023/10/12', numSteps: 10500},
+        { date: '2023/10/13', numSteps: 8},
+        { date: '2023/10/14', numSteps: 24500},
+        { date: '2023/10/15', numSteps: 1},
+        { date: '2023/10/16', numSteps: 34509},
+        { date: '2023/10/17', numSteps: 234567},
+        { date: '2023/10/18', numSteps: 3},
+        
+      ]
+    };
+    const result = checkStepGoal7Days(user);
+    expect(result).to.include('Success!');
+  });
+
 });

@@ -221,6 +221,32 @@ function checkStepGoal(currentUser) {
   }
 };
 
+function checkStepGoal7Days(currentUser) {
+  
+  if (currentUser.activityData.length === 0) {
+    return 'No!';
+  }
+
+  // Sort activityData by date in descending order
+  currentUser.activityData.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date)});
+
+  // Getting the last seven days
+  const lastWeekActivity = currentUser.activityData.slice(0, 7);
+
+  const results = lastWeekActivity.map((activity) => {
+    if (activity.numSteps >= currentUser.dailyStepGoal) {
+      return 'Success!';
+    } else {
+      return 'No!';
+    }
+  });
+
+  
+  return results;
+};
+
+
 module.exports = {
   generateRandomUserID,
   addDataToCurrentUser,
@@ -237,6 +263,7 @@ module.exports = {
   getSleepQualityFor7Days,
   getSleepFor7Days,
   minutesActiveGivenDate,
-  checkStepGoal
+  checkStepGoal,
+  checkStepGoal7Days
 };
 
