@@ -8,13 +8,11 @@ const sleepWeek = document.querySelector('#sleepWeek');
 const stepGoal = document.querySelector('#stepGoal');
 const stepsDay = document.querySelector('#stepsDay');
 const activeMinutes = document.querySelector('#activeMinutes');
-const stepsAverage = document.querySelector('#friendGoal');
+const stepsAverage = document.querySelector('#avgStepGoal');
 const stepsWeek = document.querySelector('#stepsWeek');
 
-//Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
-
 const updateUserName = (userData) => {
-  userName.innerHTML += `<h1>Hello!</h1><h1>${userData.name}</h1>`;
+  userName.innerHTML += `<h1>Hello</h1><h1>${userData.name}!</h1><p>look after your flesh prison today!</p>`;
 }
 
 const displayUserInfo = (user) => {
@@ -22,11 +20,12 @@ const displayUserInfo = (user) => {
   userInfo.innerHTML = `<p>${user.address}</p><p>${user.email}</p>`;
 }
 
-const  waterDayUpdate = (date, hydrationData) => {
+const waterDayUpdate = (date, hydrationData) => {
   waterDay.innerHTML = '';
-  waterDay.innerHTML = `<h2>${date}</h1><p>${hydrationData}</p>`
+  waterDay.innerHTML = `<h2>${date}</h1><p>${hydrationData}</p><p class='snarky-remark'>no UTIs today!</p>
+  <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>`
 }
-const  waterWeekUpdate = (hydrationArray) => {
+const waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
   const hydrationHTML = hydrationArray.map((oz) => `${oz} oz`).join(' ');
   waterWeek.innerHTML = `<h2>your week in oz</h2><p>M T W Th F S Su</p><p>${hydrationHTML}</p>`;
@@ -46,29 +45,28 @@ const sleepWeekUpdate = (sleepQuality, sleepTime) => {
 
 const stepGoalUpdate = (goal) => {
   stepGoal.innerHTML = '';
-  stepGoal.innerHTML = `<h2>Your Step Goal</h2>
-                              <p>${goal}</p>`;
+  stepGoal.innerHTML = `<h2>your step goal</h2><p>${goal}</p><p>just try your best</p>`;
 }
 
 const stepsDayUpdate = (date, steps, distance) => {
   stepsDay.innerHTML = '';
-  stepsDay.innerHTML = `<h2>your step goal</h2><p>${date}</p><p>${steps}</p><p>${distance}</p>`
+  stepsDay.innerHTML = `<h2>steps today</h2><p>${date}</p><p>${steps}</p><p>${distance}</p>`
 }
 
 const activeMinutesUpdate = (time) => {
   activeMinutes.innerHTML = '';
-  activeMinutes.innerHTML = `<h2>active minutes</h2><p>${time}</p>`;
+  activeMinutes.innerHTML = `<h2>active minutes</h2><p>${time}</p><p>ouchie!</p>`;
 }
 
 const stepsGoalCompare = (goal, averageGoal) => {
   stepsAverage.innerHTML = '';
-  stepsAverage.innerHTML = `<h2>Your Step Goal</h2><p>${goal}</p><h2>Average Step Goal</h2><p>${averageGoal}</p>`;
+  stepsAverage.innerHTML = `<h2>Your Step Goal</h2><p>${goal}</p><h2>average all-time step goal</h2><p>${averageGoal}</p><p>but who's really counting?</p>`;
 }
 
 const stepsWeekUpdate = (activityArray) => {
   stepsWeek.innerHTML = '';
   const activityDisplay = activityArray.map((html) => `<p>${html}</p>`).join('');
-  stepsWeek.innerHTML = `<h2>Step Goals Week</h2>${activityDisplay}`;
+  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p>`;
 }
 
 export {
