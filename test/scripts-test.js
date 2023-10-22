@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, selectCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate, numberOfStepsGivenDate } = require('../src/scriptDefinitions');
 
 describe('userObject creation', () => {
   it('should generate a random userId that falls within the array of users', function() {
@@ -632,6 +632,46 @@ describe('minutesActiveGivenDate', () => {
   it('should return undefined when the activityData array is empty', function () {
     const user = { activityData: [] };
     const result = minutesActiveGivenDate(user, '2023/03/24');
+    expect(result).to.be.undefined;
+  });
+});
+
+describe('numberOfStepsGivenDate', () => {
+
+  it('should be a function', function () {
+    expect(numberOfStepsGivenDate).to.be.a('function');
+  });
+  
+  it('should return the number of steps when the date is found', function () {
+    const user = {
+      activityData: [
+        { date: '2023/03/24', numSteps: 4000 },
+        { date: '2023/03/25', numSteps: 5000 }
+      ]
+    };
+    const result = numberOfStepsGivenDate(user, '2023/03/24');
+    expect(result).to.equal(4000);
+  });
+
+  it('should return undefined when the date is not found', function () {
+    const user = {
+      activityData: [
+        { date: '2023/03/24', numSteps: 4000 }
+      ]
+    };
+    const result = numberOfStepsGivenDate(user, '2023/03/25');
+    expect(result).to.be.undefined;
+  });
+
+  it('should return undefined when the activityData array is empty', function () {
+    const user = { activityData: [] };
+    const result = numberOfStepsGivenDate(user, '2023/03/24');
+    expect(result).to.be.undefined;
+  });
+
+  it('should return undefined when activityData is not provided', function () {
+    const user = {};
+    const result = numberOfStepsGivenDate(user, '2023/03/24');
     expect(result).to.be.undefined;
   });
 });
