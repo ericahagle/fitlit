@@ -44,38 +44,28 @@ describe('userObject creation', function() {
 });
 
 describe('global average step goal', function() {
-  it('should find the average step goal amongst all users', function () {
+  it('should find the average step goal amongst all users', function() {
     expect(findStepGoalAverage(users)).to.deep.equal('6333.33');
   });
 });
 
-describe('ouncesPerDay', () => {
+describe('ouncesPerDay', function() {
+  it('should return numOunces when the date is found', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
 
-  it('should return numOunces when the date is found', function () {
-    const user = {
-      hydrationData: [
-        { date: '2023/03/24', numOunces: 40 },
-        { date: '2023/03/25', numOunces: 50 }
-      ]
-    };
-    const result = ouncesPerDay(user, '2023/03/24');
-    expect(result).to.equal(40);
+    expect(ouncesPerDay(currentUser, '2023/03/24')).to.equal(35);
   });
 
-  it('should return undefined when the date is not found', function () {
-    const user = {
-      hydrationData: [
-        { date: '2023/03/24', numOunces: 40 }
-      ]
-    };
-    const result = ouncesPerDay(user, '2023/03/25');
-    expect(result).to.be.undefined;
+  it('should return undefined when the date is not found', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+
+    expect(ouncesPerDay(currentUser, '2023/03/27')).to.be.undefined;
   });
 
-  it('should return undefined when the hydrationData array is empty', function () {
-    const user = { hydrationData: [] };
-    const result = ouncesPerDay(user, '2023/03/24');
-    expect(result).to.be.undefined;
+  it('should return undefined when the hydrationData array is empty', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+
+    expect(ouncesPerDay(currentUser, '2023/03/24')).to.be.undefined;
   });
 });
 
