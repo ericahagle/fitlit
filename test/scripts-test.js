@@ -157,42 +157,28 @@ describe('calculateAverageHoursSlept', function() {
   });
 });
 
-         describe('calculateAverageSleepQuality', () => {
+describe('calculateAverageSleepQuality', function() {
+  it('should return 0 when there is no sleep data', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const averageSleepQuality = calculateAverageSleepQuality(currentUser);
 
-        it('should be a function', function () {
-          expect(calculateAverageSleepQuality).to.be.a('function');
-        });
+    expect(averageSleepQuality).to.deep.equal('0.00');
+  });
 
-        it('should return 0 when there is no sleep data', function () {
-          const user = { sleepData: [] };
-          const result = calculateAverageSleepQuality(user);
-          expect(result).to.equal('0.00');
-        });
+  it('should return the average sleep quality when there is one sleep data entry', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const averageSleepQuality = calculateAverageSleepQuality(currentUser);
 
-        it('should return the average sleep quality when there is one sleep data entry', function () {
-          const user = {
-            sleepData: [{ sleepQuality: 7 }]
-          };
-          const result = calculateAverageSleepQuality(user);
-          expect(result).to.equal('7.00');
-        });
+    expect(averageSleepQuality).to.deep.equal('4.30');
+  });
 
-        it('should return the average sleep quality when there are multiple sleep data entries', function () {
-          const user = {
-            sleepData: [{ sleepQuality: 7 }, { sleepQuality: 8 }, { sleepQuality: 6 }]
-          };
-          const result = calculateAverageSleepQuality(user);
-          expect(result).to.equal('7.00');
-        });
+  it('should return the average sleep quality when there are multiple sleep data entries', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+    const averageSleepQuality = calculateAverageSleepQuality(currentUser);
 
-        it('should correctly calculate the average sleep quality with varied sleep data entries', function () {
-          const user = {
-            sleepData: [{ sleepQuality: 5 }, { sleepQuality: 8 }, { sleepQuality: 7 }]
-          };
-          const result = calculateAverageSleepQuality(user);
-          expect(result).to.equal('6.67');
-        });
-      });
+    expect(averageSleepQuality).to.deep.equal('3.33');
+  });
+});
 
 
       describe('hoursSleptGivenDate', () => {
