@@ -59,7 +59,7 @@ describe('ouncesPerDay', function() {
   it('should return undefined when the date is not found', function() {
     const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
 
-    expect(ouncesPerDay(currentUser, '2023/03/27')).to.be.undefined;
+    expect(ouncesPerDay(currentUser, '2023/03/30')).to.be.undefined;
   });
 
   it('should return undefined when the hydrationData array is empty', function() {
