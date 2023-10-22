@@ -25,14 +25,14 @@ describe('userObject creation', function() {
         hydrationData: [{
           userID: 1, date: '2023/03/24', numOunces: 28
         }],
-        activity: [{
+        activityData: [{
           userID: 1,
           date: "2023/03/24",
           numSteps: 7362,
           minutesActive: 261,
           flightsOfStairs: 26
         }],
-        sleep: [{
+        sleepData: [{
           userID: 1,
           date: "2023/03/24",
           hoursSlept: 9.6,
@@ -59,7 +59,7 @@ describe('ouncesPerDay', function() {
   it('should return undefined when the date is not found', function() {
     const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
 
-    expect(ouncesPerDay(currentUser, '2023/03/30')).to.be.undefined;
+    expect(ouncesPerDay(currentUser, '2023/03/31')).to.be.undefined;
   });
 
   it('should return undefined when the hydrationData array is empty', function() {
@@ -72,23 +72,23 @@ describe('ouncesPerDay', function() {
 describe('getHydrationFor7Days', function() {
   it('should return hydration data for 7 days when data for all 7 days is available', function() {
     const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
-    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/29');
+    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/30');
 
     expect(sevenDayHydration.length).to.deep.equal(7);
     expect(sevenDayHydration).to.deep.equal([
       { date: '2023/03/24', numOunces: 35 },
       { date: '2023/03/25', numOunces: 92 },
       { date: '2023/03/26', numOunces: 88 },
-      { date: '2023/03/26', numOunces: 88 },
-      { date: '2023/03/27', numOunces: 68 },
-      { date: '2023/03/28', numOunces: 50 },
-      { date: '2023/03/29', numOunces: 57 }
+      { date: '2023/03/27', numOunces: 88 },
+      { date: '2023/03/28', numOunces: 68 },
+      { date: '2023/03/29', numOunces: 50 },
+      { date: '2023/03/30', numOunces: 57 }
     ]);
   });
 
   it('should return an empty array when no matching hydration data is found', function() {
     const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
-    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/29');
+    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/30');
 
     expect(sevenDayHydration.length).to.equal(0);
     expect(sevenDayHydration).to.deep.equal([]);
@@ -96,7 +96,7 @@ describe('getHydrationFor7Days', function() {
 
   it('should return partial data when only some of the 7 days have hydration data', function() {
     const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
-    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/29');
+    const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/30');
 
     expect(sevenDayHydration.length).to.equal(1);
     expect(sevenDayHydration).to.deep.equal([{ date: '2023/03/24', numOunces: 28 }]);
@@ -226,158 +226,116 @@ describe('sleepQualityGivenDate', function() {
   });
 });
 
-describe('getSleepQualityFor7Days', () => {
+describe('getSleepQualityFor7Days', function() {
+  it('should return sleep quality data for 7 days when data is available', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+    const sevenDaySleepQuality = getSleepQualityFor7Days(currentUser, '2023/03/30');
 
-  it('should return sleep quality data for 7 days when data is available', function () {
-    const user = {
-      sleepData: [
-        { date: '2023-03-20', sleepQuality: 4 },
-        { date: '2023-03-21', sleepQuality: 3 },
-        { date: '2023-03-22', sleepQuality: 2 },
-        { date: '2023-03-23', sleepQuality: 1 },
-        { date: '2023-03-24', sleepQuality: 3 },
-        { date: '2023-03-25', sleepQuality: 4 },
-        { date: '2023-03-26', sleepQuality: 2 },
-      ]
-    };
-    const result = getSleepQualityFor7Days(user, '2023-03-26');
-    expect(result.length).to.equal(7);
+    expect(sevenDaySleepQuality.length).to.deep.equal(7);
+    expect(sevenDaySleepQuality).to.deep.equal([
+      { date: '2023/03/24', sleepQuality: 3.5 },
+      { date: '2023/03/25', sleepQuality: 4.7 },
+      { date: '2023/03/26', sleepQuality: 4.8 },
+      { date: '2023/03/27', sleepQuality: 2.8 },
+      { date: '2023/03/28', sleepQuality: 2.1 },
+      { date: '2023/03/29', sleepQuality: 2.2 },
+      { date: '2023/03/30', sleepQuality: 3.2 }
+    ]);
   });
 
-  it('should return an empty array when no matching data is found', function () {
-    const user = {
-      sleepData: []
-    };
-    const result = getSleepQualityFor7Days(user, '2023-03-20');
-    expect(result).to.deep.equal([]);
+  it('should return an empty array when no matching data is found', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const sevenDaySleepQuality = getSleepQualityFor7Days(currentUser, '2023/03/30');
+
+    expect(sevenDaySleepQuality.length).to.equal(0);
+    expect(sevenDaySleepQuality).to.deep.equal([]);
   });
 
-  it('should return partial data when only some days have sleep data', function () {
-    const user = {
-      sleepData: [
-        { date: '2023-03-20', sleepQuality: 4 },
-        { date: '2023-03-22', sleepQuality: 2 },
-      ]
-    };
-    const result = getSleepQualityFor7Days(user, '2023-03-22');
-    expect(result.length).to.equal(2);
+  it('should return partial data when only some days have sleep data', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const sevenDaySleepQuality = getSleepQualityFor7Days(currentUser, '2023/03/30');
+
+    expect(sevenDaySleepQuality.length).to.equal(1);
+    expect(sevenDaySleepQuality).to.deep.equal([{ date: '2023/03/24', sleepQuality: 4.3 }]);
   });
 });
 
-      describe('getSleepFor7Days', () => {
+describe('getSleepFor7Days', function() {
+  it('should return sleep hours data for 7 days when data is available', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+    const sevenDaySleep = getSleepFor7Days(currentUser, '2023/03/30');
 
-        it('should return an array', () => {
-          setUserSleepData([{ date: '2023/03/24', hoursSlept: 7 }]);
-          const result = getSleepFor7Days(user, '2023/03/24');
-          expect(result).to.be.an('array');
-       });
-
-        it('should return sleep hours data for 7 days when data is available', function () {
-          const user = {
-            sleepData: [
-              { date: '2023-03-20', hoursSlept: 7 },
-              { date: '2023-03-21', hoursSlept: 6 },
-              { date: '2023-03-22', hoursSlept: 7 },
-              { date: '2023-03-23', hoursSlept: 8 },
-              { date: '2023-03-24', hoursSlept: 5 },
-              { date: '2023-03-25', hoursSlept: 7 },
-              { date: '2023-03-26', hoursSlept: 6 },
-            ]
-          };
-          const result = getSleepFor7Days(user, '2023-03-26');
-          expect(result.length).to.equal(7);
-        });
-
-        it('should return an empty array when no matching data is found', function () {
-          const user = {
-            sleepData: []
-          };
-          const result = getSleepFor7Days(user, '2023-03-20');
-          expect(result).to.deep.equal([]);
-        });
-
-        it('should return partial data when only some days have sleep data', function () {
-          const user = {
-            sleepData: [
-              { date: '2023-03-20', hoursSlept: 7 },
-              { date: '2023-03-22', hoursSlept: 7 },
-            ]
-          };
-          const result = getSleepFor7Days(user, '2023-03-22');
-          expect(result.length).to.equal(2);
-        });
-
-      });
-
-      describe('checkStepGoal', () => {
-
-        it('should be a function', function () {
-          expect(checkStepGoal).to.be.a('function');
-        });
-
-        it('should return "Success!" when the latest numSteps is greater than or equal to dailyStepGoal', function () {
-          const user = {
-            dailyStepGoal: 10000,
-            activityData: [
-              { date: '2023/10/12', numSteps: 10500 },
-              { date: '2023/10/11', numSteps: 9500 }
-            ]
-          };
-          const result = checkStepGoal(user);
-          expect(result).to.equal('Success!');
-        });
-
-        it('should return "No!" when the latest numSteps is less than dailyStepGoal', function () {
-          const user = {
-            dailyStepGoal: 10000,
-            activityData: [
-              { date: '2023/10/12', numSteps: 8500 },
-              { date: '2023/10/11', numSteps: 9500 }
-            ]
-          };
-          const result = checkStepGoal(user);
-          expect(result).to.equal('No!');
-        });
-        it('should handle cases where activityData is empty, returning "No!"', function () {
-          const user = {
-            dailyStepGoal: 10000,
-            activityData: []
-          };
-          const result = checkStepGoal(user);
-          expect(result).to.equal('No!');
-        });
-      });
-
-describe('minutesActiveGivenDate', () => {
-
-  it('should be a function', function () {
-    expect(minutesActiveGivenDate).to.be.a('function');
+    expect(sevenDaySleep).to.be.an('array');
+    expect(sevenDaySleep.length).to.deep.equal(7);
+    expect(sevenDaySleep).to.deep.equal([
+      { date: '2023/03/24', hoursSlept: 8.4 },
+      { date: '2023/03/25', hoursSlept: 8.1 },
+      { date: '2023/03/26', hoursSlept: 9.8 },
+      { date: '2023/03/27', hoursSlept: 10.7 },
+      { date: '2023/03/28', hoursSlept: 5.1 },
+      { date: '2023/03/29', hoursSlept: 4.3 },
+      { date: '2023/03/30', hoursSlept: 10.1 }
+    ]);
   });
 
-  it('should return minutes active when the date is found', function () {
-    const user = {
-      activityData: [
-        { date: '2023/03/24', minutesActive: 40 },
-        { date: '2023/03/25', minutesActive: 50 }
-      ]
-    };
-    const result = minutesActiveGivenDate(user, '2023/03/24');
-    expect(result).to.equal(40);
+  it('should return an empty array when no matching data is found', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const sevenDaySleep = getSleepFor7Days(currentUser, '2023/03/30');
+
+    expect(sevenDaySleep.length).to.equal(0);
+    expect(sevenDaySleep).to.deep.equal([]);
   });
 
-  it('should return undefined when the date is not found', function () {
-    const user = {
-      activityData: [
-        { date: '2023/03/24', minutesActive: 40 }
-      ]
-    };
-    const result = minutesActiveGivenDate(user, '2023/03/25');
-    expect(result).to.be.undefined;
+  it('should return partial data when only some days have sleep data', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const sevenDaySleep = getSleepFor7Days(currentUser, '2023/03/30');
+
+    expect(sevenDaySleep.length).to.equal(1);
+    expect(sevenDaySleep).to.deep.equal([{ date: '2023/03/24', hoursSlept: 9.6 }]);
+  });
+});
+
+describe('checkStepGoal', function() {
+  it('should return "Success!" when the latest numSteps is greater than or equal to dailyStepGoal', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const isSuccess = checkStepGoal(currentUser);
+
+    expect(isSuccess).to.deep.equal('Success!');
   });
 
-  it('should return undefined when the activityData array is empty', function () {
-    const user = { activityData: [] };
-    const result = minutesActiveGivenDate(user, '2023/03/24');
-    expect(result).to.be.undefined;
+  it('should return "No!" when the latest numSteps is less than dailyStepGoal', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+    const isNotSuccess = checkStepGoal(currentUser);
+
+    expect(isNotSuccess).to.deep.equal('No!');
+  });
+  it('should handle cases where activityData is empty, returning "No!"', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const isNotSuccess = checkStepGoal(currentUser);
+
+    expect(isNotSuccess).to.deep.equal('No!');
+  });
+});
+
+describe('minutesActiveGivenDate', function() {
+  it('should return minutes active when the date is found', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const minutesActive = minutesActiveGivenDate(currentUser, '2023/03/24');
+
+    expect(minutesActive).to.deep.equal(261);
+  });
+
+  it('should return undefined when the date is not found', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const minutesActive = minutesActiveGivenDate(currentUser, '2023/03/25');
+
+    expect(minutesActive).to.be.undefined;
+  });
+
+  it('should return undefined when the activityData array is empty', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const minutesActive = minutesActiveGivenDate(currentUser, '2023/03/25');
+
+    expect(minutesActive).to.be.undefined;
   });
 });

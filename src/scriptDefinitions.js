@@ -180,7 +180,7 @@ function getSleepFor7Days(currentUser, endDate) {
 
 ////////////////////* How far did you walk today miles ITERATION 5 *////////////////////
 function findDistanceTraveled(currentUser) {
-  const distance = ((currentUser.strideLength * currentUser.activity[currentUser.activity.length - 1].numSteps) / 5280).toFixed(2);
+  const distance = ((currentUser.strideLength * currentUser.activityData[currentUser.activityData.length - 1].numSteps) / 5280).toFixed(2);
   return distance;
 }
 
