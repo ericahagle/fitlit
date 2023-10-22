@@ -103,32 +103,26 @@ describe('getHydrationFor7Days', function() {
   });
 });
 
-describe('calculateTotalHydration', () => {
+describe('calculateTotalHydration', function() {
+  it('should return 0 when there is no hydration data', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const totalHydration = calculateTotalHydration(currentUser);
 
-  it('should be a function', function () {
-    expect(calculateTotalHydration).to.be.a('function')
-  })
-
-  it('should return 0 when there is no hydration data', function () {
-    const user = { hydrationData: [] };
-    const result = calculateTotalHydration(user);
-    expect(result).to.equal('0.00');
+    expect(totalHydration).to.deep.equal('0.00');
   });
 
-  it('should return the average hydration when there is one hydration data entry', function () {
-    const user = {
-      hydrationData: [{ numOunces: 40 }]
-    };
-    const result = calculateTotalHydration(user);
-    expect(result).to.equal('40.00');
+  it('should return the average hydration when there is one hydration data entry', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const totalHydration = calculateTotalHydration(currentUser);
+
+    expect(totalHydration).to.deep.equal('28.00');
   });
 
-  it('should return the average hydration when there are multiple hydration data entries', function () {
-    const user = {
-      hydrationData: [{ numOunces: 40 }, { numOunces: 60 }, { numOunces: 100 }]
-    };
-    const result = calculateTotalHydration(user);
-    expect(result).to.equal('66.67');
+  it('should return the average hydration when there are multiple hydration data entries', function() {
+    const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
+    const totalHydration = calculateTotalHydration(currentUser);
+
+    expect(totalHydration).to.deep.equal('68.29');
   });
 });
 
