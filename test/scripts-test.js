@@ -53,7 +53,7 @@ describe('ouncesPerDay', function() {
   it('should return numOunces when the date is found', function() {
     const currentUser = addDataToCurrentUser(users[1], hydrationData, activityData, sleepData);
 
-    expect(ouncesPerDay(currentUser, '2023/03/24')).to.equal(35);
+    expect(ouncesPerDay(currentUser, '2023/03/24')).to.deep.equal(35);
   });
 
   it('should return undefined when the date is not found', function() {
@@ -90,7 +90,7 @@ describe('getHydrationFor7Days', function() {
     const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
     const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/30');
 
-    expect(sevenDayHydration.length).to.equal(0);
+    expect(sevenDayHydration.length).to.deep.equal(0);
     expect(sevenDayHydration).to.deep.equal([]);
   });
 
@@ -98,7 +98,7 @@ describe('getHydrationFor7Days', function() {
     const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
     const sevenDayHydration = getHydrationFor7Days(currentUser, '2023/03/30');
 
-    expect(sevenDayHydration.length).to.equal(1);
+    expect(sevenDayHydration.length).to.deep.equal(1);
     expect(sevenDayHydration).to.deep.equal([{ date: '2023/03/24', numOunces: 28 }]);
   });
 });
@@ -247,7 +247,7 @@ describe('getSleepQualityFor7Days', function() {
     const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
     const sevenDaySleepQuality = getSleepQualityFor7Days(currentUser, '2023/03/30');
 
-    expect(sevenDaySleepQuality.length).to.equal(0);
+    expect(sevenDaySleepQuality.length).to.deep.equal(0);
     expect(sevenDaySleepQuality).to.deep.equal([]);
   });
 
@@ -255,7 +255,7 @@ describe('getSleepQualityFor7Days', function() {
     const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
     const sevenDaySleepQuality = getSleepQualityFor7Days(currentUser, '2023/03/30');
 
-    expect(sevenDaySleepQuality.length).to.equal(1);
+    expect(sevenDaySleepQuality.length).to.deep.equal(1);
     expect(sevenDaySleepQuality).to.deep.equal([{ date: '2023/03/24', sleepQuality: 4.3 }]);
   });
 });
@@ -282,7 +282,7 @@ describe('getSleepFor7Days', function() {
     const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
     const sevenDaySleep = getSleepFor7Days(currentUser, '2023/03/30');
 
-    expect(sevenDaySleep.length).to.equal(0);
+    expect(sevenDaySleep.length).to.deep.equal(0);
     expect(sevenDaySleep).to.deep.equal([]);
   });
 
@@ -290,7 +290,7 @@ describe('getSleepFor7Days', function() {
     const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
     const sevenDaySleep = getSleepFor7Days(currentUser, '2023/03/30');
 
-    expect(sevenDaySleep.length).to.equal(1);
+    expect(sevenDaySleep.length).to.deep.equal(1);
     expect(sevenDaySleep).to.deep.equal([{ date: '2023/03/24', hoursSlept: 9.6 }]);
   });
 });
