@@ -72,7 +72,7 @@ const stepsWeekUpdate = (activityArray) => {
 
 const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
   sleepLife.innerHTML = '';
-  sleepLife.innerHTML = `<h2>Placeholder</h2><p>${sleepLifeQuality}</p><p>${sleepLifeTime}</p>`;
+  sleepLife.innerHTML = `<h2>average all-time sleep</h2><p>${sleepLifeQuality}</p><p>${sleepLifeTime}</p>`;
 }
 
 export {
