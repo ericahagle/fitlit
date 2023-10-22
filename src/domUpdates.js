@@ -59,15 +59,16 @@ const activeMinutesUpdate = (time) => {
   activeMinutes.innerHTML = `<h2>active minutes</h2><p>${time}</p><p>ouchie!</p>`;
 }
 
-const stepsGoalCompare = (goal, averageGoal) => {
+const stepsGoalCompare = (averageGoal) => {
   stepsAverage.innerHTML = '';
-  stepsAverage.innerHTML = `<h2>Your Step Goal</h2><p>${goal}</p><h2>average all-time step goal</h2><p>${averageGoal}</p><p>but who's really counting?</p>`;
+  stepsAverage.innerHTML = `<h2>average all-time step goal</h2><p>${averageGoal}</p><p>but who's really counting?</p>`;
 }
 
 const stepsWeekUpdate = (activityArray) => {
   stepsWeek.innerHTML = '';
-  const activityDisplay = activityArray.map((html) => `<p>${html}</p>`).join('');
-  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p>`;
+  const activityDisplay = activityArray.join(' ');
+  const goalReached = activityArray.map((achieve) => placeholder(achieve)).join(' ')
+  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p><p>did they meet goal placeholder</p>`;
 }
 
 const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
