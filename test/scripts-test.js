@@ -180,36 +180,28 @@ describe('calculateAverageSleepQuality', function() {
   });
 });
 
+describe('hoursSleptGivenDate', function() {
+  it('should return hoursSlept when the date is found', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const hoursSlept = hoursSleptGivenDate(currentUser, '2023/03/24');
 
-      describe('hoursSleptGivenDate', () => {
+    expect(hoursSlept).to.deep.equal(9.60);
+  });
 
-        it('should return hoursSlept when the date is found', function () {
-          const user = {
-            sleepData: [
-              { date: '2023/03/26', hoursSlept: 7 },
-              { date: '2023/03/27', hoursSlept: 8 }
-            ]
-          };
-          const result = hoursSleptGivenDate(user, '2023/03/26');
-          expect(result).to.equal(7);
-        });
+  it('should return undefined when the date is not found', function() {
+    const currentUser = addDataToCurrentUser(users[0], hydrationData, activityData, sleepData);
+    const hoursSlept = hoursSleptGivenDate(currentUser, '2023/03/25');
 
-        it('should return undefined when the date is not found', function () {
-          const user = {
-            sleepData: [
-              { date: '2023/03/26', hoursSlept: 7 }
-            ]
-          };
-          const result = hoursSleptGivenDate(user, '2023/03/27');
-          expect(result).to.be.undefined;
-        });
+    expect(hoursSlept).to.be.undefined;
+  });
 
-        it('should return undefined when the sleepData array is empty', function () {
-          const user = { sleepData: [] };
-          const result = hoursSleptGivenDate(user, '2023/03/26');
-          expect(result).to.be.undefined;
-        });
-      });
+  it('should return undefined when the sleepData array is empty', function() {
+    const currentUser = addDataToCurrentUser(users[2], hydrationData, activityData, sleepData);
+    const hoursSlept = hoursSleptGivenDate(currentUser, '2023/03/25');
+
+    expect(hoursSlept).to.be.undefined;
+  });
+});
 
       describe('sleepQualityGivenDate', () => {
 
