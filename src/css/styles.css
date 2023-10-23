@@ -1,23 +1,23 @@
 body {
-  display: flex;
   font-family: 'Jaldi', sans-serif;
-  justify-content: space-around;
+  justify-content: space-evenly;
   background-color: #003249;
   height: 100%;
   width: 100%;
+  margin: 0;
+}
+
+body, article, section, .widget, .left, .middle, .right, .bottom {
+  display: flex;
 }
 
 section {
-  display: flex;
   justify-content: space-evenly;
-}
-
-article {
-  display: flex;
 }
 
 h1, h2 {
   font-weight: 700;
+  margin: 0;
   font-size: 2.5em;
 }
 
@@ -27,6 +27,9 @@ h2 {
 
 p {
   font-size: 0.75em;
+  width: 150px;
+  text-wrap: wrap;
+  text-align: center;
 }
 
 img {
@@ -36,7 +39,6 @@ img {
 }
 
 .left, .middle, .right {
-  display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
@@ -44,15 +46,12 @@ img {
 }
 
 .bottom {
-  width: 900px;
+  width: 875px;
   height: 200px;
-  display: flex;
   justify-content: space-between;
 }
 
 .widget {
-  gap: 5%;
-  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
@@ -63,7 +62,7 @@ img {
   width: 200px;
 }
 
-.bot {
+.bot, #welcomeMat {
   background-color: white;
 }
 
@@ -75,20 +74,13 @@ img {
   background-color: #59C3C3;
 }
 
-#welcomeMat {
-  background-color: white;
-  height: 200px;
-  width: 400px;
-  justify-content: space-evenly;
-}
-
 #userData, #activeMinutes {
   background-color: #D9D9D9;
 }
 
-#userData {
-  height: 125px;
-  width: 400px;
+#userData, #welcomeMat {
+  height: 200px;
+  width: 875px;
 }
 
 #sleepWeek {
