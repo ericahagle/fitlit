@@ -31,7 +31,7 @@ function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepDat
 
 ////////////////* Current Day Value *///////////////////////////
 
-const currentDay = (user) => user.hydrationData[user.hydrationData.length-1];
+const currentDay = (user) => user.hydrationData[user.hydrationData.length-1].date;
 
 ////////////////* Ounces per day *//////////////////////////////////////
 
