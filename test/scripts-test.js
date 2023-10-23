@@ -101,21 +101,15 @@ describe('tests that require complete current users with varying data', function
 
   describe('calculateTotalHydration', function() {
     it('should return 0 when there is no hydration data', function() {
-      const totalHydration = calculateTotalHydration(currentUser3);
-
-      expect(totalHydration).to.deep.equal('0.00');
+      expect(calculateTotalHydration(currentUser3)).to.deep.equal('0.00');
     });
 
     it('should return the average hydration when there is one hydration data entry', function() {
-      const totalHydration = calculateTotalHydration(currentUser1);
-
-      expect(totalHydration).to.deep.equal('28.00');
+      expect(calculateTotalHydration(currentUser1)).to.deep.equal('28.00');
     });
 
     it('should return the average hydration when there are multiple hydration data entries', function() {
-      const totalHydration = calculateTotalHydration(currentUser2);
-
-      expect(totalHydration).to.deep.equal('68.29');
+      expect(calculateTotalHydration(currentUser2)).to.deep.equal('68.29');
     });
   });
 
@@ -128,81 +122,57 @@ describe('tests that require complete current users with varying data', function
 
   describe('calculateAverageHoursSlept', function() {
     it('should return 0 when there is no sleep data', function() {
-      const averageHoursSlept = calculateTotalHydration(currentUser3);
-
-      expect(averageHoursSlept).to.deep.equal('0.00');
+      expect(calculateTotalHydration(currentUser3)).to.deep.equal('0.00');
     });
 
     it('should return the average hours slept when there is one sleep data entry', function() {
-      const averageHoursSlept = calculateAverageHoursSlept(currentUser1);
-
-      expect(averageHoursSlept).to.deep.equal('9.60');
+      expect(calculateAverageHoursSlept(currentUser1)).to.deep.equal('9.60');
     });
 
     it('should return the average hours slept when there are multiple sleep data entries', function() {
-      const averageHoursSlept = calculateAverageHoursSlept(currentUser2);
-
-      expect(averageHoursSlept).to.deep.equal('8.07');
+      expect(calculateAverageHoursSlept(currentUser2)).to.deep.equal('8.07');
     });
   });
 
   describe('calculateAverageSleepQuality', function() {
     it('should return 0 when there is no sleep data', function() {
-      const averageSleepQuality = calculateAverageSleepQuality(currentUser3);
-
-      expect(averageSleepQuality).to.deep.equal('0.00');
+      expect(calculateAverageSleepQuality(currentUser3)).to.deep.equal('0.00');
     });
 
     it('should return the average sleep quality when there is one sleep data entry', function() {
-      const averageSleepQuality = calculateAverageSleepQuality(currentUser1);
-
-      expect(averageSleepQuality).to.deep.equal('4.30');
+      expect(calculateAverageSleepQuality(currentUser1)).to.deep.equal('4.30');
     });
 
     it('should return the average sleep quality when there are multiple sleep data entries', function() {
-      const averageSleepQuality = calculateAverageSleepQuality(currentUser2);
-
-      expect(averageSleepQuality).to.deep.equal('3.33');
+      expect(calculateAverageSleepQuality(currentUser2)).to.deep.equal('3.33');
     });
   });
 
   describe('hoursSleptGivenDate', function() {
     it('should return hoursSlept when the date is found', function() {
-      const hoursSlept = hoursSleptGivenDate(currentUser1, '2023/03/24');
-
-      expect(hoursSlept).to.deep.equal(9.60);
+      expect(hoursSleptGivenDate(currentUser1, '2023/03/24')).to.deep.equal(9.60);
     });
 
     it('should return undefined when the date is not found', function() {
-      const hoursSlept = hoursSleptGivenDate(currentUser1, '2023/03/25');
-
-      expect(hoursSlept).to.be.undefined;
+      expect(hoursSleptGivenDate(currentUser1, '2023/03/25')).to.be.undefined;
     });
 
     it('should return undefined when the sleepData array is empty', function() {
-      const hoursSlept = hoursSleptGivenDate(currentUser3, '2023/03/25');
-
-      expect(hoursSlept).to.be.undefined;
+      expect(hoursSleptGivenDate(currentUser3, '2023/03/25')).to.be.undefined;
     });
   });
 
   describe('sleepQualityGivenDate', function() {
     it('should return sleepQuality when the date is found', function() {
-      const sleepQuality = sleepQualityGivenDate(currentUser1, '2023/03/24');
-
-      expect(sleepQuality).to.deep.equal(4.30);
+      expect(sleepQualityGivenDate(currentUser1, '2023/03/24')).to.deep.equal(4.30);
     });
 
     it('should return undefined when the date is not found', function() {
-      const sleepQuality = sleepQualityGivenDate(currentUser1, '2023/03/25');
-
-      expect(sleepQuality).to.be.undefined;
+      expect(sleepQualityGivenDate(currentUser1, '2023/03/25')).to.be.undefined;
     });
 
     it('should return undefined when the sleepData array is empty', function() {
-      const sleepQuality = sleepQualityGivenDate(currentUser3, '2023/03/25');
-
-      expect(sleepQuality).to.be.undefined;
+      expect(sleepQualityGivenDate(currentUser3, '2023/03/25')).to.be.undefined;
     });
   });
 
@@ -271,40 +241,29 @@ describe('tests that require complete current users with varying data', function
 
   describe('checkStepGoal', function() {
     it('should return "Success!" when the latest numSteps is greater than or equal to dailyStepGoal', function() {
-      const isSuccess = checkStepGoal(currentUser1);
-
-      expect(isSuccess).to.deep.equal('Success!');
+      expect(checkStepGoal(currentUser1)).to.deep.equal('Success!');
     });
 
     it('should return "No!" when the latest numSteps is less than dailyStepGoal', function() {
-      const isNotSuccess = checkStepGoal(currentUser2);
-
-      expect(isNotSuccess).to.deep.equal('No!');
+      expect(checkStepGoal(currentUser2)).to.deep.equal('No!');
     });
-    it('should handle cases where activityData is empty, returning "No!"', function() {
-      const isNotSuccess = checkStepGoal(currentUser3);
 
-      expect(isNotSuccess).to.deep.equal('No!');
+    it('should handle cases where activityData is empty, returning "No!"', function() {
+      expect(checkStepGoal(currentUser3)).to.deep.equal('No!');
     });
   });
 
   describe('minutesActiveGivenDate', function() {
     it('should return minutes active when the date is found', function() {
-      const minutesActive = minutesActiveGivenDate(currentUser1, '2023/03/24');
-
-      expect(minutesActive).to.deep.equal(261);
+      expect(minutesActiveGivenDate(currentUser1, '2023/03/24')).to.deep.equal(261);
     });
 
     it('should return undefined when the date is not found', function() {
-      const minutesActive = minutesActiveGivenDate(currentUser1, '2023/03/25');
-
-      expect(minutesActive).to.be.undefined;
+      expect(minutesActiveGivenDate(currentUser1, '2023/03/25')).to.be.undefined;
     });
 
     it('should return undefined when the activityData array is empty', function() {
-      const minutesActive = minutesActiveGivenDate(currentUser3, '2023/03/25');
-
-      expect(minutesActive).to.be.undefined;
+      expect(minutesActiveGivenDate(currentUser3, '2023/03/25')).to.be.undefined;
     });
   });
 
