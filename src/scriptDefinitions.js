@@ -10,7 +10,7 @@ function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepDat
 	const userHydrationData = hydrationData.filter((hData) => {
 		return hData.userID === currentUser.id;
 	});
-	
+
 	const userActivityData = activityData.filter((aData) => {
 		return aData.userID === currentUser.id;
 	});
@@ -22,8 +22,8 @@ function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepDat
 	const completeCurrentUser = {
 		...currentUser,
 		hydrationData: userHydrationData || [],
-		activity: userActivityData || [],
-		sleep: userSleepData || []
+		activityData: userActivityData || [],
+		sleepData: userSleepData || []
 	};
 
 	return completeCurrentUser;
@@ -63,7 +63,7 @@ function findStepGoalAverage(users) {
 /////////////////////* LOG HYDRATION FOR 7 DAYS ITERATION 2 *////////////////////////////
 
 function getHydrationFor7Days(currentUser, endDate) {
-  
+
   let endDateObj = new Date(endDate);
 
   let startDateObj = new Date(endDateObj);
@@ -96,28 +96,28 @@ function calculateTotalHydration(currentUser) {
 ////////////////////* SLEEP ITERATION 4*///////////////////////////
 
 function calculateAverageHoursSlept(currentUser) {
-  let totalHoursSlept = 0; 
+  let totalHoursSlept = 0;
 
   currentUser.sleepData.forEach((sleepEntry) => {
     totalHoursSlept += sleepEntry.hoursSlept /currentUser.sleepData.length
   });
 
-  return totalHoursSlept.toFixed(2);  
+  return totalHoursSlept.toFixed(2);
 }
 
 function calculateAverageSleepQuality(currentUser) {
-  let avgSleepQuality = 0; 
+  let avgSleepQuality = 0;
 
   currentUser.sleepData.forEach((sleepEntry) => {
     avgSleepQuality += sleepEntry.sleepQuality / currentUser.sleepData.length
   });
 
-  return avgSleepQuality.toFixed(2);  
+  return avgSleepQuality.toFixed(2);
 }
 
 function hoursSleptGivenDate(currentUser, date) {
 
-  if (currentUser.sleepData && 
+  if (currentUser.sleepData &&
       currentUser.sleepData.length > 0) {
 
     const sleepDate = currentUser.sleepData.find((sleepDate) => {
@@ -131,7 +131,7 @@ function hoursSleptGivenDate(currentUser, date) {
 
 function sleepQualityGivenDate(currentUser, date) {
 
-  if (currentUser.sleepData && 
+  if (currentUser.sleepData &&
       currentUser.sleepData.length > 0) {
 
     const sleepDate = currentUser.sleepData.find((sleepDate) => {
@@ -180,7 +180,7 @@ function getSleepFor7Days(currentUser, endDate) {
 
 ////////////////////* How far did you walk today miles ITERATION 5 *////////////////////
 function findDistanceTraveled(currentUser) {
-  const distance = ((currentUser.strideLength * currentUser.activity[currentUser.activity.length - 1].numSteps) / 5280).toFixed(2);
+  const distance = ((currentUser.strideLength * currentUser.activityData[currentUser.activityData.length - 1].numSteps) / 5280).toFixed(2);
   return distance;
 }
 
@@ -188,7 +188,7 @@ function findDistanceTraveled(currentUser) {
 
  function minutesActiveGivenDate(currentUser, date) {
 
-  if (currentUser.activityData && 
+  if (currentUser.activityData &&
       currentUser.activityData.length > 0) {
 
     const activityDate = currentUser.activityData.find((specificDate) => {
@@ -222,11 +222,9 @@ function checkStepGoal(currentUser) {
 };
 
 function checkStepGoal7Days(currentUser) {
-  
   if (currentUser.activityData.length === 0) {
     return 'No!';
   }
-
   // Sort activityData by date in descending order
   currentUser.activityData.sort((a, b) => {
     return new Date(b.date) - new Date(a.date)});
@@ -241,11 +239,24 @@ function checkStepGoal7Days(currentUser) {
       return 'No!';
     }
   });
-
-  
   return results;
 };
 
+/////////////////*ITERATION 5 num steps on given date*/////////////////
+
+function numberOfStepsGivenDate(currentUser, date) {
+
+  if (currentUser.activityData && 
+      currentUser.activityData.length > 0) {
+
+    const activityDate = currentUser.activityData.find((specificDate) => {
+      return specificDate.date === date;
+    });
+    if (activityDate) {
+      return activityDate.numSteps;
+    }
+  }
+}
 
 module.exports = {
   generateRandomUserID,
@@ -264,6 +275,6 @@ module.exports = {
   getSleepFor7Days,
   minutesActiveGivenDate,
   checkStepGoal,
-  checkStepGoal7Days
+  checkStepGoal7Days,
+  numberOfStepsGivenDate
 };
-
