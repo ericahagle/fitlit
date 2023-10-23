@@ -307,106 +307,43 @@ describe('tests that require complete current users with varying data', function
       expect(minutesActive).to.be.undefined;
     });
   });
-});
 
-describe('numberOfStepsGivenDate', () => {
-
-  it('should be a function', function () {
-    expect(numberOfStepsGivenDate).to.be.a('function');
+  describe('numberOfStepsGivenDate', function() {
+    it('should return the number of steps when the date is found', function() {
+      expect(numberOfStepsGivenDate(currentUser2, '2023/03/28')).to.equal(5494);
+      expect(numberOfStepsGivenDate(currentUser2, '2023/03/29')).to.equal(6959);
+      expect(numberOfStepsGivenDate(currentUser2, '2023/03/30')).to.equal(4676);
+    });
+  
+    it('should return undefined when the date is not found', function() {
+      expect(numberOfStepsGivenDate(currentUser1, '2023/03/28')).to.be.undefined;
+      expect(numberOfStepsGivenDate(currentUser1, '2023/03/29')).to.be.undefined;
+      expect(numberOfStepsGivenDate(currentUser1, '2023/03/30')).to.be.undefined;
+    });
+  
+    it('should return undefined when the activityData array is empty', function() {
+      expect(numberOfStepsGivenDate(currentUser3, '2023/03/28')).to.be.undefined;
+      expect(numberOfStepsGivenDate(currentUser3, '2023/03/29')).to.be.undefined;
+      expect(numberOfStepsGivenDate(currentUser3, '2023/03/30')).to.be.undefined;
+    });
   });
   
-  it('should return the number of steps when the date is found', function () {
-    const user = {
-      activityData: [
-        { date: '2023/03/24', numSteps: 4000 },
-        { date: '2023/03/25', numSteps: 5000 }
-      ]
-    };
-    const result = numberOfStepsGivenDate(user, '2023/03/24');
-    expect(result).to.equal(4000);
-  });
+  describe('checkStepGoal7Days', function() {
+    it('should return an array of "Success!" and/or "No!" for the last seven days', function() {
+      expect(checkStepGoal7Days(currentUser2)).to.be.an('array').that.includes('Success!', 'No!');
+    });
 
-  it('should return undefined when the date is not found', function () {
-    const user = {
-      activityData: [
-        { date: '2023/03/24', numSteps: 4000 }
-      ]
-    };
-    const result = numberOfStepsGivenDate(user, '2023/03/25');
-    expect(result).to.be.undefined;
-  });
-
-  it('should return undefined when the activityData array is empty', function () {
-    const user = { activityData: [] };
-    const result = numberOfStepsGivenDate(user, '2023/03/24');
-    expect(result).to.be.undefined;
-  });
+    it('should return "No!" for days with numSteps less than dailyStepGoal and "Success!" for days with numSteps equal or greater than dailyStepGoal', function() {
+      expect(checkStepGoal7Days(currentUser2)).to.deep.equal([
+        'No!',      'No!',
+        'No!',      'Success!',
+        'Success!', 'Success!',
+        'No!'
+      ]);
+   });
   
-  it('should return undefined when activityData is not provided', function () {
-    const user = {};
-    const result = numberOfStepsGivenDate(user, '2023/03/24');
-    expect(result).to.be.undefined;
-  });
-});
-
-describe('checkStepGoal7Days', () => {
-  it('should be a function', function () {
-    expect(checkStepGoal).to.be.a('function');
-  });
-  
-  it('should return an array of "Success!" and/or "No!" for the last seven days', function () {
-    const user = {
-      dailyStepGoal: 10000,
-      activityData: [
-        { date: '2023/10/12', numSteps: 10500 },
-        { date: '2023/10/11', numSteps: 9500 },
-        // ...add more data as needed
-      ]
-    };
-    const result = checkStepGoal7Days(user);
-    expect(result).to.be.an('array').that.includes('Success!', 'No!');
-  });
-
-  it('should return "No!" for days with no activityData', function () {
-    const user = {
-      dailyStepGoal: 10000,
-      activityData: []
-    };
-    const result = checkStepGoal7Days(user);
-    expect(result).to.include('No!');
-  });
-
-  it('should return "No!" for days with numSteps less than dailyStepGoal', function () {
-    const user = {
-      dailyStepGoal: 10000,
-      activityData: [
-        { date: '2023/10/12', numSteps: 8500},
-        { date: '2023/10/13', numSteps: 8},
-        { date: '2023/10/14', numSteps: 24500},
-        { date: '2023/10/15', numSteps: 1},
-        { date: '2023/10/16', numSteps: 34509},
-        { date: '2023/10/17', numSteps: 234567},
-        { date: '2023/10/18', numSteps: 3},
-      ]
-    };
-    const result = checkStepGoal7Days(user);
-    expect(result).to.include('No!')
-});
-  
-  it('should return "Success!" for days with numSteps equal or greater than dailyStepGoal', function () {
-    const user = {
-      dailyStepGoal: 10000,
-      activityData: [
-        { date: '2023/10/12', numSteps: 10500},
-        { date: '2023/10/13', numSteps: 8},
-        { date: '2023/10/14', numSteps: 24500},
-        { date: '2023/10/15', numSteps: 1},
-        { date: '2023/10/16', numSteps: 34509},
-        { date: '2023/10/17', numSteps: 234567},
-        { date: '2023/10/18', numSteps: 3},
-      ]
-    };
-    const result = checkStepGoal7Days(user);
-    expect(result).to.include('Success!');
+    it('should return "No!" for days with no activityData', function() {
+      expect(checkStepGoal7Days(currentUser3)).to.include('No!');
+    });
   });
 });
