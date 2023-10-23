@@ -221,6 +221,22 @@ function checkStepGoal(currentUser) {
   }
 };
 
+/////////////////*ITERATION 5 num steps on given date*/////////////////
+
+function numberOfStepsGivenDate(currentUser, date) {
+
+  if (currentUser.activityData && 
+      currentUser.activityData.length > 0) {
+
+    const activityDate = currentUser.activityData.find((specificDate) => {
+      return specificDate.date === date;
+    });
+    if (activityDate) {
+      return activityDate.numSteps;
+    }
+  }
+}
+
 module.exports = {
   generateRandomUserID,
   addDataToCurrentUser,
@@ -237,5 +253,6 @@ module.exports = {
   getSleepQualityFor7Days,
   getSleepFor7Days,
   minutesActiveGivenDate,
-  checkStepGoal
+  checkStepGoal,
+  numberOfStepsGivenDate
 };
