@@ -41,6 +41,25 @@ describe('userObject creation', function() {
       }
     );
   });
+
+  it('should add empty arrays for current users who have no hydration, activity, and/or sleep data to the currentUser', function() {
+    const currentUser = users[2];
+
+    expect(addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData)).to.deep.equal(
+      {
+        id: 3,
+        name: 'Colt Rohan',
+        address: '48010 Balistreri Harbor, Cleobury IN 43317',
+        email: 'Wilford.Barton@gmail.com',
+        strideLength: 2.7,
+        dailyStepGoal: 3000,
+        friends: [31, 16, 15, 7],
+        hydrationData: [],
+        activityData: [],
+        sleepData: []
+      }
+    );
+  });
 });
 
 describe('global average step goal', function() {
