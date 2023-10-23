@@ -15,6 +15,7 @@ const sleepLife = document.querySelector('#sleepLife');
 //Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
 
 const updateUserName = (userData) => {
+  userName.innerHTML ='';
   userName.innerHTML += `<h1>Hello!</h1><h1>${userData.name}</h1>`;
 }
 
@@ -29,19 +30,19 @@ const  waterDayUpdate = (date, hydrationData) => {
 }
 const  waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
-  const hydrationHTML = hydrationArray.map((oz) => `${oz} oz`).join(' ');
+  const hydrationHTML = hydrationArray.map((oz) => `${oz.numOunces} oz`).join(' ');
   waterWeek.innerHTML = `<h2>your week in oz</h2><p>M T W Th F S Su</p><p>${hydrationHTML}</p>`;
 }
 
-const sleepDayUpdate = (date, sleepData) => {
+const sleepDayUpdate = (date, sleepHours, sleepQuality) => {
   sleepDay.innerHTML = '';
-  sleepDay.innerHTML = `<h1>${date}</h1><p>${sleepData}</p>`;
+  sleepDay.innerHTML = `<h2>${date}</h2><p>${sleepHours}</p><p>${sleepQuality}</p>`;
 }
  
-const sleepWeekUpdate = (sleepQuality, sleepTime) => {
+const sleepWeekUpdate = (sleepTime, sleepQuality) => {
   sleepWeek.innerHTML = '';
-  const sleepQualityHTML = sleepQuality.join(' ');
-  const sleepTimeHTML = sleepTime.map((html) => `${html}h`).join(' ');
+  const sleepQualityHTML = sleepQuality.map((html) => `${html.sleepQuality}`).join(' ');
+  const sleepTimeHTML = sleepTime.map((html) => `${html.hoursSlept}h`).join(' ');
   sleepWeek.innerHTML = `<h2>your week in hrs</h2><p>${sleepQualityHTML}</p><p>${sleepTimeHTML}</p>`
 }
 

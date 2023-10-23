@@ -21,7 +21,11 @@ import { generateRandomUserID,
   hoursSleptGivenDate,
   sleepQualityGivenDate,
   getSleepQualityFor7Days,
-  getSleepFor7Days, 
+  getSleepFor7Days,
+  numberOfStepsGivenDate,
+  checkStepGoal,
+  minutesActiveGivenDate,
+  checkStepGoal7Days, 
   } from './scriptDefinitions';
 
 ///////////// Import functions from domUpdates.js ///////////////
@@ -44,5 +48,19 @@ window.addEventListener('load', () => {
 	.then(data => {
 		currentUser = allUsers[generateRandomUserID(allUsers) - 1];
     const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
+    const displayDay = currentDay(completeCurrentUser);
+    console.log(displayDay);
+    updateUserName(currentUser);
+    displayUserInfo(currentUser);
+    waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
+    waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
+    sleepDayUpdate(displayDay, hoursSleptGivenDate(completeCurrentUser, displayDay), sleepQualityGivenDate(completeCurrentUser, displayDay));
+    sleepWeekUpdate(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
+    stepGoalUpdate(completeCurrentUser.dailyStepGoal);
+    stepsDayUpdate(displayDay, numberOfStepsGivenDate(completeCurrentUser, displayDay), findDistanceTraveled(completeCurrentUser));
+    activeMinutesUpdate(minutesActiveGivenDate(completeCurrentUser, displayDay));
+    // stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
+    stepsGoalCompare(completeCurrentUser.dailyStepGoal, findStepGoalAverage(allUsers));
+    sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
   });
 });
