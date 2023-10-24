@@ -30,7 +30,7 @@ import { generateRandomUserID,
 
 ///////////// Import functions from domUpdates.js ///////////////
 import {  updateUserName,
-    displayUserInfo,
+    quipBox,
     waterDayUpdate,
     waterWeekUpdate,
     sleepDayUpdate,
@@ -50,8 +50,8 @@ window.addEventListener('load', () => {
     const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
     const displayDay = currentDay(completeCurrentUser);
     console.log(displayDay);
-    updateUserName(currentUser);
-    displayUserInfo(currentUser);
+    updateUserName(currentUser, displayDay);
+    quipBox();
     waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
     waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
     sleepDayUpdate(displayDay, hoursSleptGivenDate(completeCurrentUser, displayDay), sleepQualityGivenDate(completeCurrentUser, displayDay));
