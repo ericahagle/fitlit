@@ -28,7 +28,7 @@ const waterDayUpdate = (date, hydrationData) => {
 }
 const waterWeekUpdate = (hydrationArray) => {
   waterWeek.innerHTML = '';
-  const hydrationHTML = hydrationArray.map((oz) => `${oz} oz`).join(' ');
+  const hydrationHTML = hydrationArray.map((oz) => `${oz}oz`).join(' ');
   waterWeek.innerHTML = `<h2>your week in oz</h2><p>M T W Th F S Su</p><p>${hydrationHTML}</p>`;
 }
 
