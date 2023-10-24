@@ -31,7 +31,7 @@ function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepDat
 
 ////////////////* Current Day Value *///////////////////////////
 
-const currentDay = (user) => user.hydrationData[user.hydrationData.length-1];
+const currentDay = (user) => user.hydrationData[user.hydrationData.length-1].date;
 
 ////////////////* Ounces per day *//////////////////////////////////////
 
@@ -222,25 +222,33 @@ function checkStepGoal(currentUser) {
 };
 
 function checkStepGoal7Days(currentUser) {
-  if (currentUser.activityData.length === 0) {
-    return 'No!';
-  }
-  // Sort activityData by date in descending order
-  currentUser.activityData.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date)});
 
-  // Getting the last seven days
+  if (currentUser.activityData.length === 0) {
+    return 'No activity data available!';
+  }
+  currentUser.activityData.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+
   const lastWeekActivity = currentUser.activityData.slice(0, 7);
 
   const results = lastWeekActivity.map((activity) => {
+    let metGoal;
+
     if (activity.numSteps >= currentUser.dailyStepGoal) {
-      return 'Success!';
+      metGoal = 'You did it!';
     } else {
-      return 'No!';
+      metGoal = 'Keep trying!';
     }
+    return {
+      date: activity.date,
+      numSteps: activity.numSteps,
+      metGoal: metGoal
+    };
   });
   return results;
 };
+
 
 /////////////////*ITERATION 5 num steps on given date*/////////////////
 
