@@ -25,12 +25,19 @@ h2 {
   font-size: 1em;
 }
 
-p, #snarkyRemark {
+p {
   font-size: 0.85em;
+}
+
+p, .header-ish, #snarkyRemark {
   width: 150px;
   text-wrap: wrap;
   text-align: center;
   margin: 0;
+}
+
+.header-ish, #snarkyRemark {
+  font-size: 1.75em;
 }
 
 img {
@@ -99,8 +106,4 @@ img {
 #sleepLife {
   background-color: #8C2155;
   color: white;
-}
-
-.headerIsh {
-  font-size: 1.75em;
 }

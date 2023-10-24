@@ -45,11 +45,10 @@ import {  updateUserName,
     ////////// Event Listeners //////////
 window.addEventListener('load', () => {
   fetchAllTheData()
-	.then(data => {
-		currentUser = allUsers[generateRandomUserID(allUsers) - 1];
+  .then(data => {
+    currentUser = allUsers[generateRandomUserID(allUsers) - 1];
     const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
     const displayDay = currentDay(completeCurrentUser);
-    console.log(displayDay);
     updateUserName(currentUser, displayDay);
     quipBox();
     waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
