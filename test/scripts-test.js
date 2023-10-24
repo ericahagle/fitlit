@@ -307,21 +307,27 @@ describe('tests that require complete current users with varying data', function
   });
   
   describe('checkStepGoal7Days', function() {
-    it('should return an array of "Success!" and/or "No!" for the last seven days', function() {
-      expect(checkStepGoal7Days(currentUser2)).to.be.an('array').that.includes('Success!', 'No!');
+    it('should return an array of objects containing date, numSteps, and metGoal properties', function() {
+      var result = checkStepGoal7Days(currentUser1);
+      result.forEach(function(dayResult) {
+        expect(dayResult).to.have.all.keys('date', 'numSteps', 'metGoal');
+      });
     });
-
-    it('should return "No!" for days with numSteps less than dailyStepGoal and "Success!" for days with numSteps equal or greater than dailyStepGoal', function() {
-      expect(checkStepGoal7Days(currentUser2)).to.deep.equal([
-        'No!',      'No!',
-        'No!',      'Success!',
-        'Success!', 'Success!',
-        'No!'
-      ]);
-   });
-  
-    it('should return "No!" for days with no activityData', function() {
-      expect(checkStepGoal7Days(currentUser3)).to.include('No!');
+    
+    it('should indicate whether the dailyStepGoal was met during the last seven days', function() {
+      var result = checkStepGoal7Days(currentUser1);
+      result.forEach(function(dayResult) {
+        if (dayResult.numSteps >= currentUser1.dailyStepGoal) {
+          expect(dayResult.metGoal).to.equal('You did it!');
+        } else {
+          expect(dayResult.metGoal).to.equal('Keep trying!');
+        }
+      });
     });
+    
+    it('should handle users with no activityData, returning "No activity data available!"', function() {
+      var userWithNoData = { dailyStepGoal: 10000, activityData: [] };
+      expect(checkStepGoal7Days(userWithNoData)).to.equal('No activity data available!');
+    }); 
   });
-});
+})  
