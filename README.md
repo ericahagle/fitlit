@@ -11,7 +11,7 @@ This application helps users see their fitness data, goals, and milestones in a 
 5. The app can be viewed and interacted with in your browser of choice by using `open index.html` in your terminal.
 
 ### Preview of App:
-![screenshot]()
+![page reload to show functionality](https://user-images.githubusercontent.com/139941423/277834199-d4c02f00-08c3-45a2-ba62-9c969026d29c.gif)
 
 ### Context:
 This project was assigned during Week 1 of Module 2 in Turing's Front-End Engineering track. It is Part 1 of 2 and had a timeline of 11 days from assignment to due date. 
