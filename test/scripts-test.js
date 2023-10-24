@@ -307,27 +307,25 @@ describe('tests that require complete current users with varying data', function
   });
   
   describe('checkStepGoal7Days', function() {
+
     it('should return an array of objects containing date, numSteps, and metGoal properties', function() {
-      var result = checkStepGoal7Days(currentUser1);
-      result.forEach(function(dayResult) {
-        expect(dayResult).to.have.all.keys('date', 'numSteps', 'metGoal');
-      });
+      expect(checkStepGoal7Days(currentUser2)[0]).to.have.all.keys('date', 'numSteps', 'metGoal');
     });
     
-    it('should indicate whether the dailyStepGoal was met during the last seven days', function() {
-      var result = checkStepGoal7Days(currentUser1);
-      result.forEach(function(dayResult) {
-        if (dayResult.numSteps >= currentUser1.dailyStepGoal) {
-          expect(dayResult.metGoal).to.equal('You did it!');
-        } else {
-          expect(dayResult.metGoal).to.equal('Keep trying!');
-        }
-      });
+    it('should return the correct metGoal values based on numSteps and dailyStepGoal for all 7 days', function() {
+      expect(checkStepGoal7Days(currentUser2)).to.deep.equal([
+        { date: '2023/03/30', numSteps: 4676, metGoal: 'Keep trying!' },
+        { date: '2023/03/29', numSteps: 6959, metGoal: 'Keep trying!' },
+        { date: '2023/03/28', numSteps: 5494, metGoal: 'Keep trying!' },
+        { date: '2023/03/27', numSteps: 12127, metGoal: 'You did it!' },
+        { date: '2023/03/26', numSteps: 9543, metGoal: 'You did it!' },
+        { date: '2023/03/25', numSteps: 14719, metGoal: 'You did it!' },
+        { date: '2023/03/24', numSteps: 3049, metGoal: 'Keep trying!' },
+      ]);
     });
     
     it('should handle users with no activityData, returning "No activity data available!"', function() {
-      var userWithNoData = { dailyStepGoal: 10000, activityData: [] };
-      expect(checkStepGoal7Days(userWithNoData)).to.equal('No activity data available!');
-    }); 
+      expect(checkStepGoal7Days(currentUser3)).to.equal('No activity data available!');
+    });
   });
 })  
