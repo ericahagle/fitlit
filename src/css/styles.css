@@ -40,12 +40,6 @@ p, .header-ish, #snarkyRemark {
   font-size: 1.75em;
 }
 
-img {
-  height: 100px;
-  width: 100px;
-  padding-bottom: 5%;
-}
-
 .left, .middle, .right {
   justify-content: space-evenly;
   align-items: center;
