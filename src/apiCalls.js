@@ -91,5 +91,9 @@ const fetchAllTheData = () => {
 }
 
 export {
-  fetchAllTheData
+  fetchAllTheData,
+  allUsers,
+  hydrationData,
+  activityData,
+  sleepData
 }
