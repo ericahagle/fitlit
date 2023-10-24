@@ -59,7 +59,7 @@ window.addEventListener('load', () => {
     stepGoalUpdate(completeCurrentUser.dailyStepGoal);
     stepsDayUpdate(displayDay, numberOfStepsGivenDate(completeCurrentUser, displayDay), findDistanceTraveled(completeCurrentUser));
     activeMinutesUpdate(minutesActiveGivenDate(completeCurrentUser, displayDay));
-    // stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
+    stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(completeCurrentUser.dailyStepGoal, findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
   });
