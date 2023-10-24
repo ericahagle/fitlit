@@ -74,11 +74,11 @@ img {
   background-color: #59C3C3;
 }
 
-#userData, #stepsWeek {
+#userData, #activeMinutes {
   background-color: #D9D9D9;
 }
 
-#stepsWeek, #welcomeMat {
+#userData, #welcomeMat {
   height: 200px;
   width: 875px;
 }
