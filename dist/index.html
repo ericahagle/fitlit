@@ -1,66 +1,47 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/css/styles.css">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='/src/css/styles.css'>
     <title>Fitlit</title>
   </head>
   <body>
     <section class='left'>
       <article class='widget square week-view' id='waterWeek'>
-        <h2>your week in oz</h2>
       </article>
       <article class='widget square' id='waterDay'>
-        <h2>today</h2>
-        <p class='snarky-remark'>no UTIs today!</p>
-        <img src='https://media.tenor.com/BIRrUUfHY9YAAAAd/key-and-peele-jordan-peele.gif' alt='Jordan Peele sweating profusely'>
       </article>
-      <article class='widget square' id='activeMinutes'>
-        <h2>active minutes</h2>
-        <p class='snarky-remark'>ouchie!</p>
+      <article class='widget square' id='userData'>
       </article>
     </section>
     <section class='middle' id='infoCards'>
       <article class='widget' id='welcomeMat'>
-        <h1>Hello</h1>
-        <h2 class='snarky-remark'>look after your flesh prison today!</h2>
       </article>
-      <article class='widget' id='userData'>
-      </article>      
+      <article class='widget week-view' id='stepsWeek'>
+      </article>
       <section class='bottom'> 
-        <article class='widget square bot' id='stepsDay'>
-          <h2>steps today</h2>
+        <article class='widget square bot' id='activeMinutes'>
         </article>
-        <article class='widget square week-view bot' id='stepsWeek'>
-          <h2>your week in steps</h2>
+        <article class='widget square bot' id='stepsDay'>
         </article>
         <article class='widget square bot' id='stepGoal'>
-          <h2>your step goal</h2>
-          <p class='snarky-remark'>just try your best</p>
         </article>
         <article class='widget square bot' id='avgStepGoal'>
-          <h2>average all-time step goal</h2>
-          <p class='snarky-remark'>but who's really counting?</p>
         </article>
       </section> 
     </section> 
     <section class='right'>
       <article class='widget square week-view' id='sleepWeek'>
-        <h2>your week in hrs</h2>
       </article>
       <article class='widget square' id='sleepDay'>
-        <h2>today</h2>
-        <p class='snarky-remark'>you haven't felt this rested since childhood!</p>
       </article>
       <article class='widget square' id='sleepLife'>
-        <h2>average all-time sleep</h2>
-        <p class='snarky-remark'>like a baby or something</p>
       </article>
     </section>
-    <script src="bundle.js"></script>
+    <script src='bundle.js'></script>
   </body>
 </html>
