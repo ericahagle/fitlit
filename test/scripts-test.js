@@ -307,21 +307,25 @@ describe('tests that require complete current users with varying data', function
   });
   
   describe('checkStepGoal7Days', function() {
-    it('should return an array of "Success!" and/or "No!" for the last seven days', function() {
-      expect(checkStepGoal7Days(currentUser2)).to.be.an('array').that.includes('Success!', 'No!');
-    });
 
-    it('should return "No!" for days with numSteps less than dailyStepGoal and "Success!" for days with numSteps equal or greater than dailyStepGoal', function() {
+    it('should return an array of objects containing date, numSteps, and metGoal properties', function() {
+      expect(checkStepGoal7Days(currentUser2)[0]).to.have.all.keys('date', 'numSteps', 'metGoal');
+    });
+    
+    it('should return the correct metGoal values based on numSteps and dailyStepGoal for all 7 days', function() {
       expect(checkStepGoal7Days(currentUser2)).to.deep.equal([
-        'No!',      'No!',
-        'No!',      'Success!',
-        'Success!', 'Success!',
-        'No!'
+        { date: '2023/03/30', numSteps: 4676, metGoal: 'Keep trying!' },
+        { date: '2023/03/29', numSteps: 6959, metGoal: 'Keep trying!' },
+        { date: '2023/03/28', numSteps: 5494, metGoal: 'Keep trying!' },
+        { date: '2023/03/27', numSteps: 12127, metGoal: 'You did it!' },
+        { date: '2023/03/26', numSteps: 9543, metGoal: 'You did it!' },
+        { date: '2023/03/25', numSteps: 14719, metGoal: 'You did it!' },
+        { date: '2023/03/24', numSteps: 3049, metGoal: 'Keep trying!' },
       ]);
-   });
-  
-    it('should return "No!" for days with no activityData', function() {
-      expect(checkStepGoal7Days(currentUser3)).to.include('No!');
+    });
+    
+    it('should handle users with no activityData, returning "No activity data available!"', function() {
+      expect(checkStepGoal7Days(currentUser3)).to.equal('No activity data available!');
     });
   });
-});
+})  

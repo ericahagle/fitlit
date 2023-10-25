@@ -67,9 +67,9 @@ const stepsGoalCompare = (averageGoal) => {
 
 const stepsWeekUpdate = (activityArray) => {
   stepsWeek.innerHTML = '';
-  const activityDisplay = activityArray.join(' ');
-  const goalReached = activityArray.map((achieve) => placeholder(achieve)).join(' ')
-  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${activityDisplay}</p><p>${goalReached}</p>`;
+  const stepsWeekDay = activityArray.map(day => day.numSteps).join(' ');
+  const stepsGoalDay = activityArray.map(day => day.metGoal).join(' ');
+  stepsWeek.innerHTML = `<h2>your week in steps</h2><p>${stepsWeekDay}</p><p>${stepsGoalDay}</p>`;
 }
 
 const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
