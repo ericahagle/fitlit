@@ -12,7 +12,7 @@ const stepsWeek = document.querySelector('#stepsWeek');
 const sleepLife = document.querySelector('#sleepLife');
 const userPage = document.querySelector('#userWrapper');
 const adminPage = document.querySelector('#adminWrapper');
-const toggleButton = document.querySelector('.toggle-button');
+const toggleButton = document.querySelector('#toggleButton');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
