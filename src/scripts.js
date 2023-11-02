@@ -30,7 +30,8 @@ import {
   } from './scriptDefinitions';
 
 ///////////// Import functions from domUpdates.js ///////////////
-import {  toggleAdmin,
+import {  toggleButton,
+    toggleAdmin,
     updateUserName,
     quipBox,
     waterDayUpdate,
@@ -63,6 +64,8 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
-  });
+    });
   
 });
+
+toggleButton.addEventListener('click', toggleAdmin);

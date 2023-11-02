@@ -12,6 +12,7 @@ const stepsWeek = document.querySelector('#stepsWeek');
 const sleepLife = document.querySelector('#sleepLife');
 const userPage = document.querySelector('#userWrapper');
 const adminPage = document.querySelector('#adminWrapper');
+const toggleButton = document.querySelector('.toggle-button');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
@@ -83,6 +84,7 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 }
 
 export {
+  toggleButton,
   toggleAdmin,
   updateUserName,
   quipBox,
