@@ -7,8 +7,21 @@ body {
   margin: 0;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom {
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper{
   display: flex;
+}
+
+.user-wrapper {
+  width: 1405px;
+  justify-content: space-evenly;
+}
+
+.admin-wrapper {
+  width: 1000px
+}
+
+.hidden {
+  display: none;
 }
 
 section {

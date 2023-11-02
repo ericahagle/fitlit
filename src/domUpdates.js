@@ -10,6 +10,13 @@ const activeMinutes = document.querySelector('#activeMinutes');
 const stepsAverage = document.querySelector('#avgStepGoal');
 const stepsWeek = document.querySelector('#stepsWeek');
 const sleepLife = document.querySelector('#sleepLife');
+const userPage = document.querySelector('#userWrapper');
+const adminPage = document.querySelector('#adminWrapper');
+
+const toggleAdmin = () => {
+  userPage.classList.toggle('hidden');
+  adminPage.classList.toggle('hidden');
+}
 
 const updateUserName = (userData, date) => {
   userName.innerHTML ='';
@@ -76,6 +83,7 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 }
 
 export {
+  toggleAdmin,
   updateUserName,
   quipBox,
   waterDayUpdate,

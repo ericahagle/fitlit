@@ -8,7 +8,8 @@ import './css/styles.css';
 import { fetchAllTheData, allUsers, hydrationData, activityData, sleepData } from './apiCalls';
 
 //////////// Import functions from scriptDefinitions //////////////
-import { generateRandomUserID,
+import {
+  generateRandomUserID,
   addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
@@ -29,7 +30,8 @@ import { generateRandomUserID,
   } from './scriptDefinitions';
 
 ///////////// Import functions from domUpdates.js ///////////////
-import {  updateUserName,
+import {  toggleAdmin,
+    updateUserName,
     quipBox,
     waterDayUpdate,
     waterWeekUpdate,
@@ -62,4 +64,5 @@ window.addEventListener('load', () => {
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
   });
+  
 });
