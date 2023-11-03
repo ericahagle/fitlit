@@ -5,7 +5,7 @@ let currentUser = null;
 import './css/styles.css';
 
 //////////// Import fetch call from apiCalls.js //////////////
-import { fetchAllTheData, allUsers, hydrationData, activityData, sleepData } from './apiCalls';
+import { fetchAllTheData, allUsers, hydrationData, activityData, sleepData,  postHydrationData } from './apiCalls';
 
 //////////// Import functions from scriptDefinitions //////////////
 import {
@@ -27,33 +27,40 @@ import {
   checkStepGoal,
   minutesActiveGivenDate,
   checkStepGoal7Days, 
+  initializeDatePicker
   } from './scriptDefinitions';
 
-///////////// Import functions from domUpdates.js ///////////////
-import {  toggleButton,
-    toggleAdmin,
-    updateUserName,
-    quipBox,
-    waterDayUpdate,
-    waterWeekUpdate,
-    sleepDayUpdate,
-    sleepWeekUpdate,
-    stepGoalUpdate,
-    stepsDayUpdate,
-    activeMinutesUpdate,
-    stepsWeekUpdate,
-    stepsGoalCompare,
-    sleepLifeUpdate  } from './domUpdates';
+///////////// Import from domUpdates.js ///////////////
+
+import {  
+  toggleButton,
+  toggleAdmin,
+  updateUserName,
+  quipBox,
+  waterDayUpdate,
+  waterWeekUpdate,
+  sleepDayUpdate,
+  sleepWeekUpdate,
+  stepGoalUpdate,
+  stepsDayUpdate,
+  activeMinutesUpdate,
+  stepsWeekUpdate,
+  stepsGoalCompare,
+  sleepLifeUpdate,
+  dateInput,
+  submitData,
+  userHydrationData  } from './domUpdates';
 
     ////////// Event Listeners //////////
+   
 window.addEventListener('load', () => {
+  initializeDatePicker()
   fetchAllTheData()
   .then(data => {
     currentUser = allUsers[generateRandomUserID(allUsers) - 1];
     const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
     const displayDay = currentDay(completeCurrentUser);
     updateUserName(currentUser, displayDay);
-    quipBox();
     waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
     waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
     sleepDayUpdate(displayDay, hoursSleptGivenDate(completeCurrentUser, displayDay), sleepQualityGivenDate(completeCurrentUser, displayDay));
@@ -64,8 +71,19 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
-    });
-  
+  });
+});
+    
+//  Listen for the submit button click
+submitData.addEventListener("click", () => {
+  const hydrationData = userHydrationData.value;
+  const selectedDate = dateInput.value;
+  const combinedData = {
+    userID: currentUser.id,
+    date: selectedDate,
+    numOunces: parseInt(hydrationData),
+  };
+  postHydrationData(combinedData);
 });
 
 toggleButton.addEventListener('click', toggleAdmin);

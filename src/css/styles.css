@@ -125,3 +125,42 @@ p, .header-ish, #snarkyRemark {
   background-color: #8C2155;
   color: white;
 }
+/* Style the datepicker input field */
+#datepicker {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #333;
+  background-color: white;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+/* Style the datepicker container */
+.dp-container {
+  z-index: 100; /* Ensures the datepicker is above other elements */
+  background-color: white; /* Match to your theme if necessary */
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Optional: Adds a shadow for better visibility */
+}
+
+/* Adjust the positioning of the datepicker if necessary */
+.dp-container {
+  /* You can adjust the top, right, bottom, left properties as needed */
+}
+
+/* This targets the date cells in the datepicker */
+.dp-day {
+  color: #333; /* Adjust text color as needed */
+}
+
+/* Style for the selected date */
+.dp-selected {
+  background-color: #003249; /* Example: Use your primary color here */
+  color: white;
+}
+
+/* Hover styles for date cells */
+.dp-day:hover {
+  background-color: #f0f0f0; /* Adjust hover background color as needed */
+}

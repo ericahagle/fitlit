@@ -19,6 +19,12 @@ const toggleAdmin = () => {
   adminPage.classList.toggle('hidden');
 }
 
+const userHydrationData = document.querySelector('#hydrationInput')
+const submitData = document.querySelector("#submitData")
+const dateInput = document.querySelector("#datepicker")
+
+
+
 const updateUserName = (userData, date) => {
   userName.innerHTML ='';
   userName.innerHTML += `<h1>Hello ${userData.name}!</h1><h2 class='header-ish'>${date}</h2><p class='rectangle'>${userData.address} / ${userData.email}</p>`;
@@ -87,7 +93,7 @@ export {
   toggleButton,
   toggleAdmin,
   updateUserName,
-  quipBox,
+  // quipBox,
   waterDayUpdate,
   waterWeekUpdate,
   sleepDayUpdate,
@@ -97,5 +103,8 @@ export {
   activeMinutesUpdate,
   stepsGoalCompare,
   stepsWeekUpdate,
-  sleepLifeUpdate
+  sleepLifeUpdate,
+  dateInput,
+  submitData,
+  userHydrationData
 }
