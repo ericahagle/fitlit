@@ -8,7 +8,8 @@ import './css/styles.css';
 import { fetchAllTheData, allUsers, hydrationData, activityData, sleepData,  postHydrationData } from './apiCalls';
 
 //////////// Import functions from scriptDefinitions //////////////
-import { generateRandomUserID,
+import {
+  generateRandomUserID,
   addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
@@ -30,68 +31,59 @@ import { generateRandomUserID,
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
-import {  updateUserName,
-    quipBox,
-    waterDayUpdate,
-    waterWeekUpdate,
-    sleepDayUpdate,
-    sleepWeekUpdate,
-    stepGoalUpdate,
-    stepsDayUpdate,
-    activeMinutesUpdate,
-    stepsWeekUpdate,
-    stepsGoalCompare,
-    sleepLifeUpdate,
-    dateInput,
-    submitData,
-    userHydrationData  } from './domUpdates';
+
+import {  
+  toggleButton,
+  toggleAdmin,
+  updateUserName,
+  quipBox,
+  waterDayUpdate,
+  waterWeekUpdate,
+  sleepDayUpdate,
+  sleepWeekUpdate,
+  stepGoalUpdate,
+  stepsDayUpdate,
+  activeMinutesUpdate,
+  stepsWeekUpdate,
+  stepsGoalCompare,
+  sleepLifeUpdate,
+  dateInput,
+  submitData,
+  userHydrationData  } from './domUpdates';
 
     ////////// Event Listeners //////////
    
-    window.addEventListener('load', () => {
-   
-      initializeDatePicker()
-      fetchAllTheData()
-      .then(data => {
-        currentUser = allUsers[generateRandomUserID(allUsers) - 1];
-        const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
-        const displayDay = currentDay(completeCurrentUser);
-        updateUserName(currentUser, displayDay);
-        // quipBox();
-        waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
-        waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
-        sleepDayUpdate(displayDay, hoursSleptGivenDate(completeCurrentUser, displayDay), sleepQualityGivenDate(completeCurrentUser, displayDay));
-        sleepWeekUpdate(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
-        stepGoalUpdate(completeCurrentUser.dailyStepGoal);
-        stepsDayUpdate(displayDay, numberOfStepsGivenDate(completeCurrentUser, displayDay), findDistanceTraveled(completeCurrentUser));
-        activeMinutesUpdate(minutesActiveGivenDate(completeCurrentUser, displayDay));
-        stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
-        stepsGoalCompare(findStepGoalAverage(allUsers));
-        sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
-
-      });
-   
-    });
-    
-    //  Listen for the submit button click
-     submitData.addEventListener("click", () => {
-      const hydrationData = userHydrationData.value;
-      const selectedDate = dateInput.value;
-
-      const combinedData = {
-          userID: currentUser.id,
-          date: selectedDate,
-          numOunces: parseInt(hydrationData),
-         
-      };
-              postHydrationData(combinedData);
+window.addEventListener('load', () => {
+  initializeDatePicker()
+  fetchAllTheData()
+  .then(data => {
+    currentUser = allUsers[generateRandomUserID(allUsers) - 1];
+    const completeCurrentUser = addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData);
+    const displayDay = currentDay(completeCurrentUser);
+    updateUserName(currentUser, displayDay);
+    waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
+    waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
+    sleepDayUpdate(displayDay, hoursSleptGivenDate(completeCurrentUser, displayDay), sleepQualityGivenDate(completeCurrentUser, displayDay));
+    sleepWeekUpdate(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
+    stepGoalUpdate(completeCurrentUser.dailyStepGoal);
+    stepsDayUpdate(displayDay, numberOfStepsGivenDate(completeCurrentUser, displayDay), findDistanceTraveled(completeCurrentUser));
+    activeMinutesUpdate(minutesActiveGivenDate(completeCurrentUser, displayDay));
+    stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
+    stepsGoalCompare(findStepGoalAverage(allUsers));
+    sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
   });
-  
- 
+});
+    
+//  Listen for the submit button click
+submitData.addEventListener("click", () => {
+  const hydrationData = userHydrationData.value;
+  const selectedDate = dateInput.value;
+  const combinedData = {
+    userID: currentUser.id,
+    date: selectedDate,
+    numOunces: parseInt(hydrationData),
+  };
+  postHydrationData(combinedData);
+});
 
- 
-
-  
-  
-  
-  
+toggleButton.addEventListener('click', toggleAdmin);

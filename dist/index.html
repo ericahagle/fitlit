@@ -11,6 +11,7 @@
     <title>Fitlit</title>
   </head>
   <body>
+    <div class="user-wrapper" id="userWrapper">
     <section class='left'>
       <article class='widget square week-view' id='waterWeek'>
       </article>
@@ -46,7 +47,20 @@
       <article class='widget square' id='sleepLife'>
       </article>
     </section>
-    <script src="https://unpkg.com/js-datepicker"></script>
-    <script src='bundle.js'></script>
+  </div>
+  <button class="toggle-button" id="toggleButton">Admin</button>
+  <div class="admin-wrapper hidden" id="adminWrapper">
+    <section class="admin-view">
+      Buttons
+    </section>
+    <section class="user-data">
+      User Data
+    </section>
+    <section class="overall-data">
+      Overall Data
+    </section>
+  </div>
+  <script src='bundle.js'></script>
+  <script src="https://unpkg.com/js-datepicker"></script>
   </body>
 </html>
