@@ -43,7 +43,8 @@ import {  updateUserName,
     stepsGoalCompare,
     sleepLifeUpdate,
     dateInput,
-    submitData  } from './domUpdates';
+    submitData,
+    userHydrationData  } from './domUpdates';
 
     ////////// Event Listeners //////////
    
@@ -74,7 +75,7 @@ import {  updateUserName,
     
     //  Listen for the submit button click
      submitData.addEventListener("click", () => {
-      const hydrationData = document.querySelector('#hydrationInput').value;
+      const hydrationData = userHydrationData.value;
       const selectedDate = dateInput.value;
 
       const combinedData = {

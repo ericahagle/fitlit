@@ -11,6 +11,7 @@ const stepsAverage = document.querySelector('#avgStepGoal');
 const stepsWeek = document.querySelector('#stepsWeek');
 const sleepLife = document.querySelector('#sleepLife');
 
+const userHydrationData = document.querySelector('#hydrationInput')
 const submitData = document.querySelector("#submitData")
 const dateInput = document.querySelector("#datepicker")
 
@@ -94,5 +95,6 @@ export {
   stepsWeekUpdate,
   sleepLifeUpdate,
   dateInput,
-  submitData
+  submitData,
+  userHydrationData
 }
