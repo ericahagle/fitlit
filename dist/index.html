@@ -7,6 +7,7 @@
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap' rel='stylesheet'>
     <link rel='stylesheet' href='/src/css/styles.css'>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
     <title>Fitlit</title>
   </head>
   <body>
@@ -16,6 +17,9 @@
       <article class='widget square' id='waterDay'>
       </article>
       <article class='widget square' id='userData'>
+        <input id="hydrationInput" type="text" placeholder="Enter hydration data">
+        <button id="submitData">Submit</button>
+        <input type="text" id="datepicker" placeholder="Select Date">
       </article>
     </section>
     <section class='middle' id='infoCards'>
@@ -42,6 +46,7 @@
       <article class='widget square' id='sleepLife'>
       </article>
     </section>
+    <script src="https://unpkg.com/js-datepicker"></script>
     <script src='bundle.js'></script>
   </body>
 </html>

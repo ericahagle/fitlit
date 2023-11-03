@@ -266,6 +266,26 @@ function numberOfStepsGivenDate(currentUser, date) {
   }
 }
 
+function initializeDatePicker() {
+  function handleDateSelection(instance, date) {
+      const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
+      dateInput.value = formattedDate;
+  }
+
+  const dateInput = document.querySelector('#datepicker');
+  
+  // Set the start date to 2023/07/02
+  const startDate = new Date('2023-07-03');
+
+  const picker = datepicker(dateInput, {
+      minDate: startDate,
+      onSelect: handleDateSelection
+  });
+}
+
+
+
+
 module.exports = {
   generateRandomUserID,
   addDataToCurrentUser,
@@ -284,5 +304,6 @@ module.exports = {
   minutesActiveGivenDate,
   checkStepGoal,
   checkStepGoal7Days,
-  numberOfStepsGivenDate
+  numberOfStepsGivenDate,
+  initializeDatePicker
 };

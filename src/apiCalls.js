@@ -80,20 +80,55 @@ const fetchSleepData = () => {
 	});
 }
 
+
+/////////////POST/////////////////////
+
+
+function postHydrationData(combinedData) {
+    fetch(hydrationApi, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(combinedData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(addedData => {
+        console.log('Data added:', addedData);
+       
+		return fetchHydrationData()
+    })
+
+	.then(() => {
+		// updateDOMWithNewHydrationData()
+
+	})	
+    .catch(error => {
+        alert(error.message);
+        console.error(error);
+    });
+}
+
 //////////// FETCH ALL THE DATA ////////////
 const fetchAllTheData = () => {
 	return Promise.all([
 		fetchUsers(usersApi),
 		fetchHydrationData(hydrationApi),
 		fetchActivityData(activityApi),
-		fetchSleepData(sleepApi)
+		fetchSleepData(sleepApi),
+		
 	])
 }
+
 
 export {
   fetchAllTheData,
   allUsers,
   hydrationData,
   activityData,
-  sleepData
+  sleepData,
+  postHydrationData
 }

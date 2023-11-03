@@ -11,6 +11,11 @@ const stepsAverage = document.querySelector('#avgStepGoal');
 const stepsWeek = document.querySelector('#stepsWeek');
 const sleepLife = document.querySelector('#sleepLife');
 
+const submitData = document.querySelector("#submitData")
+const dateInput = document.querySelector("#datepicker")
+
+
+
 const updateUserName = (userData, date) => {
   userName.innerHTML ='';
   userName.innerHTML += `<h1>Hello ${userData.name}!</h1><h2 class='header-ish'>${date}</h2><p class='rectangle'>${userData.address} / ${userData.email}</p>`;
@@ -77,7 +82,7 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 
 export {
   updateUserName,
-  quipBox,
+  // quipBox,
   waterDayUpdate,
   waterWeekUpdate,
   sleepDayUpdate,
@@ -87,5 +92,7 @@ export {
   activeMinutesUpdate,
   stepsGoalCompare,
   stepsWeekUpdate,
-  sleepLifeUpdate
+  sleepLifeUpdate,
+  dateInput,
+  submitData
 }
