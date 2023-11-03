@@ -5,10 +5,34 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
+  overflow: hidden;
+  flex-direction: column;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom {
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper{
   display: flex;
+}
+
+.user-wrapper {
+  width: 1405px;
+  height: 775px;
+  justify-content: space-evenly;
+  align-self: center;
+}
+
+.admin-wrapper {
+  width: 1000px
+}
+
+.toggle-button {
+  width: 75px;
+  align-self: center;
+  background-color: #D9D9D9;
+  margin-top: 5px;
+}
+
+.hidden {
+  display: none;
 }
 
 section {
