@@ -27,10 +27,18 @@ const toggleAdmin = () => {
 
 const toggleAdminData = () => {
   if(userAdminButton.disabled) {
+    userAdminButton.style.backgroundColor='#003249';
+    userAdminButton.style.color='white';
+    overallAdminButton.style.backgroundColor='white';
+    overallAdminButton.style.color='black';
     userAdminButton.disabled=!userAdminButton.disabled;
     overallAdminButton.disabled=!overallAdminButton.disabled;
   }
   else if(overallAdminButton.disabled) {
+    overallAdminButton.style.backgroundColor='#003249';
+    overallAdminButton.style.color='white';
+    userAdminButton.style.backgroundColor='white';
+    userAdminButton.style.color='black';
     overallAdminButton.disabled=!overallAdminButton.disabled;
     userAdminButton.disabled=!userAdminButton.disabled;
   }

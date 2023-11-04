@@ -189,20 +189,18 @@ aside {
 }
 
 .user-data-button, .overall-data-button {
-  border-left: none;
+  border: none;
   width: 100%;
   height: 50px;
 }
 
 .user-data-button {
-  border-right: none;
-  border-top: white;
+  color: black;
   background-color: white;
 }
 
 .overall-data-button {
   color: white;
-  border-top: none;
   background-color: #003249;
 }
 
