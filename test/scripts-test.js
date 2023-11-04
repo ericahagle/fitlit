@@ -75,7 +75,7 @@ describe('get user info for admin', function () {
     });
   });
 
-  it('returns "User not found" if user does not exist', function() {
+  it('returns "User not found" if user does not exist', function () {
     expect(findUserByEmail('email@email.com', users)).to.deep.equal('User not found');
   });
 });
