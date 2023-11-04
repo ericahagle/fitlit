@@ -16,7 +16,6 @@ function findUserByEmail(email, users) {
   }
 }
 
-
 ////////////////////* Create complete userObject card *////////////////////
 function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData) {
 
