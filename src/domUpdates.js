@@ -13,10 +13,29 @@ const sleepLife = document.querySelector('#sleepLife');
 const userPage = document.querySelector('#userWrapper');
 const adminPage = document.querySelector('#adminWrapper');
 const toggleButton = document.querySelector('#toggleButton');
+const mainButton = document.querySelector('#mainButton');
+const userDataWrapper = document.querySelector('#userDataWrapper');
+const overallDataWrapper = document.querySelector('#overallDataWrapper');
+const userAdminButton = document.querySelector('#userDataButton');
+const overallAdminButton = document.querySelector('#overallDataButton');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
   adminPage.classList.toggle('hidden');
+
+}
+
+const toggleAdminData = () => {
+  if(userAdminButton.disabled) {
+    userAdminButton.disabled=!userAdminButton.disabled;
+    overallAdminButton.disabled=!overallAdminButton.disabled;
+  }
+  else if(overallAdminButton.disabled) {
+    overallAdminButton.disabled=!overallAdminButton.disabled;
+    userAdminButton.disabled=!userAdminButton.disabled;
+  }
+  userDataWrapper.classList.toggle('hidden');
+  overallDataWrapper.classList.toggle('hidden');
 }
 
 const userHydrationData = document.querySelector('#hydrationInput')
@@ -91,7 +110,11 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 
 export {
   toggleButton,
+  mainButton,
+  userAdminButton,
+  overallAdminButton,
   toggleAdmin,
+  toggleAdminData,
   updateUserName,
   // quipBox,
   waterDayUpdate,

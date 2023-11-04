@@ -34,7 +34,10 @@ import {
 
 import {  
   toggleButton,
+  userAdminButton,
+  overallAdminButton,
   toggleAdmin,
+  toggleAdminData,
   updateUserName,
   quipBox,
   waterDayUpdate,
@@ -49,7 +52,8 @@ import {
   sleepLifeUpdate,
   dateInput,
   submitData,
-  userHydrationData  } from './domUpdates';
+  userHydrationData,  
+  mainButton} from './domUpdates';
 
     ////////// Event Listeners //////////
    
@@ -71,6 +75,7 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
+    toggleAdmin()
   });
 });
     
@@ -87,3 +92,6 @@ submitData.addEventListener("click", () => {
 });
 
 toggleButton.addEventListener('click', toggleAdmin);
+mainButton.addEventListener('click', toggleAdmin);
+userAdminButton.addEventListener('click', toggleAdminData);
+overallAdminButton.addEventListener('click', toggleAdminData);

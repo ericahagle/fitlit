@@ -47,18 +47,24 @@
       <article class='widget square' id='sleepLife'>
       </article>
     </section>
+    <button class="toggle-button" id="toggleButton">Admin</button>
   </div>
-  <button class="toggle-button" id="toggleButton">Admin</button>
   <div class="admin-wrapper hidden" id="adminWrapper">
-    <section class="admin-view">
-      Buttons
-    </section>
-    <section class="user-data">
+    <aside>
+      <button class="user-data-button" id="userDataButton" disabled>User</button>
+      <button class="overall-data-button" id="overallDataButton">Overall</button>
+    </aside>
+    <div class="user-data-wrapper" id="userDataWrapper">
       User Data
-    </section>
-    <section class="overall-data">
+      <section class="user-data">
+      </section>
+    </div>
+    <div class="overall-data-wrapper hidden" id="overallDataWrapper">
       Overall Data
-    </section>
+      <section>
+      </section>
+    </div>
+    <button class="main-button" id="mainButton">Main</button>
   </div>
   <script src='bundle.js'></script>
   <script src="https://unpkg.com/js-datepicker"></script>
