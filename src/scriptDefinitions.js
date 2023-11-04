@@ -5,8 +5,15 @@ function generateRandomUserID(usersArray) {
 }
 
 ////////////////////* Retrieve user data for Admin *////////////////////
-function findUserDataByName() {
-
+function findUserByEmail(email, users) {
+  const foundUser = users.find((user) => {
+   return user.email === email;
+  });
+  if (foundUser) {
+    return foundUser;
+  } else {
+    return "User not found";
+  }
 }
 
 
@@ -292,7 +299,7 @@ function initializeDatePicker() {
 
 module.exports = {
   generateRandomUserID,
-  findUserDataByName,
+  findUserByEmail,
   addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
