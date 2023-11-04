@@ -8,6 +8,7 @@ let hydrationData = null;
 let activityData = null;
 let sleepData = null;
 
+
 ////////// FETCH USERS ////////////
 const fetchUsers = () => {
 	return fetch(usersApi)
@@ -82,10 +83,8 @@ const fetchSleepData = () => {
 
 
 /////////////POST/////////////////////
-
-
 function postHydrationData(combinedData) {
-    fetch(hydrationApi, {
+    return fetch(hydrationApi, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(combinedData)
@@ -98,19 +97,16 @@ function postHydrationData(combinedData) {
     })
     .then(addedData => {
         console.log('Data added:', addedData);
-       
-		return fetchHydrationData()
+        // fetch the latest hydration data
+        return fetchHydrationData(); // return the promise from fetchHydrationData
     })
-
-	.then(() => {
-		// updateDOMWithNewHydrationData()
-
-	})	
     .catch(error => {
         alert(error.message);
         console.error(error);
     });
 }
+
+
 
 //////////// FETCH ALL THE DATA ////////////
 const fetchAllTheData = () => {
@@ -132,3 +128,4 @@ export {
   sleepData,
   postHydrationData
 }
+

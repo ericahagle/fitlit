@@ -284,8 +284,6 @@ function initializeDatePicker() {
 }
 
 
-
-
 module.exports = {
   generateRandomUserID,
   addDataToCurrentUser,
@@ -305,5 +303,5 @@ module.exports = {
   checkStepGoal,
   checkStepGoal7Days,
   numberOfStepsGivenDate,
-  initializeDatePicker
+  initializeDatePicker,
 };
