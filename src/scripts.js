@@ -53,7 +53,8 @@ import {
   dateInput,
   submitData,
   userHydrationData,  
-  mainButton} from './domUpdates';
+  mainButton,
+  mainButton2,} from './domUpdates';
 
     ////////// Event Listeners //////////
    
@@ -92,5 +93,6 @@ submitData.addEventListener("click", () => {
 
 toggleButton.addEventListener('click', toggleAdmin);
 mainButton.addEventListener('click', toggleAdmin);
+mainButton2.addEventListener('click', toggleAdmin);
 userAdminButton.addEventListener('click', toggleAdminData);
 overallAdminButton.addEventListener('click', toggleAdminData);

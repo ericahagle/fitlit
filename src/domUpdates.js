@@ -14,6 +14,7 @@ const userPage = document.querySelector('#userWrapper');
 const adminPage = document.querySelector('#adminWrapper');
 const toggleButton = document.querySelector('#toggleButton');
 const mainButton = document.querySelector('#mainButton');
+const mainButton2 = document.querySelector('#mainButton2');
 const userDataWrapper = document.querySelector('#userDataWrapper');
 const overallDataWrapper = document.querySelector('#overallDataWrapper');
 const userAdminButton = document.querySelector('#userDataButton');
@@ -119,6 +120,7 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 export {
   toggleButton,
   mainButton,
+  mainButton2,
   userAdminButton,
   overallAdminButton,
   toggleAdmin,
