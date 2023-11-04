@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, addDataToCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate, checkStepGoal7Days, numberOfStepsGivenDate } = require('../src/scriptDefinitions');
+const { generateRandomUserID, findUserDataByName, addDataToCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate, checkStepGoal7Days, numberOfStepsGivenDate } = require('../src/scriptDefinitions');
 const { users, hydrationData, activityData, sleepData } = require('../src/data/testData');
 
 describe('userObject creation', function() {
@@ -59,6 +59,43 @@ describe('userObject creation', function() {
         sleepData: []
       }
     );
+  });
+});
+
+describe('get user info for admin', function(){
+  it.only('returns all data for a given user', function() {
+    expect(findUserDataByName('Trystan Gorczany')).to.deep.equal({
+      id: 1,
+      name: 'Trystan Gorczany',
+      address: '9484 Lucas Flat, West Kittymouth WA 67504',
+      email: 'Taurean_Pollich31@gmail.com',
+      strideLength: 4,
+      dailyStepGoal: 7000,
+      friends: [ 5, 43, 46, 11 ],
+      hydrationData: [ 
+        { userID: 1,
+          date: '2023/03/24',
+          numOunces: 28 
+        } 
+      ],
+      activityData: [
+        {
+          userID: 1,
+          date: '2023/03/24',
+          numSteps: 7362,
+          minutesActive: 261,
+          flightsOfStairs: 26
+        }
+      ],
+      sleepData: [
+        {
+          userID: 1,
+          date: '2023/03/24',
+          hoursSlept: 9.6,
+          sleepQuality: 4.3
+        }
+      ]
+    });
   });
 });
 

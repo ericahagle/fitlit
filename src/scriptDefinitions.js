@@ -4,6 +4,12 @@ function generateRandomUserID(usersArray) {
 	return randomUserId;
 }
 
+////////////////////* Retrieve user data for Admin *////////////////////
+function findUserDataByName() {
+
+}
+
+
 ////////////////////* Create complete userObject card *////////////////////
 function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData) {
 
@@ -286,6 +292,7 @@ function initializeDatePicker() {
 
 module.exports = {
   generateRandomUserID,
+  findUserDataByName,
   addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
