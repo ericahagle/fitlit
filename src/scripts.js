@@ -82,19 +82,34 @@ submitData.addEventListener("click", () => {
     date: selectedDate,
     numOunces: parseInt(hydrationInput),
   };
-
+  // if all inputs have a value, call postHydration data, if not, alert("Please be sure to fill out all submission fields before proceeding.")
+  if(!combinedData.date || !combinedData.numOunces){
+    alert("Please be sure to fill out all submission fields before proceeding.");
+  } else {
   postHydrationData(combinedData)
     .then(addedData => {
+      if(!response.ok){
+        throw new Error(`Failed to post hydration data: ${error.name}`)
+      }
       // Update the currentUser with the new hydration data
       const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
       // Now update the DOM
       const displayDay = currentDay(completeCurrentUser);
       waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
-      waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
+      waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));   
+      // reset input fields 
+      userHydrationData.value = '';
+      dateInput.value = '';
     })
     .catch(error => {
-      console.error("Failed to post hydration data:", error);
+      alert("Failed to post hydration data, please ensure all fields are filled out correctly and completely.")
+      console.error(error);
     });
+  }
 });
+
+
+// alternatively, disable and change color of button until all fields have a value, then enable
+//reset form fields
 
 toggleButton.addEventListener('click', toggleAdmin);

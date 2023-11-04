@@ -8,7 +8,6 @@ let hydrationData = null;
 let activityData = null;
 let sleepData = null;
 
-
 ////////// FETCH USERS ////////////
 const fetchUsers = () => {
 	return fetch(usersApi)
@@ -81,7 +80,6 @@ const fetchSleepData = () => {
 	});
 }
 
-
 /////////////POST/////////////////////
 function postHydrationData(combinedData) {
     return fetch(hydrationApi, {
@@ -106,8 +104,6 @@ function postHydrationData(combinedData) {
     });
 }
 
-
-
 //////////// FETCH ALL THE DATA ////////////
 const fetchAllTheData = () => {
 	return Promise.all([
@@ -118,7 +114,6 @@ const fetchAllTheData = () => {
 		
 	])
 }
-
 
 export {
   fetchAllTheData,
