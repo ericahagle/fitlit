@@ -315,5 +315,5 @@ module.exports = {
   checkStepGoal,
   checkStepGoal7Days,
   numberOfStepsGivenDate,
-  initializeDatePicker
+  initializeDatePicker,
 };
