@@ -266,6 +266,8 @@ function numberOfStepsGivenDate(currentUser, date) {
   }
 }
 
+////////////////*ITERATION 7 POST support*/////////////////
+
 function initializeDatePicker() {
   function handleDateSelection(instance, date) {
       const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
@@ -283,8 +285,16 @@ function initializeDatePicker() {
   });
 }
 
-
-
+// disabled dates after data entry
+// unsure about formattedDate being usable here or if these need to be written pre-formatting
+//.push() the selected date to blackoutDates each time user info is submitted so they cannot be selected again
+// const blackoutDates = datepicker('.some-input', {
+//   disabledDates: [
+//     // new Date(2099, 0, 5),
+//     // new Date(2099, 0, 6),
+//     // new Date(2099, 0, 7),
+//   ]
+// })
 
 module.exports = {
   generateRandomUserID,

@@ -92,7 +92,7 @@ function postHydrationData(combinedData) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
+            throw new Error(`Something went wrong: ${response.status} Error`);
         }
         return response.json();
     })

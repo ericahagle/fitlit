@@ -36,7 +36,6 @@ import {
   toggleButton,
   toggleAdmin,
   updateUserName,
-  quipBox,
   waterDayUpdate,
   waterWeekUpdate,
   sleepDayUpdate,
@@ -83,7 +82,13 @@ submitData.addEventListener("click", () => {
     date: selectedDate,
     numOunces: parseInt(hydrationData),
   };
-  postHydrationData(combinedData);
+  // if all inputs have a value, call postHydration data, if not, alert("Please be sure to fill out all submission fields before proceeding.")
+  if(!combinedData.date || !combinedData.numOunces){
+    alert("Please be sure to fill out all submission fields before proceeding.");
+  } else { 
+    postHydrationData(combinedData);}
+  // alternatively, disable and change color of button until all fields have a value, then enable
+ //reset form fields
 });
 
 toggleButton.addEventListener('click', toggleAdmin);
