@@ -284,6 +284,123 @@ function initializeDatePicker() {
 }
 
 
+///NEW hydration average
+function findTopDrinkers(hydrationData, users) {
+  // Map over users to calculate total ounces and average for each
+  let userHydrationDetails = users.map((user) => {
+    let userHydrationEntries = hydrationData.filter((entry) => {
+      return entry.userID === user.id;
+    });
+
+    let totalOunces = userHydrationEntries.reduce((acc, curr) => acc + curr.numOunces, 0);
+
+    // Calculate the average ounces per entry
+    let averageOunces = totalOunces / userHydrationEntries.length;
+
+    return { 
+      userID: user.id, 
+      totalOunces: totalOunces,
+      averageOunces: averageOunces
+    };
+  });
+
+  // Sort users by total ounces
+  let sortedByOunces = userHydrationDetails.sort((a, b) => a.totalOunces - b.totalOunces);
+
+  // Slice to get top entries
+  let bottomDrinkers = sortedByOunces.slice(0, 10);
+
+  // Map to include user names
+  return bottomDrinkers.map((drinker) => {
+    // Find the user to include the name
+    let user = users.find((u) => u.id === drinker.userID);
+
+    return { 
+      ...drinker, 
+      userName: user.name,
+      averageOunces: drinker.averageOunces
+    };
+  });
+}
+
+
+// Sleep
+function findTopSleepers(sleepData, users) {
+  // Map over users to calculate total hours slept and average hours slept for each
+  let userSleepDetails = users.map((user) => {
+    // Filter sleep entries for the current user
+    let userSleeps = sleepData.filter((sleep) => sleep.userID === user.id);
+
+    // Sum up all hours slept for the user
+    let totalHoursSlept = userSleeps.reduce((acc, curr) => acc + curr.hoursSlept, 0);
+    // Calculate the average hours slept per entry for the user
+    let averageHoursSlept = totalHoursSlept / userSleeps.length;
+
+    // Return object for the user
+    return {
+      userID: user.id,
+      totalHoursSlept: totalHoursSlept,
+      averageHoursSlept: averageHoursSlept
+    };
+  });
+
+  // Sort the summary objects by total hours slept in descending order
+  let sortedBySleep = userSleepDetails.sort((a, b) => a.totalHoursSlept - b.totalHoursSlept);
+  // Slice the top 10 users with the most hours slept
+  let bottomSleepers = sortedBySleep.slice(0, 10);
+
+  // Map over the top sleepers to add user names
+  return bottomSleepers.map((sleeper) => {
+    // Find the user object to retrieve the user's name
+    let user = users.find((u) => u.id === sleeper.userID);
+    // Return object including the user's name
+    return {
+      ...sleeper,
+      userName: user.name
+    };
+  });
+}
+
+
+// Activity
+function findTopStepTakers(activityData, users) {
+  // Map over users to calculate total steps and average steps for each
+  let userStepDetails = users.map((user) => {
+    // Filter activity entries for the current user
+    let userActivities = activityData.filter((activity) => activity.userID === user.id);
+
+    // Sum up all steps for the user
+    let totalSteps = userActivities.reduce((acc, curr) => acc + curr.numSteps, 0);
+    // Calculate the average steps per entry for the user
+    let averageSteps = totalSteps / userActivities.length;
+
+    // Return object for the user
+    return {
+      userID: user.id,
+      totalSteps: totalSteps,
+      averageSteps: averageSteps
+    };
+  });
+
+  // Sort the summary objects by total steps in descending order
+  let sortedBySteps = userStepDetails.sort((a, b) => a.totalSteps - b.totalSteps);
+  // Slice the top 10 users with the most steps
+  let bottomStepTakers = sortedBySteps.slice(0, 10);
+
+  // Map over the top step takers to add user names
+  return bottomStepTakers.map((taker) => {
+    // Find the user object to retrieve the user's name
+    let user = users.find((u) => u.id === taker.userID);
+    // Return a new object including the user's name
+    return {
+      ...taker,
+      userName: user.name
+    };
+  });
+}
+
+
+
 module.exports = {
   generateRandomUserID,
   addDataToCurrentUser,
@@ -304,4 +421,7 @@ module.exports = {
   checkStepGoal7Days,
   numberOfStepsGivenDate,
   initializeDatePicker,
+  findTopDrinkers,
+  findTopSleepers,
+  findTopStepTakers
 };
