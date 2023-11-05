@@ -205,6 +205,22 @@ aside {
 }
 
 .user-data-wrapper, .overall-data-wrapper {
+  justify-content: center;
+  flex-wrap: wrap;
   width: 90%;
   background-color: white;
+}
+
+.overall-sleep-bot, .overall-water-bot, .overall-activity-bot {
+  width: 33%;
+  height: 25%;
+  align-items: flex-start;
+  flex-wrap: wrap
+}
+
+.title-water, .title-sleep, .title-activity {
+    font-size:x-large;
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
