@@ -7,7 +7,7 @@ describe('userObject creation', function () {
     const randomUserID = generateRandomUserID(users);
 
     expect(randomUserID).to.be.at.least(1);
-    expect(randomUserID).to.be.below(4);
+    expect(randomUserID).to.be.below(14);
   });
 
   it('should add hydration, activity, and sleep data to the currentUser', function () {
@@ -82,7 +82,7 @@ describe('get user info for admin', function () {
 
 describe('global average step goal', function () {
   it('should find the average step goal amongst all users', function () {
-    expect(findStepGoalAverage(users)).to.deep.equal('6333.33');
+    expect(findStepGoalAverage(users)).to.deep.equal('7230.77');
   });
 });
 
@@ -96,16 +96,58 @@ describe('bottom 10s', function () {
         userName: 'Colt Rohan'
       },
       {
+        userID: 12,
+        totalOunces: 24,
+        averageOunces: 24,
+        userName: 'Jacinthe Prosacco'
+      },
+      {
         userID: 1,
         totalOunces: 28,
         averageOunces: 28,
         userName: 'Trystan Gorczany'
       },
       {
-        userID: 2,
-        totalOunces: 478,
-        averageOunces: 68.28571428571429,
-        userName: 'Tyreek VonRueden'
+        userID: 8,
+        totalOunces: 36,
+        averageOunces: 36,
+        userName: 'Amir Lang'
+      },
+      {
+        userID: 9,
+        totalOunces: 40,
+        averageOunces: 40,
+        userName: 'Antonina McClure'
+      },
+      {
+        userID: 5,
+        totalOunces: 47,
+        averageOunces: 47,
+        userName: 'Brycen Rutherford'
+      },
+      {
+        userID: 11,
+        totalOunces: 48,
+        averageOunces: 48,
+        userName: 'Kailey Langosh'
+      },
+      {
+        userID: 10,
+        totalOunces: 49,
+        averageOunces: 49,
+        userName: 'Dianna Streich'
+      },
+      {
+        userID: 4,
+        totalOunces: 74,
+        averageOunces: 74,
+        userName: 'Evie Satterfield'
+      },
+      {
+        userID: 7,
+        totalOunces: 74,
+        averageOunces: 74,
+        userName: 'Elaina Mosciski'
       }
     ]);
   });
@@ -119,16 +161,58 @@ describe('bottom 10s', function () {
         userName: 'Colt Rohan'
       },
       {
-        userID: 1,
-        totalHoursSlept: 9.6,
-        averageHoursSlept: 9.6,
-        userName: 'Trystan Gorczany'
+        userID: 12,
+        totalHoursSlept: 4,
+        averageHoursSlept: 4,
+        userName: 'Jacinthe Prosacco'
       },
       {
-        userID: 2,
-        totalHoursSlept: 56.5,
-        averageHoursSlept: 8.071428571428571,
-        userName: 'Tyreek VonRueden'
+        userID: 7,
+        totalHoursSlept: 4.1,
+        averageHoursSlept: 4.1,
+        userName: 'Elaina Mosciski'
+      },
+      {
+        userID: 6,
+        totalHoursSlept: 4.2,
+        averageHoursSlept: 4.2,
+        userName: 'Jillian Senger'
+      },
+      {
+        userID: 4,
+        totalHoursSlept: 4.7,
+        averageHoursSlept: 4.7,
+        userName: 'Evie Satterfield'
+      },
+      {
+        userID: 9,
+        totalHoursSlept: 4.8,
+        averageHoursSlept: 4.8,
+        userName: 'Antonina McClure'
+      },
+      {
+        userID: 13,
+        totalHoursSlept: 6.5,
+        averageHoursSlept: 6.5,
+        userName: 'Seamus Upton'
+      },
+      {
+        userID: 10,
+        totalHoursSlept: 7.2,
+        averageHoursSlept: 7.2,
+        userName: 'Dianna Streich'
+      },
+      {
+        userID: 11,
+        totalHoursSlept: 7.2,
+        averageHoursSlept: 7.2,
+        userName: 'Kailey Langosh'
+      },
+      {
+        userID: 5,
+        totalHoursSlept: 8,
+        averageHoursSlept: 8,
+        userName: 'Brycen Rutherford'
       }
     ]);
   });
@@ -142,16 +226,58 @@ describe('bottom 10s', function () {
         userName: 'Colt Rohan'
       },
       {
+        userID: 10,
+        totalSteps: 2145,
+        averageSteps: 2145,
+        userName: 'Dianna Streich'
+      },
+      {
+        userID: 9,
+        totalSteps: 3801,
+        averageSteps: 3801,
+        userName: 'Antonina McClure'
+      },
+      {
+        userID: 11,
+        totalSteps: 5491,
+        averageSteps: 5491,
+        userName: 'Kailey Langosh'
+      },
+      {
+        userID: 8,
+        totalSteps: 7255,
+        averageSteps: 7255,
+        userName: 'Amir Lang'
+      },
+      {
         userID: 1,
         totalSteps: 7362,
         averageSteps: 7362,
         userName: 'Trystan Gorczany'
       },
       {
-        userID: 2,
-        totalSteps: 56567,
-        averageSteps: 8081,
-        userName: 'Tyreek VonRueden'
+        userID: 7,
+        totalSteps: 7765,
+        averageSteps: 7765,
+        userName: 'Elaina Mosciski'
+      },
+      {
+        userID: 5,
+        totalSteps: 8443,
+        averageSteps: 8443,
+        userName: 'Brycen Rutherford'
+      },
+      {
+        userID: 4,
+        totalSteps: 8934,
+        averageSteps: 8934,
+        userName: 'Evie Satterfield'
+      },
+      {
+        userID: 12,
+        totalSteps: 11616,
+        averageSteps: 11616,
+        userName: 'Jacinthe Prosacco'
       }
     ]);
   });
