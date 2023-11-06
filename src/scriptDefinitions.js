@@ -267,34 +267,27 @@ function numberOfStepsGivenDate(currentUser, date) {
 }
 
 ////////////////*ITERATION 7 POST support*/////////////////
+var dateToDisable;
+var pickerObject;
 
 function initializeDatePicker() {
   function handleDateSelection(instance, date) {
-      const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
-      dateInput.value = formattedDate;
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
+    dateInput.value = formattedDate;
   }
 
   const dateInput = document.querySelector('#datepicker');
   
   // Set the start date to 2023/07/02
   const startDate = new Date('2023-07-03');
-
-  const picker = datepicker(dateInput, {
-      minDate: startDate,
-      onSelect: handleDateSelection
-  });
+  pickerObject = {
+    minDate: startDate,
+    onSelect: handleDateSelection,
+    disabledDates: []
 }
-
-// disabled dates after data entry
-// unsure about formattedDate being usable here or if these need to be written pre-formatting
-//.push() the selected date to blackoutDates each time user info is submitted so they cannot be selected again
-// const blackoutDates = datepicker('.some-input', {
-//   disabledDates: [
-//     // new Date(2099, 0, 5),
-//     // new Date(2099, 0, 6),
-//     // new Date(2099, 0, 7),
-//   ]
-// })
+  const picker = datepicker(dateInput, pickerObject);
+  console.log(pickerObject.disabledDates)
+}
 
 module.exports = {
   generateRandomUserID,
@@ -316,4 +309,6 @@ module.exports = {
   checkStepGoal7Days,
   numberOfStepsGivenDate,
   initializeDatePicker,
+  dateToDisable,
+  pickerObject
 };

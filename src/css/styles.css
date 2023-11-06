@@ -2,14 +2,14 @@ body {
   font-family: 'Jaldi', sans-serif;
   justify-content: space-evenly;
   background-color: #003249;
-  height: 100%;
+  height: 740px;
   width: 100%;
   margin: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   flex-direction: column;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper{
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper {
   display: flex;
 }
 

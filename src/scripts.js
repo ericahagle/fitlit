@@ -28,6 +28,8 @@ import {
   minutesActiveGivenDate,
   checkStepGoal7Days, 
   initializeDatePicker,
+  dateToDisable,
+  pickerObject
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -50,7 +52,7 @@ import {
   submitData,
   userHydrationData  } from './domUpdates';
 
-    ////////// Event Listeners //////////
+////////////// Event Listeners //////////
    
 window.addEventListener('load', () => {
   initializeDatePicker()
@@ -70,10 +72,13 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
+  })
+  .catch(error => {
+    alert("Something went wrong: Failed to get data.")
+    console.log(error);
   });
 });
-    
-//  Listen for the submit button click
+
 submitData.addEventListener("click", () => {
   const hydrationInput = userHydrationData.value;
   const selectedDate = dateInput.value;
@@ -82,34 +87,24 @@ submitData.addEventListener("click", () => {
     date: selectedDate,
     numOunces: parseInt(hydrationInput),
   };
-  // if all inputs have a value, call postHydration data, if not, alert("Please be sure to fill out all submission fields before proceeding.")
   if(!combinedData.date || !combinedData.numOunces){
     alert("Please be sure to fill out all submission fields before proceeding.");
   } else {
   postHydrationData(combinedData)
     .then(addedData => {
-      if(!response.ok){
-        throw new Error(`Failed to post hydration data: ${error.name}`)
-      }
-      // Update the currentUser with the new hydration data
       const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
-      // Now update the DOM
       const displayDay = currentDay(completeCurrentUser);
       waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
       waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));   
-      // reset input fields 
       userHydrationData.value = '';
       dateInput.value = '';
+      initializeDatePicker()
     })
     .catch(error => {
-      alert("Failed to post hydration data, please ensure all fields are filled out correctly and completely.")
-      console.error(error);
+      alert("Something went wrong: Failed to post hydration data.")
+      console.log(error);
     });
   }
 });
-
-
-// alternatively, disable and change color of button until all fields have a value, then enable
-//reset form fields
 
 toggleButton.addEventListener('click', toggleAdmin);
