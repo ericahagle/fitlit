@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const { generateRandomUserID, findUserByEmail, addDataToCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate, checkStepGoal7Days, numberOfStepsGivenDate, findBottomDrinkers, findBottomSleepers } = require('../src/scriptDefinitions');
+const { generateRandomUserID, findUserByEmail, addDataToCurrentUser, findStepGoalAverage, getHydrationFor7Days, calculateTotalHydration, findDistanceTraveled, ouncesPerDay, calculateAverageHoursSlept, calculateAverageSleepQuality, hoursSleptGivenDate, sleepQualityGivenDate, getSleepFor7Days, getSleepQualityFor7Days, checkStepGoal, minutesActiveGivenDate, checkStepGoal7Days, numberOfStepsGivenDate, findBottomDrinkers, findBottomSleepers, findBottomStepTakers } = require('../src/scriptDefinitions');
 const { users, hydrationData, activityData, sleepData } = require('../src/data/testData');
 
 describe('userObject creation', function () {
@@ -128,6 +128,29 @@ describe('bottom 10s', function () {
         userID: 2,
         totalHoursSlept: 56.5,
         averageHoursSlept: 8.071428571428571,
+        userName: 'Tyreek VonRueden'
+      }
+    ]);
+  });
+
+  it('should return userID, totalSteps, averageSteps, and userName for the (up to) 10 worst steppers', function () {
+    expect(findBottomStepTakers(activityData, users)).to.deep.equal([
+      {
+        userID: 3,
+        totalSteps: 0,
+        averageSteps: NaN,
+        userName: 'Colt Rohan'
+      },
+      {
+        userID: 1,
+        totalSteps: 7362,
+        averageSteps: 7362,
+        userName: 'Trystan Gorczany'
+      },
+      {
+        userID: 2,
+        totalSteps: 56567,
+        averageSteps: 8081,
         userName: 'Tyreek VonRueden'
       }
     ]);
