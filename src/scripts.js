@@ -28,6 +28,9 @@ import {
   minutesActiveGivenDate,
   checkStepGoal7Days, 
   initializeDatePicker,
+  findBottomDrinkers,
+  findBottomSleepers,
+  findBottomStepTakers
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -97,5 +100,6 @@ submitData.addEventListener("click", () => {
       console.error("Failed to post hydration data:", error);
     });
 });
+
 
 toggleButton.addEventListener('click', toggleAdmin);
