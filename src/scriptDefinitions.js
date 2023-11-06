@@ -285,7 +285,7 @@ function initializeDatePicker() {
 
 
 ///NEW hydration average
-function findTopDrinkers(hydrationData, users) {
+function findBottomDrinkers(hydrationData, users) {
   // Map over users to calculate total ounces and average for each
   let userHydrationDetails = users.map((user) => {
     let userHydrationEntries = hydrationData.filter((entry) => {
@@ -325,7 +325,7 @@ function findTopDrinkers(hydrationData, users) {
 
 
 // Sleep
-function findTopSleepers(sleepData, users) {
+function findBottomSleepers(sleepData, users) {
   // Map over users to calculate total hours slept and average hours slept for each
   let userSleepDetails = users.map((user) => {
     // Filter sleep entries for the current user
@@ -363,7 +363,7 @@ function findTopSleepers(sleepData, users) {
 
 
 // Activity
-function findTopStepTakers(activityData, users) {
+function findBottomStepTakers(activityData, users) {
   // Map over users to calculate total steps and average steps for each
   let userStepDetails = users.map((user) => {
     // Filter activity entries for the current user
@@ -421,7 +421,7 @@ module.exports = {
   checkStepGoal7Days,
   numberOfStepsGivenDate,
   initializeDatePicker,
-  findTopDrinkers,
-  findTopSleepers,
-  findTopStepTakers
+  findBottomDrinkers,
+  findBottomSleepers,
+  findBottomStepTakers
 };

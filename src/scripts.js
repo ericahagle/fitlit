@@ -28,9 +28,9 @@ import {
   minutesActiveGivenDate,
   checkStepGoal7Days, 
   initializeDatePicker,
-  findTopDrinkers,
-  findTopSleepers,
-  findTopStepTakers
+  findBottomDrinkers,
+  findBottomSleepers,
+  findBottomStepTakers
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
