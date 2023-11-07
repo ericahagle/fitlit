@@ -94,7 +94,7 @@ window.addEventListener('load', () => {
     displayBottomSteppers(findBottomStepTakers(activityData, allUsers));
     adminBasicInfoDisplay(currentUser);
     adminWaterInfoDisplay(getHydrationFor7Days(completeCurrentUser, displayDay));
-    adminStepsInfoDisplay(checkStepGoal7Days(completeCurrentUser))
+    adminStepsInfoDisplay(checkStepGoal7Days(completeCurrentUser));
     adminSleepInfoDisplay(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
     submitData.disabled = false;
   })
@@ -135,12 +135,17 @@ submitData.addEventListener("click", () => {
 adminSearchButton.addEventListener("click", () => {
   fetchAllTheData()
   .then(data => {
-    let foundUser = findUserByEmail(userEmailInput.value, allUsers)
+    const foundUser = findUserByEmail(userEmailInput.value, allUsers)
     const completeFoundUser = addDataToCurrentUser(foundUser, hydrationData, activityData, sleepData);
-    console.log(completeFoundUser); // leaving this here temporarily for reference
+    console.log(completeFoundUser);
+    const displayDay = currentDay(completeFoundUser);
+    console.log(adminBasicInfoDisplay(foundUser));
+    adminWaterInfoDisplay(getHydrationFor7Days(completeFoundUser, displayDay));
+    adminStepsInfoDisplay(checkStepGoal7Days(completeFoundUser));
+    adminSleepInfoDisplay(getSleepFor7Days(completeFoundUser, displayDay), getSleepQualityFor7Days(completeFoundUser, displayDay));
   })
   .catch(error => {
-    alert("Something went wrong: Failed to get data.")
+    alert("Something went wrong: Failed to get data.");
     console.log(error);
   });
 });
