@@ -8,7 +8,7 @@ body {
   flex-direction: column;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, aside, .user-data-wrapper, .overall-data-wrapper, .title-water, .title-sleep, .title-activity, #userData{
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, aside, .user-data-wrapper, .overall-data-wrapper, .title-water, .title-sleep, .title-activity, #userHydrateInput, #userData {
   display: flex;
 }
 
@@ -118,11 +118,11 @@ p, .header-ish, #snarkyRemark {
   background-color: #59C3C3;
 }
 
-#userData, #stepsWeek {
+#userHydrateInput, #stepsWeek {
   background-color: #D9D9D9;
 }
 
-#userData {
+#userHydrateInput {
   flex-direction: column;
   justify-content: center;
 }
@@ -144,7 +144,7 @@ p, .header-ish, #snarkyRemark {
   background-color: #8C2155;
   color: white;
 }
-/* Style the datepicker input field */
+
 #datepicker {
   padding: 10px;
   border: 1px solid #ccc;
@@ -152,7 +152,7 @@ p, .header-ish, #snarkyRemark {
   font-size: 1em;
   color: #333;
   background-color: white;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
 }
 
 .dp-container {
@@ -198,6 +198,7 @@ aside {
   color: white;
   background-color: #003249;
 }
+
 .user-data-wrapper {
   flex-direction: column;
   align-content: center;
@@ -205,12 +206,15 @@ aside {
   width: 90%;
   background-color: white;
 }
+
 .overall-data-wrapper {
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   width: 90%;
   background-color: white;
 }
+
 label {
   align-self: center;
 }
@@ -224,26 +228,57 @@ label {
   width: 6%;
   align-self: center;
 }
+
 .user-data {
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: white;
 }
 
 .basic-info, .water-info, .steps-info, .sleep-info {
-  background-color: white;
   height: 350px;
   width: 648px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.water-info, .steps-info, .sleep-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.water-info, .overall-water-bot {
+  background-color: #59C3C3;
+}
+
+.steps-info, .overall-activity-bot {
+  background-color: #F9FBB2;
+}
+
+.sleep-info {
+  background-color: #D1BCE3;
+}
+
+.overall-sleep-bot {
+  background-color: #DBD56E;
+}
+
+.basic-info {
+  background-color: #D9D9D9;
 }
 
 .overall-sleep-bot, .overall-water-bot, .overall-activity-bot {
   width: 33%;
-  height: 25%;
-  align-items: flex-start;
+  height: 50%;
+  align-items: center;
   flex-wrap: wrap
 }
 
 .title-water, .title-sleep, .title-activity {
-    font-size:x-large;
-    width: 100%;
-    justify-content: center;
+  font-size:x-large;
+  width: 100%;
+  justify-content: center;
 }

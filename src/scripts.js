@@ -137,9 +137,8 @@ adminSearchButton.addEventListener("click", () => {
   .then(data => {
     const foundUser = findUserByEmail(userEmailInput.value, allUsers)
     const completeFoundUser = addDataToCurrentUser(foundUser, hydrationData, activityData, sleepData);
-    console.log(completeFoundUser);
     const displayDay = currentDay(completeFoundUser);
-    console.log(adminBasicInfoDisplay(foundUser));
+    adminBasicInfoDisplay(foundUser);
     adminWaterInfoDisplay(getHydrationFor7Days(completeFoundUser, displayDay));
     adminStepsInfoDisplay(checkStepGoal7Days(completeFoundUser));
     adminSleepInfoDisplay(getSleepFor7Days(completeFoundUser, displayDay), getSleepQualityFor7Days(completeFoundUser, displayDay));

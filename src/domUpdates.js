@@ -1,5 +1,5 @@
 const userName = document.querySelector('#welcomeMat');
-const userInfo = document.querySelector('#userData');
+// const userInfo = document.querySelector('#userData');
 const waterDay = document.querySelector('#waterDay');
 const waterWeek = document.querySelector('#waterWeek')
 const sleepDay = document.querySelector('#sleepDay');
@@ -119,26 +119,26 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 
 const adminBasicInfoDisplay = (basicInfo) => {
   adminBasicInfo.innerHTML = '';
-  adminBasicInfo.innerHTML += `<p>${basicInfo.name}!</p><p>${basicInfo.address} / ${basicInfo.email}</p>`;
+  adminBasicInfo.innerHTML += `<h2>${basicInfo.name}</h2><p>${basicInfo.address} / ${basicInfo.email}</p>`;
 }
 
 const adminWaterInfoDisplay = (waterWeek) => {
   adminWaterInfo.innerHTML = '';
   const waterData = waterWeek.map((oz) => `${oz.numOunces}oz`).join(' / ');
-  adminWaterInfo.innerHTML = `<p>${waterData}</p>`;
+  adminWaterInfo.innerHTML = `<h2>Week in Water</h2><p>${waterData}</p>`;
 }
 
 const adminStepsInfoDisplay = (stepsWeek) => {
   adminStepsInfo.innerHTML = '';
   const dailySteps = stepsWeek.map(day => day.numSteps).join(' steps / ');
-  adminStepsInfo.innerHTML = `<p>${dailySteps}</p>`
+  adminStepsInfo.innerHTML = `<h2>Week in Steps</h2><p>${dailySteps}</p>`
 }
 
 const adminSleepInfoDisplay = (sleepTimeWeek, sleepQualityWeek) => {
   adminSleepInfo.innerHTML = '';
   const sleepQualityData = sleepQualityWeek.map((html) => `${html.sleepQuality}`).join(' / ');
   const sleepTimeData = sleepTimeWeek.map((html) => `${html.hoursSlept}h`).join(' / ');
-  adminSleepInfo.innerHTML = `<p>${sleepTimeData}</p><p>${sleepQualityData} quality rating</p>`
+  adminSleepInfo.innerHTML = `<h2>Week in Sleep</h2><p>${sleepTimeData}</p><h2>Week in Sleep Quality</h2><p>${sleepQualityData} quality rating</p>`
 }
 
 const displayBottomDrinkers = (bottomDrinkers) => {
