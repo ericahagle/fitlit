@@ -198,6 +198,7 @@ aside {
   color: white;
   background-color: #003249;
 }
+
 .user-data-wrapper {
   flex-direction: column;
   align-content: center;
@@ -205,8 +206,10 @@ aside {
   width: 90%;
   background-color: white;
 }
+
 .overall-data-wrapper {
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   width: 90%;
   background-color: white;
@@ -229,6 +232,8 @@ label {
 .user-data {
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: white;
 }
 
@@ -267,13 +272,13 @@ label {
 
 .overall-sleep-bot, .overall-water-bot, .overall-activity-bot {
   width: 33%;
-  height: 25%;
-  align-items: flex-start;
+  height: 50%;
+  align-items: center;
   flex-wrap: wrap
 }
 
 .title-water, .title-sleep, .title-activity {
-    font-size:x-large;
-    width: 100%;
-    justify-content: center;
+  font-size:x-large;
+  width: 100%;
+  justify-content: center;
 }
