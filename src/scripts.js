@@ -54,6 +54,10 @@ import {
   stepsGoalCompare,
   sleepLifeUpdate,
   dateInput,
+  adminBasicInfoDisplay,
+  adminWaterInfoDisplay,
+  adminStepsInfoDisplay,
+  adminSleepInfoDisplay,
   displayBottomDrinkers,
   displayBottomSleepers,
   displayBottomSteppers,  
@@ -85,6 +89,10 @@ window.addEventListener('load', () => {
     displayBottomDrinkers(findBottomDrinkers(hydrationData, allUsers));
     displayBottomSleepers(findBottomSleepers(sleepData, allUsers));
     displayBottomSteppers(findBottomStepTakers(activityData, allUsers));
+    adminBasicInfoDisplay(currentUser);
+    adminWaterInfoDisplay(getHydrationFor7Days(completeCurrentUser, displayDay));
+    adminStepsInfoDisplay(checkStepGoal7Days(completeCurrentUser))
+    adminSleepInfoDisplay(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
   });
 });
     

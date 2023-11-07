@@ -22,6 +22,10 @@ const overallAdminButton = document.querySelector('#overallDataButton');
 const bottomSleepersList = document.querySelector('#sleepAverages');
 const bottomDrinkersList = document.querySelector('#waterAverages');
 const bottomSteppersList = document.querySelector('#stepsAverages');
+const adminBasicInfo = document.querySelector('#basicInfo');
+const adminSleepInfo = document.querySelector('#sleepInfo');
+const adminWaterInfo = document.querySelector('#waterInfo');
+const adminStepsInfo = document.querySelector('#stepsInfo');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
@@ -119,6 +123,31 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
   sleepLife.innerHTML = '';
   sleepLife.innerHTML = `<h2>Users' Average Sleep</h2><p>${sleepLifeTime}h</p><p>${sleepLifeQuality} quality rating</p>`;
 }
+
+const adminBasicInfoDisplay = (basicInfo) => {
+  adminBasicInfo.innerHTML = '';
+  adminBasicInfo.innerHTML += `<p>${basicInfo.name}!</p><p>${basicInfo.address} / ${basicInfo.email}</p>`;
+}
+
+const adminWaterInfoDisplay = (waterWeek) => {
+  adminWaterInfo.innerHTML = '';
+  const waterData = waterWeek.map((oz) => `${oz.numOunces}oz`).join(' / ');
+  adminWaterInfo.innerHTML = `<p>${waterData}</p>`;
+}
+
+const adminStepsInfoDisplay = (stepsWeek) => {
+  adminStepsInfo.innerHTML = '';
+  const dailySteps = stepsWeek.map(day => day.numSteps).join(' steps / ');
+  adminStepsInfo.innerHTML = `<p>${dailySteps}</p>`
+}
+
+const adminSleepInfoDisplay = (sleepTimeWeek, sleepQualityWeek) => {
+  adminSleepInfo.innerHTML = '';
+  const sleepQualityData = sleepQualityWeek.map((html) => `${html.sleepQuality}`).join(' / ');
+  const sleepTimeData = sleepTimeWeek.map((html) => `${html.hoursSlept}h`).join(' / ');
+  adminSleepInfo.innerHTML = `<p>${sleepTimeData}</p><p>${sleepQualityData} quality rating</p>`
+}
+
 const displayBottomDrinkers = (bottomDrinkers) => {
   bottomDrinkersList.innerHTML = '';
   const drink10 = bottomDrinkers.map(data => `<li>${data.userName} ${data.averageOunces.toFixed(2)} Ounces`).join('');
@@ -155,6 +184,10 @@ export {
   stepsGoalCompare,
   stepsWeekUpdate,
   sleepLifeUpdate,
+  adminBasicInfoDisplay,
+  adminWaterInfoDisplay,
+  adminStepsInfoDisplay,
+  adminSleepInfoDisplay,
   displayBottomDrinkers,
   displayBottomSleepers,
   displayBottomSteppers,

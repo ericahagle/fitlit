@@ -203,12 +203,41 @@ aside {
   color: white;
   background-color: #003249;
 }
-
-.user-data-wrapper, .overall-data-wrapper {
+.user-data-wrapper {
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  background-color: white;
+}
+.overall-data-wrapper {
   justify-content: center;
   flex-wrap: wrap;
   width: 90%;
   background-color: white;
+}
+label {
+  align-self: center;
+}
+
+#userEmail {
+  width: 12%;
+  align-self: center;
+}
+
+.admin-search {
+  width: 6%;
+  align-self: center;
+}
+.user-data {
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.basic-info, .water-info, .steps-info, .sleep-info {
+  background-color: white;
+  height: 350px;
+  width: 648px;
 }
 
 .overall-sleep-bot, .overall-water-bot, .overall-activity-bot {

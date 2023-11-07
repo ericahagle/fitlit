@@ -55,7 +55,15 @@
       <button class="overall-data-button" id="overallDataButton">Overall</button>
     </aside>
     <div class="user-data-wrapper" id="userDataWrapper">
-      <section class="user-data">
+      <label for="userEmail">User E-mail</label>
+      <input type="text" id="userEmail" name="user-email"
+      required minlength='10' size="30"/>
+      <button class="admin-search" id="adminSearch">Submit</button>
+      <section class="user-data" id="userData">
+        <article class="basic-info" id="basicInfo"></article>
+        <article class="water-info" id="waterInfo"></article>
+        <article class="steps-info" id="stepsInfo"></article>
+        <article class="sleep-info" id="sleepInfo"></article>
       </section>
       <button class="main-button" id="mainButton">Main</button>
     </div>
