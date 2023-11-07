@@ -13,9 +13,9 @@ const sleepLife = document.querySelector('#sleepLife');
 const userPage = document.querySelector('#userWrapper');
 const adminPage = document.querySelector('#adminWrapper');
 const toggleButton = document.querySelector('#toggleButton');
-const userHydrationData = document.querySelector('#hydrationInput')
-const submitData = document.querySelector("#submitData")
-const dateInput = document.querySelector("#datepicker")
+const userHydrationData = document.querySelector('#hydrationInput');
+const submitData = document.querySelector("#submitData");
+const dateInput = document.querySelector("#datepicker");
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');

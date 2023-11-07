@@ -5,11 +5,10 @@ body {
   height: 740px;
   width: 100%;
   margin: 0;
-  /* overflow: hidden; */
   flex-direction: column;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper {
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, #userData {
   display: flex;
 }
 
@@ -106,6 +105,11 @@ p, .header-ish, #snarkyRemark {
 
 #userData, #stepsWeek {
   background-color: #D9D9D9;
+}
+
+#userData {
+  flex-direction: column;
+  justify-content: center;
 }
 
 #stepsWeek, #welcomeMat {

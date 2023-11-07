@@ -70,6 +70,7 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
+    submitData.disabled = false;
   })
   .catch(error => {
     alert("Something went wrong: Failed to get data.")
@@ -88,14 +89,15 @@ submitData.addEventListener("click", () => {
   if(!combinedData.date || !combinedData.numOunces){
     alert("Please be sure to fill out all submission fields before proceeding.");
   } else {
-  postHydrationData(combinedData)
-    .then(addedData => {
-      const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
-      const displayDay = currentDay(completeCurrentUser);
-      waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
-      waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));   
-      userHydrationData.value = '';
-      dateInput.value = '';
+    postHydrationData(combinedData)
+      .then(addedData => {
+        const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
+        const displayDay = currentDay(completeCurrentUser);
+        waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
+        waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));   
+        userHydrationData.value = '';
+        dateInput.value = '';
+        submitData.disabled = true;
     })
     .catch(error => {
       alert("Something went wrong: Failed to post hydration data.")
@@ -103,5 +105,7 @@ submitData.addEventListener("click", () => {
     });
   }
 });
+
+// if both input fields have a value, pop up an alert before submit is clicked to ask a user to verify their info, disable submit button after click
 
 toggleButton.addEventListener('click', toggleAdmin);
