@@ -54,6 +54,9 @@ import {
   stepsGoalCompare,
   sleepLifeUpdate,
   dateInput,
+  displayBottomDrinkers,
+  displayBottomSleepers,
+  displayBottomSteppers,  
   submitData,
   userHydrationData,  
   mainButton,
@@ -79,6 +82,9 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
+    displayBottomDrinkers(findBottomDrinkers(hydrationData, allUsers));
+    displayBottomSleepers(findBottomSleepers(sleepData, allUsers));
+    displayBottomSteppers(findBottomStepTakers(activityData, allUsers));
   });
 });
     

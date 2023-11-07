@@ -19,6 +19,9 @@ const userDataWrapper = document.querySelector('#userDataWrapper');
 const overallDataWrapper = document.querySelector('#overallDataWrapper');
 const userAdminButton = document.querySelector('#userDataButton');
 const overallAdminButton = document.querySelector('#overallDataButton');
+const bottomSleepersList = document.querySelector('#sleepAverages');
+const bottomDrinkersList = document.querySelector('#waterAverages');
+const bottomSteppersList = document.querySelector('#stepsAverages');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
@@ -116,11 +119,26 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
   sleepLife.innerHTML = '';
   sleepLife.innerHTML = `<h2>Users' Average Sleep</h2><p>${sleepLifeTime}h</p><p>${sleepLifeQuality} quality rating</p>`;
 }
+const displayBottomDrinkers = (bottomDrinkers) => {
+  bottomDrinkersList.innerHTML = '';
+  const drink10 = bottomDrinkers.map(data => `<li>${data.userName} ${data.averageOunces.toFixed(2)} Ounces`).join('');
+  bottomDrinkersList.innerHTML += drink10;
+}
+
+const displayBottomSleepers = (bottomSleepers) => {
+  bottomSleepersList.innerHTML = '';
+  const sleep10 = bottomSleepers.map(data => `<li>${data.userName} ${data.averageHoursSlept.toFixed(2)} hours`).join('');
+  bottomSleepersList.innerHTML += sleep10;
+}
+
+const displayBottomSteppers = (bottomSteppers) => {
+  bottomSteppersList.innerHTML = '';
+  const step10 = bottomSteppers.map(data => `<li>${data.userName} ${data.averageSteps.toFixed(2)} Steps`).join('');
+  bottomSteppersList.innerHTML += step10;
+}
 
 export {
   toggleButton,
-  mainButton,
-  mainButton2,
   userAdminButton,
   overallAdminButton,
   toggleAdmin,
@@ -137,7 +155,12 @@ export {
   stepsGoalCompare,
   stepsWeekUpdate,
   sleepLifeUpdate,
+  displayBottomDrinkers,
+  displayBottomSleepers,
+  displayBottomSteppers,
   dateInput,
   submitData,
-  userHydrationData
+  userHydrationData,
+  mainButton,
+  mainButton2,
 }
