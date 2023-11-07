@@ -1,3 +1,8 @@
+// import {
+//   dateInput
+// } from './domUpdates'
+
+
 ////////////////////* Generate random number *////////////////////
 function generateRandomUserID(usersArray) {
   let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
@@ -278,6 +283,8 @@ function numberOfStepsGivenDate(currentUser, date) {
   }
 }
 
+////////////////*ITERATION 7 POST support*/////////////////
+
 function initializeDatePicker() {
   function handleDateSelection(instance, date) {
     const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
@@ -294,7 +301,6 @@ function initializeDatePicker() {
     onSelect: handleDateSelection
   });
 }
-
 
 ///NEW hydration average
 function findBottomDrinkers(hydrationData, users) {
@@ -333,8 +339,8 @@ function findBottomDrinkers(hydrationData, users) {
       averageOunces: drinker.averageOunces
     };
   });
-}
 
+}
 
 // Sleep
 function findBottomSleepers(sleepData, users) {
@@ -410,8 +416,6 @@ function findBottomStepTakers(activityData, users) {
     };
   });
 }
-
-
 
 module.exports = {
   generateRandomUserID,

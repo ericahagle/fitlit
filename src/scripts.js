@@ -39,7 +39,6 @@ import {
   toggleButton,
   toggleAdmin,
   updateUserName,
-  quipBox,
   waterDayUpdate,
   waterWeekUpdate,
   sleepDayUpdate,
@@ -54,7 +53,7 @@ import {
   submitData,
   userHydrationData  } from './domUpdates';
 
-    ////////// Event Listeners //////////
+////////////// Event Listeners //////////
    
 window.addEventListener('load', () => {
   initializeDatePicker()
@@ -74,10 +73,14 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
+    submitData.disabled = false;
+  })
+  .catch(error => {
+    alert("Something went wrong: Failed to get data.")
+    console.log(error);
   });
 });
-    
-//  Listen for the submit button click
+
 submitData.addEventListener("click", () => {
   const hydrationInput = userHydrationData.value;
   const selectedDate = dateInput.value;
@@ -86,20 +89,24 @@ submitData.addEventListener("click", () => {
     date: selectedDate,
     numOunces: parseInt(hydrationInput),
   };
-
-  postHydrationData(combinedData)
-    .then(addedData => {
-      // Update the currentUser with the new hydration data
-      const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
-      // Now update the DOM
-      const displayDay = currentDay(completeCurrentUser);
-      waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
-      waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
+  if(!combinedData.date || !combinedData.numOunces){
+    alert("Please be sure to fill out all submission fields before proceeding.");
+  } else {
+    postHydrationData(combinedData)
+      .then(addedData => {
+        const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
+        const displayDay = currentDay(completeCurrentUser);
+        waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
+        waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));   
+        userHydrationData.value = '';
+        dateInput.value = '';
+        submitData.disabled = true;
     })
     .catch(error => {
-      console.error("Failed to post hydration data:", error);
+      alert("Something went wrong: Failed to post hydration data.")
+      console.log(error);
     });
+  }
 });
-
 
 toggleButton.addEventListener('click', toggleAdmin);
