@@ -239,6 +239,12 @@ label {
   align-items: center;
 }
 
+.water-info, .steps-info, .sleep-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
 .water-info, .overall-water-bot {
   background-color: #59C3C3;
 }
