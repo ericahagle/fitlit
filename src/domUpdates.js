@@ -13,6 +13,9 @@ const sleepLife = document.querySelector('#sleepLife');
 const userPage = document.querySelector('#userWrapper');
 const adminPage = document.querySelector('#adminWrapper');
 const toggleButton = document.querySelector('#toggleButton');
+const userHydrationData = document.querySelector('#hydrationInput');
+const submitData = document.querySelector("#submitData");
+const dateInput = document.querySelector("#datepicker");
 const mainButton = document.querySelector('#mainButton');
 const mainButton2 = document.querySelector('#mainButton2');
 const userDataWrapper = document.querySelector('#userDataWrapper');
@@ -30,7 +33,6 @@ const adminStepsInfo = document.querySelector('#stepsInfo');
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
   adminPage.classList.toggle('hidden');
-
 }
 
 const toggleAdminData = () => {
@@ -54,20 +56,9 @@ const toggleAdminData = () => {
   overallDataWrapper.classList.toggle('hidden');
 }
 
-const userHydrationData = document.querySelector('#hydrationInput')
-const submitData = document.querySelector("#submitData")
-const dateInput = document.querySelector("#datepicker")
-
-
-
 const updateUserName = (userData, date) => {
   userName.innerHTML ='';
   userName.innerHTML += `<h1>Hello ${userData.name}!</h1><h2 class='header-ish'>${date}</h2><p class='rectangle'>${userData.address} / ${userData.email}</p>`;
-}
-
-const quipBox = () => {
-  userInfo.innerHTML = '';
-  userInfo.innerHTML = `<h2 class='header-ish' id='snarkyRemark'>Look after your flesh prison today!</h2>`;
 }
 
 const waterDayUpdate = (date, hydrationData) => {
@@ -173,7 +164,6 @@ export {
   toggleAdmin,
   toggleAdminData,
   updateUserName,
-  // quipBox,
   waterDayUpdate,
   waterWeekUpdate,
   sleepDayUpdate,
