@@ -30,7 +30,8 @@ import {
   initializeDatePicker,
   findBottomDrinkers,
   findBottomSleepers,
-  findBottomStepTakers
+  findBottomStepTakers,
+  findUserByEmail
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -63,7 +64,10 @@ import {
   submitData,
   userHydrationData,  
   mainButton,
-  mainButton2,} from './domUpdates';
+  mainButton2,
+  userEmailInput,
+  adminSearchButton
+} from './domUpdates';
 
 ////////////// Event Listeners //////////
    
@@ -126,6 +130,19 @@ submitData.addEventListener("click", () => {
       console.log(error);
     });
   }
+});
+
+adminSearchButton.addEventListener("click", () => {
+  fetchAllTheData()
+  .then(data => {
+    let foundUser = findUserByEmail(userEmailInput.value, allUsers)
+    const completeFoundUser = addDataToCurrentUser(foundUser, hydrationData, activityData, sleepData);
+    console.log(completeFoundUser); // leaving this here temporarily for reference
+  })
+  .catch(error => {
+    alert("Something went wrong: Failed to get data.")
+    console.log(error);
+  });
 });
 
 toggleButton.addEventListener('click', toggleAdmin);

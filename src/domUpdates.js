@@ -29,6 +29,8 @@ const adminBasicInfo = document.querySelector('#basicInfo');
 const adminSleepInfo = document.querySelector('#sleepInfo');
 const adminWaterInfo = document.querySelector('#waterInfo');
 const adminStepsInfo = document.querySelector('#stepsInfo');
+const userEmailInput = document.querySelector('#userEmail');
+const adminSearchButton = document.querySelector('#adminSearch');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
@@ -186,4 +188,6 @@ export {
   userHydrationData,
   mainButton,
   mainButton2,
+  userEmailInput,
+  adminSearchButton
 }
