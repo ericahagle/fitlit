@@ -8,7 +8,7 @@ body {
   flex-direction: column;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, aside, .user-data-wrapper, .overall-data-wrapper, #userData{
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, aside, .user-data-wrapper, .overall-data-wrapper, .title-water, .title-sleep, .title-activity, #userData{
   display: flex;
 }
 
@@ -48,11 +48,11 @@ h1, h2 {
 }
 
 h2 {
-  font-size: 1em;
+  font-size: 1.25em;
 }
 
 p {
-  font-size: 0.85em;
+  font-size: 1em;
 }
 
 p, .header-ish, #snarkyRemark {
@@ -155,33 +155,24 @@ p, .header-ish, #snarkyRemark {
   margin-top: 20px; /* Adjust as needed */
 }
 
-/* Style the datepicker container */
 .dp-container {
-  z-index: 100; /* Ensures the datepicker is above other elements */
-  background-color: white; /* Match to your theme if necessary */
+  z-index: 100;
+  background-color: white;
   border-radius: 4px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Optional: Adds a shadow for better visibility */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
-/* Adjust the positioning of the datepicker if necessary */
-.dp-container {
-  /* You can adjust the top, right, bottom, left properties as needed */
-}
-
-/* This targets the date cells in the datepicker */
 .dp-day {
-  color: #333; /* Adjust text color as needed */
+  color: #333;
 }
 
-/* Style for the selected date */
 .dp-selected {
-  background-color: #003249; /* Example: Use your primary color here */
+  background-color: #003249;
   color: white;
 }
 
-/* Hover styles for date cells */
 .dp-day:hover {
-  background-color: #f0f0f0; /* Adjust hover background color as needed */
+  background-color: #f0f0f0;
 }
 
 /* ///////// Admin Content //////// */
@@ -253,7 +244,6 @@ label {
 
 .title-water, .title-sleep, .title-activity {
     font-size:x-large;
-    display: flex;
     width: 100%;
     justify-content: center;
 }

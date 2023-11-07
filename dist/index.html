@@ -18,8 +18,9 @@
       <article class='widget square' id='waterDay'>
       </article>
       <article class='widget square' id='userData'>
-        <input id="hydrationInput" type="text" placeholder="Enter hydration data">
-        <input type="text" id="datepicker" placeholder="Select Date">
+        <h2>Add Hydration</h2>
+        <input id="hydrationInput" type="text" aria-label="user water input field" placeholder="Number of oz drank">
+        <input type="text" id="datepicker" aria-label="user date input field" placeholder="Date YYYY/MM/DD">
         <p>Check before clicking, you only get one shot.</p>
         <button id="submitData">Submit</button>
       </article>
@@ -51,7 +52,7 @@
     <button class="toggle-button" id="toggleButton">Admin</button>
   </div>
   <div class="admin-wrapper hidden" id="adminWrapper">
-    <aside>
+    <aside role="page tabs">
       <button class="user-data-button" id="userDataButton" disabled>User</button>
       <button class="overall-data-button" id="overallDataButton">Overall</button>
     </aside>
