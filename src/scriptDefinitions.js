@@ -1,8 +1,3 @@
-// import {
-//   dateInput
-// } from './domUpdates'
-
-
 ////////////////////* Generate random number *////////////////////
 function generateRandomUserID(usersArray) {
   let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
