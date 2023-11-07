@@ -1,20 +1,28 @@
 # FitLit
 
 ### Abstract:
-This application helps users see their fitness data, goals, and milestones in a user-friendly activity dashboard. The user data is sourced remotely and accessed through an API.
+This application helps users see their fitness data, goals, and milestones in a user-friendly activity dashboard. The user data is sourced remotely and accessed through an API. It also allows an admin to view any individual's data, as well as a few key "bottom 10" data sets.
 
-### Installation Instructions:
-1. To get this app running, clone it down from GitHub under the "<> Code" dropdown. 
+### App Installation Instructions:
+1. To get this app running, navigate to https://github.com/ericahagle/fitlit and clone it down from GitHub under the "<> Code" dropdown. 
 2. Open it from your terminal or preferred CLI with `git clone <HTTPS or SSH key>`. 
 3. Move (`cd`) into the directory. 
 4. Open the file in your code editor of choice, and you'll have everything you need! 
 5. The app can be viewed and interacted with in your browser of choice by using `open index.html` in your terminal.
 
+### Server Installation Instructions:
+1. Navigate to https://github.com/turingschool-examples/fitlit-api
+2. Clone the repo down to your preferred location (NOT within the main app repo)
+3. Move (`cd`) into the directory on a separate terminal window from where you're running the front end
+4. Run the `npm install` command to install the dependencies
+5. Run the `npm start` command in your terminal to start the local server
+6. Use `cmd + c` to stop the local server from running in your terminal at any time
+
 ### Preview of App:
 ![page reload to show functionality](https://user-images.githubusercontent.com/139941423/277834199-d4c02f00-08c3-45a2-ba62-9c969026d29c.gif)
 
 ### Context:
-This project was assigned during Week 1 of Module 2 in Turing's Front-End Engineering track. It is Part 1 of 2 and had a timeline of 11 days from assignment to due date. 
+This project was assigned during Week 1 of Module 2 in Turing's Front-End Engineering track. Part 1 of 2 had a timeline of 11 days from kickoff to due date. Part 2 was assigned during Week 4 of Module 2, and had a timeline of 5 days from kickoff to due date.
 
 ### Contributors:
 This application was built by [Brendan Turner](https://github.com/BrendanTurner1), [Erica Hagle](https://github.com/ericahagle/), [Chris Butler](https://github.com/butlertree/), and [Arden Ranta](https://github.com/tenthwalker/).
