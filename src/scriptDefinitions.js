@@ -5,38 +5,50 @@
 
 ////////////////////* Generate random number *////////////////////
 function generateRandomUserID(usersArray) {
-	let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
-	return randomUserId;
+  let randomUserId = Math.floor(Math.random() * usersArray.length) + 1;
+  return randomUserId;
+}
+
+////////////////////* Retrieve user data for Admin *////////////////////
+function findUserByEmail(email, users) {
+  const foundUser = users.find((user) => {
+    return user.email === email;
+  });
+  if (foundUser) {
+    return foundUser;
+  } else {
+    return "User not found";
+  }
 }
 
 ////////////////////* Create complete userObject card *////////////////////
 function addDataToCurrentUser(currentUser, hydrationData, activityData, sleepData) {
 
-	const userHydrationData = hydrationData.filter((hData) => {
-		return hData.userID === currentUser.id;
-	});
+  const userHydrationData = hydrationData.filter((hData) => {
+    return hData.userID === currentUser.id;
+  });
 
-	const userActivityData = activityData.filter((aData) => {
-		return aData.userID === currentUser.id;
-	});
+  const userActivityData = activityData.filter((aData) => {
+    return aData.userID === currentUser.id;
+  });
 
-	const userSleepData = sleepData.filter((sData) => {
-		return sData.userID === currentUser.id;
-	});
+  const userSleepData = sleepData.filter((sData) => {
+    return sData.userID === currentUser.id;
+  });
 
-	const completeCurrentUser = {
-		...currentUser,
-		hydrationData: userHydrationData || [],
-		activityData: userActivityData || [],
-		sleepData: userSleepData || []
-	};
+  const completeCurrentUser = {
+    ...currentUser,
+    hydrationData: userHydrationData || [],
+    activityData: userActivityData || [],
+    sleepData: userSleepData || []
+  };
 
-	return completeCurrentUser;
+  return completeCurrentUser;
 }
 
 ////////////////* Current Day Value *///////////////////////////
 
-const currentDay = (user) => user.hydrationData[user.hydrationData.length-1].date;
+const currentDay = (user) => user.hydrationData[user.hydrationData.length - 1].date;
 
 ////////////////* Ounces per day *//////////////////////////////////////
 
@@ -72,19 +84,19 @@ function getHydrationFor7Days(currentUser, endDate) {
   let endDateObj = new Date(endDate);
 
   let startDateObj = new Date(endDateObj);
-  startDateObj.setDate(endDateObj.getDate() -6  );
+  startDateObj.setDate(endDateObj.getDate() - 6);
 
   return currentUser.hydrationData.filter((entry) => {
-      let entryDateObj = new Date(entry.date);
-      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
-     })
-        .map((entry) => {
-          return {
-            date: entry.date,
-            numOunces: entry.numOunces
-          };
-        });
-    }
+    let entryDateObj = new Date(entry.date);
+    return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+  })
+    .map((entry) => {
+      return {
+        date: entry.date,
+        numOunces: entry.numOunces
+      };
+    });
+}
 
 //////////////////////* HYDRATION AVERAGE ITERATION 2 */////////////////////////////
 
@@ -104,7 +116,7 @@ function calculateAverageHoursSlept(currentUser) {
   let totalHoursSlept = 0;
 
   currentUser.sleepData.forEach((sleepEntry) => {
-    totalHoursSlept += sleepEntry.hoursSlept /currentUser.sleepData.length
+    totalHoursSlept += sleepEntry.hoursSlept / currentUser.sleepData.length
   });
 
   return totalHoursSlept.toFixed(2);
@@ -123,7 +135,7 @@ function calculateAverageSleepQuality(currentUser) {
 function hoursSleptGivenDate(currentUser, date) {
 
   if (currentUser.sleepData &&
-      currentUser.sleepData.length > 0) {
+    currentUser.sleepData.length > 0) {
 
     const sleepDate = currentUser.sleepData.find((sleepDate) => {
       return sleepDate.date === date;
@@ -137,7 +149,7 @@ function hoursSleptGivenDate(currentUser, date) {
 function sleepQualityGivenDate(currentUser, date) {
 
   if (currentUser.sleepData &&
-      currentUser.sleepData.length > 0) {
+    currentUser.sleepData.length > 0) {
 
     const sleepDate = currentUser.sleepData.find((sleepDate) => {
       return sleepDate.date === date;
@@ -152,7 +164,7 @@ function getSleepQualityFor7Days(currentUser, endDate) {
   let endDateObj = new Date(endDate);
 
   let startDateObj = new Date(endDateObj);
-  startDateObj.setDate(endDateObj.getDate() -6  );
+  startDateObj.setDate(endDateObj.getDate() - 6);
   return currentUser.sleepData
     .filter((entry) => {
       let entryDateObj = new Date(entry.date);
@@ -170,18 +182,18 @@ function getSleepFor7Days(currentUser, endDate) {
   let endDateObj = new Date(endDate);
 
   let startDateObj = new Date(endDateObj);
-  startDateObj.setDate(endDateObj.getDate() -6  );
+  startDateObj.setDate(endDateObj.getDate() - 6);
   return currentUser.sleepData.filter((entry) => {
-      let entryDateObj = new Date(entry.date);
-      return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
-     })
-        .map((entry) => {
-          return {
-            date: entry.date,
-            hoursSlept: entry.hoursSlept
-          };
-        });
-    }
+    let entryDateObj = new Date(entry.date);
+    return entryDateObj >= startDateObj && entryDateObj <= endDateObj;
+  })
+    .map((entry) => {
+      return {
+        date: entry.date,
+        hoursSlept: entry.hoursSlept
+      };
+    });
+}
 
 ////////////////////* How far did you walk today miles ITERATION 5 *////////////////////
 function findDistanceTraveled(currentUser) {
@@ -189,12 +201,12 @@ function findDistanceTraveled(currentUser) {
   return distance;
 }
 
- ///////////////*Minutes user was active on given day ITERATION 5*/////////////////////
+///////////////*Minutes user was active on given day ITERATION 5*/////////////////////
 
- function minutesActiveGivenDate(currentUser, date) {
+function minutesActiveGivenDate(currentUser, date) {
 
   if (currentUser.activityData &&
-      currentUser.activityData.length > 0) {
+    currentUser.activityData.length > 0) {
 
     const activityDate = currentUser.activityData.find((specificDate) => {
       return specificDate.date === date;
@@ -259,8 +271,8 @@ function checkStepGoal7Days(currentUser) {
 
 function numberOfStepsGivenDate(currentUser, date) {
 
-  if (currentUser.activityData && 
-      currentUser.activityData.length > 0) {
+  if (currentUser.activityData &&
+    currentUser.activityData.length > 0) {
 
     const activityDate = currentUser.activityData.find((specificDate) => {
       return specificDate.date === date;
@@ -280,19 +292,134 @@ function initializeDatePicker() {
   }
 
   const dateInput = document.querySelector('#datepicker');
-  
+
   // Set the start date to 2023/07/02
   const startDate = new Date('2023-07-03');
-  const pickerObject = {
+
+  const picker = datepicker(dateInput, {
     minDate: startDate,
-    onSelect: handleDateSelection,
-    disabledDates: []
+    onSelect: handleDateSelection
+  });
 }
-  const picker = datepicker(dateInput, pickerObject);
+
+///NEW hydration average
+function findBottomDrinkers(hydrationData, users) {
+  // Map over users to calculate total ounces and average for each
+  let userHydrationDetails = users.map((user) => {
+    let userHydrationEntries = hydrationData.filter((entry) => {
+      return entry.userID === user.id;
+    });
+
+    let totalOunces = userHydrationEntries.reduce((acc, curr) => acc + curr.numOunces, 0);
+
+    // Calculate the average ounces per entry
+    let averageOunces = totalOunces / userHydrationEntries.length;
+
+    return { 
+      userID: user.id, 
+      totalOunces: totalOunces,
+      averageOunces: averageOunces
+    };
+  });
+
+  // Sort users by total ounces
+  let sortedByOunces = userHydrationDetails.sort((a, b) => a.totalOunces - b.totalOunces);
+
+  // Slice to get top entries
+  let bottomDrinkers = sortedByOunces.slice(0, 10);
+
+  // Map to include user names
+  return bottomDrinkers.map((drinker) => {
+    // Find the user to include the name
+    let user = users.find((u) => u.id === drinker.userID);
+
+    return { 
+      ...drinker, 
+      userName: user.name,
+      averageOunces: drinker.averageOunces
+    };
+  });
+
+}
+
+// Sleep
+function findBottomSleepers(sleepData, users) {
+  // Map over users to calculate total hours slept and average hours slept for each
+  let userSleepDetails = users.map((user) => {
+    // Filter sleep entries for the current user
+    let userSleeps = sleepData.filter((sleep) => sleep.userID === user.id);
+
+    // Sum up all hours slept for the user
+    let totalHoursSlept = userSleeps.reduce((acc, curr) => acc + curr.hoursSlept, 0);
+    // Calculate the average hours slept per entry for the user
+    let averageHoursSlept = totalHoursSlept / userSleeps.length;
+
+    // Return object for the user
+    return {
+      userID: user.id,
+      totalHoursSlept: totalHoursSlept,
+      averageHoursSlept: averageHoursSlept
+    };
+  });
+
+  // Sort the summary objects by total hours slept in descending order
+  let sortedBySleep = userSleepDetails.sort((a, b) => a.totalHoursSlept - b.totalHoursSlept);
+  // Slice the top 10 users with the most hours slept
+  let bottomSleepers = sortedBySleep.slice(0, 10);
+
+  // Map over the top sleepers to add user names
+  return bottomSleepers.map((sleeper) => {
+    // Find the user object to retrieve the user's name
+    let user = users.find((u) => u.id === sleeper.userID);
+    // Return object including the user's name
+    return {
+      ...sleeper,
+      userName: user.name
+    };
+  });
+}
+
+
+// Activity
+function findBottomStepTakers(activityData, users) {
+  // Map over users to calculate total steps and average steps for each
+  let userStepDetails = users.map((user) => {
+    // Filter activity entries for the current user
+    let userActivities = activityData.filter((activity) => activity.userID === user.id);
+
+    // Sum up all steps for the user
+    let totalSteps = userActivities.reduce((acc, curr) => acc + curr.numSteps, 0);
+    // Calculate the average steps per entry for the user
+    let averageSteps = totalSteps / userActivities.length;
+
+    // Return object for the user
+    return {
+      userID: user.id,
+      totalSteps: totalSteps,
+      averageSteps: averageSteps
+    };
+  });
+
+  // Sort the summary objects by total steps in descending order
+  let sortedBySteps = userStepDetails.sort((a, b) => a.totalSteps - b.totalSteps);
+  // Slice the top 10 users with the most steps
+  let bottomStepTakers = sortedBySteps.slice(0, 10);
+
+  // Map over the top step takers to add user names
+  return bottomStepTakers.map((taker) => {
+    // Find the user object to retrieve the user's name
+    let user = users.find((u) => u.id === taker.userID);
+    // Return a new object including the user's name
+    return {
+      ...taker,
+      userName: user.name
+    };
+  });
 }
 
 module.exports = {
   generateRandomUserID,
+  findUserByEmail,
   addDataToCurrentUser,
   currentDay,
   findStepGoalAverage,
@@ -311,4 +438,7 @@ module.exports = {
   checkStepGoal7Days,
   numberOfStepsGivenDate,
   initializeDatePicker,
+  findBottomDrinkers,
+  findBottomSleepers,
+  findBottomStepTakers
 };

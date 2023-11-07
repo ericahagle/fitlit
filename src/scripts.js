@@ -28,6 +28,9 @@ import {
   minutesActiveGivenDate,
   checkStepGoal7Days, 
   initializeDatePicker,
+  findBottomDrinkers,
+  findBottomSleepers,
+  findBottomStepTakers
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -105,7 +108,5 @@ submitData.addEventListener("click", () => {
     });
   }
 });
-
-// if both input fields have a value, pop up an alert before submit is clicked to ask a user to verify their info, disable submit button after click
 
 toggleButton.addEventListener('click', toggleAdmin);
