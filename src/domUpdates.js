@@ -1,5 +1,5 @@
 const userName = document.querySelector('#welcomeMat');
-const userInfo = document.querySelector('#userData');
+// const userInfo = document.querySelector('#userData');
 const waterDay = document.querySelector('#waterDay');
 const waterWeek = document.querySelector('#waterWeek')
 const sleepDay = document.querySelector('#sleepDay');

@@ -8,7 +8,7 @@ body {
   flex-direction: column;
 }
 
-body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, aside, .user-data-wrapper, .overall-data-wrapper, .title-water, .title-sleep, .title-activity, #userData{
+body, article, section, .widget, .left, .middle, .right, .bottom, .user-wrapper, .admin-wrapper, aside, .user-data-wrapper, .overall-data-wrapper, .title-water, .title-sleep, .title-activity, #userHydrateInput, #userData {
   display: flex;
 }
 
@@ -118,11 +118,11 @@ p, .header-ish, #snarkyRemark {
   background-color: #59C3C3;
 }
 
-#userData, #stepsWeek {
+#userHydrateInput, #stepsWeek {
   background-color: #D9D9D9;
 }
 
-#userData {
+#userHydrateInput {
   flex-direction: column;
   justify-content: center;
 }
@@ -211,6 +211,7 @@ aside {
   width: 90%;
   background-color: white;
 }
+
 label {
   align-self: center;
 }
@@ -224,8 +225,10 @@ label {
   width: 6%;
   align-self: center;
 }
+
 .user-data {
   flex-wrap: wrap;
+  flex-direction: row;
   background-color: white;
 }
 
