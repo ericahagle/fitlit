@@ -30,7 +30,8 @@ import {
   initializeDatePicker,
   findBottomDrinkers,
   findBottomSleepers,
-  findBottomStepTakers
+  findBottomStepTakers,
+  findUserByEmail
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -63,7 +64,10 @@ import {
   submitData,
   userHydrationData,  
   mainButton,
-  mainButton2,} from './domUpdates';
+  mainButton2,
+  userEmailInput,
+  adminSearchButton
+} from './domUpdates';
 
 ////////////// Event Listeners //////////
    
@@ -90,7 +94,7 @@ window.addEventListener('load', () => {
     displayBottomSteppers(findBottomStepTakers(activityData, allUsers));
     adminBasicInfoDisplay(currentUser);
     adminWaterInfoDisplay(getHydrationFor7Days(completeCurrentUser, displayDay));
-    adminStepsInfoDisplay(checkStepGoal7Days(completeCurrentUser))
+    adminStepsInfoDisplay(checkStepGoal7Days(completeCurrentUser));
     adminSleepInfoDisplay(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
     submitData.disabled = false;
   })
@@ -126,6 +130,24 @@ submitData.addEventListener("click", () => {
       console.log(error);
     });
   }
+});
+
+adminSearchButton.addEventListener("click", () => {
+  fetchAllTheData()
+  .then(data => {
+    const foundUser = findUserByEmail(userEmailInput.value, allUsers)
+    const completeFoundUser = addDataToCurrentUser(foundUser, hydrationData, activityData, sleepData);
+    console.log(completeFoundUser);
+    const displayDay = currentDay(completeFoundUser);
+    console.log(adminBasicInfoDisplay(foundUser));
+    adminWaterInfoDisplay(getHydrationFor7Days(completeFoundUser, displayDay));
+    adminStepsInfoDisplay(checkStepGoal7Days(completeFoundUser));
+    adminSleepInfoDisplay(getSleepFor7Days(completeFoundUser, displayDay), getSleepQualityFor7Days(completeFoundUser, displayDay));
+  })
+  .catch(error => {
+    alert("Something went wrong: Failed to get data.");
+    console.log(error);
+  });
 });
 
 toggleButton.addEventListener('click', toggleAdmin);
