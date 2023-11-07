@@ -144,7 +144,7 @@ p, .header-ish, #snarkyRemark {
   background-color: #8C2155;
   color: white;
 }
-/* Style the datepicker input field */
+
 #datepicker {
   padding: 10px;
   border: 1px solid #ccc;
@@ -152,7 +152,7 @@ p, .header-ish, #snarkyRemark {
   font-size: 1em;
   color: #333;
   background-color: white;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
 }
 
 .dp-container {
