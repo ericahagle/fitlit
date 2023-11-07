@@ -28,8 +28,6 @@ import {
   minutesActiveGivenDate,
   checkStepGoal7Days, 
   initializeDatePicker,
-  dateToDisable,
-  pickerObject
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -98,7 +96,6 @@ submitData.addEventListener("click", () => {
       waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));   
       userHydrationData.value = '';
       dateInput.value = '';
-      initializeDatePicker()
     })
     .catch(error => {
       alert("Something went wrong: Failed to post hydration data.")

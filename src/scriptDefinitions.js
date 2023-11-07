@@ -267,8 +267,6 @@ function numberOfStepsGivenDate(currentUser, date) {
 }
 
 ////////////////*ITERATION 7 POST support*/////////////////
-var dateToDisable;
-var pickerObject;
 
 function initializeDatePicker() {
   function handleDateSelection(instance, date) {
@@ -280,13 +278,12 @@ function initializeDatePicker() {
   
   // Set the start date to 2023/07/02
   const startDate = new Date('2023-07-03');
-  pickerObject = {
+  const pickerObject = {
     minDate: startDate,
     onSelect: handleDateSelection,
     disabledDates: []
 }
   const picker = datepicker(dateInput, pickerObject);
-  console.log(pickerObject.disabledDates)
 }
 
 module.exports = {
@@ -309,6 +306,4 @@ module.exports = {
   checkStepGoal7Days,
   numberOfStepsGivenDate,
   initializeDatePicker,
-  dateToDisable,
-  pickerObject
 };
