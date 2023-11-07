@@ -16,10 +16,44 @@ const toggleButton = document.querySelector('#toggleButton');
 const userHydrationData = document.querySelector('#hydrationInput');
 const submitData = document.querySelector("#submitData");
 const dateInput = document.querySelector("#datepicker");
+const mainButton = document.querySelector('#mainButton');
+const mainButton2 = document.querySelector('#mainButton2');
+const userDataWrapper = document.querySelector('#userDataWrapper');
+const overallDataWrapper = document.querySelector('#overallDataWrapper');
+const userAdminButton = document.querySelector('#userDataButton');
+const overallAdminButton = document.querySelector('#overallDataButton');
+const bottomSleepersList = document.querySelector('#sleepAverages');
+const bottomDrinkersList = document.querySelector('#waterAverages');
+const bottomSteppersList = document.querySelector('#stepsAverages');
+const adminBasicInfo = document.querySelector('#basicInfo');
+const adminSleepInfo = document.querySelector('#sleepInfo');
+const adminWaterInfo = document.querySelector('#waterInfo');
+const adminStepsInfo = document.querySelector('#stepsInfo');
 
 const toggleAdmin = () => {
   userPage.classList.toggle('hidden');
   adminPage.classList.toggle('hidden');
+}
+
+const toggleAdminData = () => {
+  if(userAdminButton.disabled) {
+    userAdminButton.style.backgroundColor='#003249';
+    userAdminButton.style.color='white';
+    overallAdminButton.style.backgroundColor='white';
+    overallAdminButton.style.color='black';
+    userAdminButton.disabled=!userAdminButton.disabled;
+    overallAdminButton.disabled=!overallAdminButton.disabled;
+  }
+  else if(overallAdminButton.disabled) {
+    overallAdminButton.style.backgroundColor='#003249';
+    overallAdminButton.style.color='white';
+    userAdminButton.style.backgroundColor='white';
+    userAdminButton.style.color='black';
+    overallAdminButton.disabled=!overallAdminButton.disabled;
+    userAdminButton.disabled=!userAdminButton.disabled;
+  }
+  userDataWrapper.classList.toggle('hidden');
+  overallDataWrapper.classList.toggle('hidden');
 }
 
 const updateUserName = (userData, date) => {
@@ -81,9 +115,54 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
   sleepLife.innerHTML = `<h2>Users' Average Sleep</h2><p>${sleepLifeTime}h</p><p>${sleepLifeQuality} quality rating</p>`;
 }
 
+const adminBasicInfoDisplay = (basicInfo) => {
+  adminBasicInfo.innerHTML = '';
+  adminBasicInfo.innerHTML += `<p>${basicInfo.name}!</p><p>${basicInfo.address} / ${basicInfo.email}</p>`;
+}
+
+const adminWaterInfoDisplay = (waterWeek) => {
+  adminWaterInfo.innerHTML = '';
+  const waterData = waterWeek.map((oz) => `${oz.numOunces}oz`).join(' / ');
+  adminWaterInfo.innerHTML = `<p>${waterData}</p>`;
+}
+
+const adminStepsInfoDisplay = (stepsWeek) => {
+  adminStepsInfo.innerHTML = '';
+  const dailySteps = stepsWeek.map(day => day.numSteps).join(' steps / ');
+  adminStepsInfo.innerHTML = `<p>${dailySteps}</p>`
+}
+
+const adminSleepInfoDisplay = (sleepTimeWeek, sleepQualityWeek) => {
+  adminSleepInfo.innerHTML = '';
+  const sleepQualityData = sleepQualityWeek.map((html) => `${html.sleepQuality}`).join(' / ');
+  const sleepTimeData = sleepTimeWeek.map((html) => `${html.hoursSlept}h`).join(' / ');
+  adminSleepInfo.innerHTML = `<p>${sleepTimeData}</p><p>${sleepQualityData} quality rating</p>`
+}
+
+const displayBottomDrinkers = (bottomDrinkers) => {
+  bottomDrinkersList.innerHTML = '';
+  const drink10 = bottomDrinkers.map(data => `<li>${data.userName} ${data.averageOunces.toFixed(2)} Ounces`).join('');
+  bottomDrinkersList.innerHTML += drink10;
+}
+
+const displayBottomSleepers = (bottomSleepers) => {
+  bottomSleepersList.innerHTML = '';
+  const sleep10 = bottomSleepers.map(data => `<li>${data.userName} ${data.averageHoursSlept.toFixed(2)} hours`).join('');
+  bottomSleepersList.innerHTML += sleep10;
+}
+
+const displayBottomSteppers = (bottomSteppers) => {
+  bottomSteppersList.innerHTML = '';
+  const step10 = bottomSteppers.map(data => `<li>${data.userName} ${data.averageSteps.toFixed(2)} Steps`).join('');
+  bottomSteppersList.innerHTML += step10;
+}
+
 export {
   toggleButton,
+  userAdminButton,
+  overallAdminButton,
   toggleAdmin,
+  toggleAdminData,
   updateUserName,
   waterDayUpdate,
   waterWeekUpdate,
@@ -95,7 +174,16 @@ export {
   stepsGoalCompare,
   stepsWeekUpdate,
   sleepLifeUpdate,
+  adminBasicInfoDisplay,
+  adminWaterInfoDisplay,
+  adminStepsInfoDisplay,
+  adminSleepInfoDisplay,
+  displayBottomDrinkers,
+  displayBottomSleepers,
+  displayBottomSteppers,
   dateInput,
   submitData,
-  userHydrationData
+  userHydrationData,
+  mainButton,
+  mainButton2,
 }
