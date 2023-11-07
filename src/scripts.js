@@ -37,7 +37,10 @@ import {
 
 import {  
   toggleButton,
+  userAdminButton,
+  overallAdminButton,
   toggleAdmin,
+  toggleAdminData,
   updateUserName,
   waterDayUpdate,
   waterWeekUpdate,
@@ -50,8 +53,17 @@ import {
   stepsGoalCompare,
   sleepLifeUpdate,
   dateInput,
+  adminBasicInfoDisplay,
+  adminWaterInfoDisplay,
+  adminStepsInfoDisplay,
+  adminSleepInfoDisplay,
+  displayBottomDrinkers,
+  displayBottomSleepers,
+  displayBottomSteppers,  
   submitData,
-  userHydrationData  } from './domUpdates';
+  userHydrationData,  
+  mainButton,
+  mainButton2,} from './domUpdates';
 
 ////////////// Event Listeners //////////
    
@@ -73,6 +85,13 @@ window.addEventListener('load', () => {
     stepsWeekUpdate(checkStepGoal7Days(completeCurrentUser));
     stepsGoalCompare(findStepGoalAverage(allUsers));
     sleepLifeUpdate(calculateAverageSleepQuality(completeCurrentUser), calculateAverageHoursSlept(completeCurrentUser));
+    displayBottomDrinkers(findBottomDrinkers(hydrationData, allUsers));
+    displayBottomSleepers(findBottomSleepers(sleepData, allUsers));
+    displayBottomSteppers(findBottomStepTakers(activityData, allUsers));
+    adminBasicInfoDisplay(currentUser);
+    adminWaterInfoDisplay(getHydrationFor7Days(completeCurrentUser, displayDay));
+    adminStepsInfoDisplay(checkStepGoal7Days(completeCurrentUser))
+    adminSleepInfoDisplay(getSleepFor7Days(completeCurrentUser, displayDay), getSleepQualityFor7Days(completeCurrentUser, displayDay));
     submitData.disabled = false;
   })
   .catch(error => {
@@ -110,3 +129,7 @@ submitData.addEventListener("click", () => {
 });
 
 toggleButton.addEventListener('click', toggleAdmin);
+mainButton.addEventListener('click', toggleAdmin);
+mainButton2.addEventListener('click', toggleAdmin);
+userAdminButton.addEventListener('click', toggleAdminData);
+overallAdminButton.addEventListener('click', toggleAdminData);
