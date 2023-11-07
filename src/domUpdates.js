@@ -119,7 +119,7 @@ const sleepLifeUpdate = (sleepLifeQuality, sleepLifeTime) => {
 
 const adminBasicInfoDisplay = (basicInfo) => {
   adminBasicInfo.innerHTML = '';
-  adminBasicInfo.innerHTML += `<p>${basicInfo.name}!</p><p>${basicInfo.address} / ${basicInfo.email}</p>`;
+  adminBasicInfo.innerHTML += `<h2>${basicInfo.name}!</h2><p>${basicInfo.address} / ${basicInfo.email}</p>`;
 }
 
 const adminWaterInfoDisplay = (waterWeek) => {

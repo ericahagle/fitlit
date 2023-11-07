@@ -233,9 +233,30 @@ label {
 }
 
 .basic-info, .water-info, .steps-info, .sleep-info {
-  background-color: white;
   height: 350px;
   width: 648px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.water-info, .overall-water-bot {
+  background-color: #59C3C3;
+}
+
+.steps-info, .overall-activity-bot {
+  background-color: #F9FBB2;
+}
+
+.sleep-info {
+  background-color: #D1BCE3;
+}
+
+.overall-sleep-bot {
+  background-color: #DBD56E;
+}
+
+.basic-info {
+  background-color: #D9D9D9;
 }
 
 .overall-sleep-bot, .overall-water-bot, .overall-activity-bot {
