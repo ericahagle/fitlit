@@ -27,7 +27,10 @@ import {
   checkStepGoal,
   minutesActiveGivenDate,
   checkStepGoal7Days, 
-  initializeDatePicker
+  initializeDatePicker,
+  findBottomDrinkers,
+  findBottomSleepers,
+  findBottomStepTakers
   } from './scriptDefinitions';
 
 ///////////// Import from domUpdates.js ///////////////
@@ -81,15 +84,28 @@ window.addEventListener('load', () => {
     
 //  Listen for the submit button click
 submitData.addEventListener("click", () => {
-  const hydrationData = userHydrationData.value;
+  const hydrationInput = userHydrationData.value;
   const selectedDate = dateInput.value;
   const combinedData = {
     userID: currentUser.id,
     date: selectedDate,
-    numOunces: parseInt(hydrationData),
+    numOunces: parseInt(hydrationInput),
   };
-  postHydrationData(combinedData);
+
+  postHydrationData(combinedData)
+    .then(addedData => {
+      // Update the currentUser with the new hydration data
+      const completeCurrentUser = addDataToCurrentUser(currentUser, addedData, activityData, sleepData);
+      // Now update the DOM
+      const displayDay = currentDay(completeCurrentUser);
+      waterDayUpdate(displayDay, ouncesPerDay(completeCurrentUser, displayDay));
+      waterWeekUpdate(getHydrationFor7Days(completeCurrentUser, displayDay));
+    })
+    .catch(error => {
+      console.error("Failed to post hydration data:", error);
+    });
 });
+
 
 toggleButton.addEventListener('click', toggleAdmin);
 mainButton.addEventListener('click', toggleAdmin);
