@@ -16,7 +16,7 @@ This application helps users see their fitness data, goals, and milestones in a 
 3. Move (`cd`) into the directory on a separate terminal window from where you're running the front end
 4. Run the `npm install` command to install the dependencies
 5. Run the `npm start` command in your terminal to start the local server
-6. Use `cmd + c` to stop the local server from running in your terminal at any time
+6. Use `ctrl + c` to stop the local server from running in your terminal at any time
 
 ### Preview of App:
 ![page reload to show functionality](https://user-images.githubusercontent.com/139941423/277834199-d4c02f00-08c3-45a2-ba62-9c969026d29c.gif)
