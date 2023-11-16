@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='/src/css/styles.css'>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <title>Fitlit</title>
+  </head>
+  <body>
+    <div class="user-wrapper" id="userWrapper">
+    <section class='left'>
+      <article class='widget square week-view' id='waterWeek'>
+      </article>
+      <article class='widget square' id='waterDay'>
+      </article>
+      <article class='widget square' id='userHydrateInput'>
+        <h2>Add Hydration</h2>
+        <input id="hydrationInput" type="text" aria-label="user water input field" placeholder="Number of oz drank">
+        <input type="text" id="datepicker" aria-label="user date input field" placeholder="Date YYYY/MM/DD">
+        <p>Check before clicking, you only get one shot.</p>
+        <button id="submitData">Submit</button>
+      </article>
+    </section>
+    <section class='middle' id='infoCards'>
+      <article class='widget' id='welcomeMat'>
+      </article>
+      <article class='widget week-view' id='stepsWeek'>
+      </article>
+      <section class='bottom'> 
+        <article class='widget square bot' id='activeMinutes'>
+        </article>
+        <article class='widget square bot' id='stepsDay'>
+        </article>
+        <article class='widget square bot' id='stepGoal'>
+        </article>
+        <article class='widget square bot' id='avgStepGoal'>
+        </article>
+      </section> 
+    </section> 
+    <section class='right'>
+      <article class='widget square week-view' id='sleepWeek'>
+      </article>
+      <article class='widget square' id='sleepDay'>
+      </article>
+      <article class='widget square' id='sleepLife'>
+      </article>
+    </section>
+    <button class="toggle-button" id="toggleButton">Admin</button>
+  </div>
+  <div class="admin-wrapper hidden" id="adminWrapper">
+    <aside role="page tabs">
+      <button class="user-data-button" id="userDataButton" disabled>User</button>
+      <button class="overall-data-button" id="overallDataButton">Overall</button>
+    </aside>
+    <div class="user-data-wrapper" id="userDataWrapper">
+      <label for="userEmail">Enter User E-mail to Search</label>
+      <input type="text" id="userEmail" name="user-email"
+      required minlength='10' size="30"/>
+      <button class="admin-search" id="adminSearch">Submit</button>
+      <section class="user-data" id="userData">
+        <article class="basic-info" id="basicInfo"></article>
+        <article class="water-info" id="waterInfo"></article>
+        <article class="steps-info" id="stepsInfo"></article>
+        <article class="sleep-info" id="sleepInfo"></article>
+      </section>
+      <button class="main-button" id="mainButton">Main</button>
+    </div>
+    <div class="overall-data-wrapper hidden" id="overallDataWrapper">
+      <section class="overall-water-bot" id="overallWaterBot">
+        <div class="title-water">
+          <h2>The 10 Average Bottom Drinkers</h2>
+        </div>
+        <ol class="water-averages" id="waterAverages"></ol>
+      </section>
+      <section class="overall-sleep-bot" id="overallSleepBot">
+        <div class="title-sleep">
+          <h2>The 10 Average Bottom Sleepers</h2>
+        </div>
+        <ol class="sleep-averages" id="sleepAverages"></ol>
+      </section>
+      <section class="overall-activity-bot" id="overallActivityBot">
+        <div class="title-activity">
+          <h2>The 10 Average Bottom Steppers</h2>
+        </div>
+        <ol class="steps-averages" id="stepsAverages"></ol>
+      </section>
+      <button class="main-button-2" id="mainButton2">Main</button>
+    </div>
+  </div>
+  <script src='bundle.js'></script>
+  <script src="https://unpkg.com/js-datepicker"></script>
+  </body>
+</html>
